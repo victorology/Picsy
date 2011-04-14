@@ -112,6 +112,7 @@ GEM
     money (3.1.0)
     multi_json (0.0.5)
     multipart-post (1.1.0)
+    mysql2 (0.2.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -127,7 +128,6 @@ GEM
     paperclip (2.3.4)
       activerecord
       activesupport
-    pg (0.10.1)
     polyglot (0.3.1)
     rack (1.2.2)
     rack-mount (0.6.14)
@@ -219,10 +219,10 @@ DEPENDENCIES
   mechanize (= 1.0.0)
   mini_magick (= 3.2)
   money (= 3.1.0)
+  mysql2 (= 0.2.7)
   nokogiri (= 1.4.3.1)
   oauth (= 0.4.4)
   paperclip (= 2.3.4)
-  pg
   rails (= 3.0.6)
   rspec (= 2.0.0)
   rspec-rails (= 2.0.0)
