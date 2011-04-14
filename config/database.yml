@@ -11,7 +11,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: pumpl_development
+  database: picsy_development
   pool: 5
   username: postgres
   password: work1234 
@@ -37,7 +37,7 @@ development:
 test: &test
   adapter: postgresql
   encoding: unicode
-  database: pumpl_test
+  database: picsy_test
   pool: 5
   username: postgres
   password: work1234
@@ -45,9 +45,9 @@ test: &test
 pre:
   adapter: postgresql
   encoding: unicode
-  database: pumpl_pre
+  database: picsy_pre
   pool: 5
-  username: pumpl
+  username: picsy
   password: d34ld34l
 
 cucumber:
