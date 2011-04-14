@@ -9,8 +9,7 @@
 #       Choose the win32 build.
 #       Install PostgreSQL and put its /bin directory on your path.
 development:
-  adapter: mysql
-  encoding: unicode
+  adapter: mysql2
   database: picsy_development
   username: root
   password: root 
@@ -34,15 +33,13 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  adapter: mysql
-  encoding: unicode
+  adapter: mysql2
   database: picsy_test
   username: postgres
   password: work1234
 
 pre:
-  adapter: mysql
-  encoding: unicode
+  adapter: mysql2
   database: picsy_pre
   username: picsy
   password: d34ld34l
