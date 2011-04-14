@@ -1,0 +1,4 @@
+<div id="more">
+	<%= link_to_remote "더보기",:url => items_more_url(:page => page,:item_type_name => params[:item_type_name],:category_name => params[:category_name]),:loading => "$('loading').show();$('more').hide()" %>
+</div> <!-- #more -->
+<div id="loading" style="display:none;"><%= image_tag "/images/loading.gif" %></div> <!-- #loading -->

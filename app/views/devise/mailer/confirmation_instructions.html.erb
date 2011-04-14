@@ -1,0 +1,5 @@
+<p>Welcome <%= @resource.nickname %>!</p>
+
+<p>You has been registered to PUMPL, click link below to activate your account:</p>
+
+<p><%= link_to 'Activate my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

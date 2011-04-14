@@ -1,0 +1,7 @@
+<h1>Editing Item </h1>
+<% form_for(@item,:url =>admin_item_path(@item),:html => { :multipart => true }) do |f| %>
+  <%= render :partial => 'form',:locals => {:f => f} %>
+<% end %>
+
+<%= link_to 'Show', @admin_item %> |
+<%= link_to 'Back', admin_items_path %>

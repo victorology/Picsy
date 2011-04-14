@@ -1,0 +1,49 @@
+<script type="javascript">
+  window.onload = function() {
+    <% if !params[:chk_location].blank? %>
+     <% for check_i in params[:chk_location] %>
+       $("item_block_" + <%=check_i%>).style.backgroundColor = '#aecfe4';
+     <% end %>
+  <% end %>
+  }
+</script>
+
+<h4>Locations</h4>  
+<div class="clear"></div>
+
+<% for item in @myitems %>  
+  <div id="item_block_<%= item.id %>" class="check_bx">
+    <%= check_box_tag "chk_location[]", item.id, assigned_check_boxes(params[:chk_location],item.id), :id=>"check_#{item.id}", :onclick=>"change_background(this.id,#{item.id})"%>
+	  <%= item.name %>
+  </div>
+<% end %>
+	
+<div class="clear"></div>	
+
+<h4>Categories</h4> 
+<div class="clear"></div>
+
+<% for category in @parent_categories %>  
+  <div id="item_block_<%= category.id %>" class="parent_chk">
+    <div class="clear"></div>
+  
+    <a href="javascript://" onclick="new Ajax.Updater('activity_block_<%= category.id %>', '/personalization/sub_categories/<%= category.id %>', {evalscripts: true});">
+    <%= check_box_tag "chk_category[]", category.id, assigned_check_boxes(params[:chk_category],category.id), :id=>"check_#{category.id}", :onclick=>"change_background(this.id,#{category.id})"%></a>
+	  <%= category.name %>
+	</div>
+	
+	<div class="child_chk" id="activity_block_<%= category.id %>">
+	  <% @child_cats = signupfind_childs(category.id) %>
+	  <% for child in @child_cats%>
+	    <input id="chk_categeory_<%= child.id %>" name="chk_categeory[]" value='<%= child.id %>' type="checkbox">
+		  <%= child.name %>
+	  <% end %>
+	  <div class="clear"></div>
+  </div>
+<% end %>
+      	
+<div class="clear"></div>	
+
+<div id="save_my_deals">
+  <%= submit_tag "Save My Deals",:class=> 'save' %>
+</div>

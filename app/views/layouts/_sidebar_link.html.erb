@@ -1,0 +1,3 @@
+<% dom_id = (sidebar_type == "item_type") ? "itype_link_#{menu.id}" : "categ_link_#{menu.id}" %>
+
+<%= link_to menu.name,"javascript:void(0)", :onclick => "sidebar_#{sidebar_type}_updater(#{menu.id},'#{menu.name}')" , :id => dom_id, :class => "sidebar_unselected" %>

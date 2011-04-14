@@ -1,0 +1,7 @@
+<h1>New Category</h1>
+
+<%= form_for(@item_type,:url => admin_item_types_path) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>
+
+<%= render :template => "admin/item_types/index" %>

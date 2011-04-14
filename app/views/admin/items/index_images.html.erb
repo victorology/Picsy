@@ -1,0 +1,44 @@
+<% item_ids_for_js = @items.collect {|it| it.id}.join(',') %>
+
+<div>
+<h1>Listing Unlocalized Image of Items</h1>
+<div style="text-align:right;">Select All<%= check_box_tag "all_images", 1, false, :onclick => "admin_all_images_local('#{item_ids_for_js}')" %></div>
+</div>
+<% form_tag manage_images_admin_items_path do -%>
+
+<%= hidden_field_tag "page", params[:page] %>
+<%= hidden_field_tag "order", params[:order] %>
+
+
+<table>
+  <tr id="table_row">
+	  <td>ID</th>
+	  <td>Title</th>
+	  <td>URL</th>
+		<td>RSS</th>
+    <td>Local Image</th>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+	  <td><%= item.id %></td>
+	  <td><%= item.title %></td>
+	  <td><%= item.url %></td>
+		<td><%= link_to item.rss_source,item.rss_source, :target => "_blank" if item.rss_source %></td>
+    <td>
+	     <% is_local = (item.picture_url.blank? == true && item.image_file_name.blank? == false) ? true : false %>
+	     <%= check_box_tag "image_location[#{item.id}]", "local",is_local, :disabled => is_local ? true : false %>
+	  </td>
+  </tr>
+<% end %>
+</table>
+<br />
+<div id="submit_select">
+  <%= submit_tag "Update Images" %>
+</div>
+<% end %>
+
+<br />
+<%= will_paginate @items %>
+
+

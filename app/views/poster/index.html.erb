@@ -1,0 +1,163 @@
+<h2>Registration Step 2 API</h2>
+
+<% form_for :user, :url => personalization_user_creation_path(:format => "json") do |f| %>
+	<p>Nickname : <br /> 
+	<%= f.text_field :nickname %> </p>
+	
+	<p> Email : <br />
+	<%= f.text_field :email %> </p>
+	
+	<p> Password :<br />
+	<%= f.password_field :password %> </p>
+	<%= submit_tag "Send" %>
+<% end %>	
+
+<h2>Login API</h2>
+
+<form action="/check_sign_in.json" method="post">
+	<p> Email : <br />
+	<%= text_field_tag "user[email]" %> </p>
+	
+	<p> Password :<br />
+	<%= password_field_tag "user[password]" %> </p>
+	<%= submit_tag "Send" %>
+</form>
+
+<h2>List of Connections API</h2>
+<% if @photo_user.session_api %>
+<form action="/connections.json" method="get">
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>	
+	
+	<p>PUMPL Nickname<br/>
+	<%= @photo_user.nickname %></p>		
+	<%= submit_tag "Submit" %>
+		
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
+
+<h2>Connect to Twitter</h2>
+<% if @photo_user.session_api %>
+<form action="/twitter/xauth_token.json" method="post">
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>
+	
+	<p>Twitter Username: <br />
+	<%= text_field_tag "x_auth_username" %></p>
+	
+	<p>Twitter Password: <br />
+	<%= password_field_tag "x_auth_password" %></p>	
+	
+	<%= submit_tag "Connect" %></p>	
+		
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
+
+<h2>Connect to Facebook</h2>
+<% if @photo_user.session_api %>
+<form action='<%= facebook_index_path(:format => "json") %>' method="get">
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>
+
+	<%= submit_tag "Connect" %>
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
+
+
+<h2>Upload Photo API</h2>
+<% if @photo_user.session_api %>
+<form action="/photos.json" method="post" enctype="multipart/form-data">
+	<p> User : <br />
+	<b><%= @photo_user.nickname %></b></p>	
+	
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>
+	
+	<p> Title : <br />
+	<%= text_field :photo,:title %> </p>
+	
+	<p> Photo :<br />
+	<%= file_field :photo, :image %> </p>
+	
+	<p> Post to Facebook<br />
+	<%= select :photo, :post_to_facebook, options_for_select(["yes", "no"], "no") %></p>
+	
+	<p> Post to Twitter<br />
+	<%= select :photo, :post_to_twitter, options_for_select(["yes", "no"], "no") %></p>
+	
+	<%= submit_tag "Upload" %>
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
+
+
+<h2>Retrieve My Photos API</h2>
+<form action="/photos/mine.json" method="get" enctype="multipart/form-data">
+	<p> User : <br />
+	<b><%= @photo_user.nickname %></b></p>	
+	<%= hidden_field_tag "id",@photo_user.id %>
+	<%= hidden_field_tag "session_api", @photo_user.session_api %>
+	<%= submit_tag "Retrieve" %>
+</form>
+
+<h2>Photo API via Facebook Step 1 (Authorize)</h2>
+<form action='<%= facebook_index_path(:format => "json") %>' method="get" enctype="multipart/form-data">
+	<%= submit_tag "Authorize" %>
+</form>
+
+<h2>Photo API via Facebook Step 2 (Upload)</h2>
+<% if @fb_user and @fb_user.try(:facebook_token).blank? == false %>
+	<form action="/photos.json" method="post" enctype="multipart/form-data">
+		<p> email : <br />
+		<b><%= @fb_user.email %></b></p>
+			
+		<%= hidden_field_tag "id",@fb_user.id %>
+		<%= hidden_field_tag "session_api", @fb_user.session_api %>
+    <%= hidden_field_tag "facebook_token", @fb_user.facebook_token %>
+
+		<p> Title : <br />
+		<%= text_field :photo,:title %> </p>
+
+		<p> Photo :<br />
+		<%= file_field :photo, :facebook_image %> </p>
+
+		<%= submit_tag "Upload to FB" %>
+	</form>
+<% else %>
+  <p>Can't show the upload form, pls authorize the Facebook first</p>
+<% end %>	
+
+
+
+<h2>Authorize via Twitter xAuth API Step 2 (Login - no longer used, form below just for testing purpose)</h2>	
+	<form action="/twitter/xauth_login.json" method="get">
+		<p>Access Token : <br />
+		<%= text_field_tag "x_auth_access_token",@photo_user.twitter_token,:size => 50 %></p>
+
+		<p>Access Secret : <br />
+		<%= text_field_tag "x_auth_access_secret",@photo_user.twitter_secret, :size => 50 %></p>	
+
+		<%= submit_tag "Submit" %>	
+
+	</form>
+
+<p><%= link_to "back to HOME", "/"%></p>

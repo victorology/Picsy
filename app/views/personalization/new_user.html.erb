@@ -1,0 +1,33 @@
+<body>
+<div id="register_alert" class="alert" style="text-align:center;">
+  <%= params[:msg] %>
+</div>
+	
+<%= form_for :user ,:url => personalization_user_creation_path, :html => {:id => "register_form"}  do %>
+<div id="personalize">
+  <%= render :partial => "personalize_form", :locals => {:item_types => @item_types, :categories => @categories} %>  
+  <%= button_to_function "Submit", "step2()" %>
+</div> <!-- personalize -->
+
+<div id="register">	
+		<fieldset>
+		<legend>회원가입</legend>
+		<ol>
+			<li><label for="username">닉네임</label>
+			<%= text_field :user, :nickname, :size => 32 %></li>
+			<li><label for="email">이메일</label>
+			<%= text_field :user, :email, :size => 32 %></li>
+			<li><label for="password">비밀번호</label>
+			<%= password_field :user, :password, :size => 32 %></li></li>
+		</ol>
+		</fieldset>
+		<%# button_to_remote "Submit", :url => personalization_ajax_user_creation_path , :with => "'user[email]=' + $('user_email').value + '&user[password]=' + $('user_password').value + '&user[nickname]=' + $('user_nickname').value", :loading => "$('register_spinner').show()", :complete => "$('register_spinner').hide()" %><%# image_tag "/stylesheets/spinner.gif", :id => "register_spinner", :size => "30x30", :style => "display:none;"%>
+		<%= button_to_remote "Submit", :url => personalization_ajax_user_creation_path , :with => "$('register_form').serialize()", :loading => "$('register_spinner').show()", :complete => "$('register_spinner').hide()" %>
+		<%= image_tag "/stylesheets/spinner.gif", :id => "register_spinner", :size => "30x30", :style => "display:none;"%>
+	
+</div>
+
+<% end %>
+</body>
+
+

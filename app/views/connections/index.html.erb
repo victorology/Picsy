@@ -1,0 +1,16 @@
+<h1>Connect your account to another services</h1>
+
+<div>
+	<% unless current_user.twitter_connected? %>
+    <%= link_to "Twitter", twitter_index_path%>
+  <% else %>
+    Connected to twitter as @<%= current_user.twitter_nickname %> || <%= link_to "Unlink", unlink_twitter_index_path, :confirm => "are you sure want to unlink your twitter account ?"%>
+  <% end %> 
+</div>
+<div>
+	<% unless current_user.facebook_connected? %>
+    <%= link_to "Facebook", facebook_index_path %>
+  <% else %>
+    Connected to facebook as <%= current_user.facebook_nickname %> || <%= link_to "Unlink", unlink_facebook_index_path, :confirm => "are you sure want to unlink your facebook account ?"%>
+  <% end %>
+</div>

@@ -1,0 +1,27 @@
+<h1><%= link_to "PUMPL","/" %></h1>
+<div id="header_all"><%= link_to "전체보기","/" %></div>
+
+<% unless current_user.blank? %>
+<div class="header_divider"></div>
+
+<div id="header_my"><%= link_to "나의펌플", my_path %></div>
+<% end %>
+<div id="header_right">
+	<% if current_user.blank? %>
+		<div id="header_register">	
+			<a href="javascript:void(0)" title="회원가입" onclick="Modalbox.show('<%= personalization_new_user_path %>'); return false;">>회원가입</a>
+	  </div>
+	  <div class="header_divider"></div>
+	<% end %> 
+		
+	<% if current_user.blank? %>
+		  
+		<div id="header_login">
+		  <%= link_to "로그인", "javascript:void(0)", :onclick => "Modalbox.show('#{user_sign_in_personalization_index_path}'); return false;", :title => "로그인" %>
+		</div>
+		<% else %>
+		<div id="header_logout">
+		  	<%= link_to "로그아웃", destroy_user_session_path %>
+		</div>
+	<% end %>
+</div> <!-- #header_right -->

@@ -1,0 +1,16 @@
+<body>
+<div id="register_alert" class="alert" style="text-align:center;">
+  <%= params[:msg] %>
+</div>
+	
+<%= form_for :user ,:url => do_assign_categories_locations_facebook_index_path, :html => {:id => "register_form"}  do %>
+<div id="personalize">
+  <%= render :partial => "personalization/personalize_form", :locals => {:item_types => @item_types, :categories => @categories} %>  
+  <%= button_to_remote "Submit", :url => do_assign_categories_locations_facebook_index_path , :with => "$('register_form').serialize()", :loading => "$('register_spinner').show()", :complete => "$('register_spinner').hide()" %>
+	<%= image_tag "/stylesheets/spinner.gif", :id => "register_spinner", :size => "30x30", :style => "display:none;"%>
+</div> <!-- personalize -->
+
+<% end %>
+
+
+</body>

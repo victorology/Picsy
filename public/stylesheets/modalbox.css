@@ -1,0 +1,204 @@
+/**** FORM *************/
+
+legend {
+	padding-bottom: 15px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+fieldset ol {
+	list-style: none;
+}
+
+fieldset ol li {
+	margin-bottom: 10px;
+}
+
+label {
+	font-size: 12px;
+	font-weight: bold;
+	display: block;
+}
+
+input {
+	height: 28px;
+	font-size: 16px;
+}
+
+/**** REGISTER *************/
+
+#register {
+	float: left;
+	width: 400px;
+	padding: 30px 25px;
+	background: #fff;
+	text-align: left;
+	margin-bottom: 10px;
+	display:none;
+}
+
+/**** LOGIN *************/
+
+#login {
+	float: left;
+	width: 400px;
+	padding: 30px 25px;
+	background: #fff;
+	text-align: left;
+	margin-bottom: 10px;	
+}
+
+/**** PERSONALIZE *************/
+
+#personalize {
+	float: left;
+	width: 400px;
+	padding: 30px 25px;
+	background-color: #fff;
+	text-align: left;
+}
+
+.per_checkbox {
+	float: left;
+	margin: 0px 5px 5px 0px;
+	width: 128px;
+}
+
+.per_checkbox input {
+	float: left;
+}
+
+.per_checkbox label {
+	padding: 0 10px;
+	cursor: pointer;
+	display: block;
+	line-height: 34px;
+}
+
+.per_checkbox label:hover {
+	color: #67b1df;
+}
+
+
+#save_my_deals {
+  font-size:large; 
+  clear:both; 
+  font-style:oblique;
+}
+
+#social_network {
+  list-style:none; 
+  display:block; 
+  width:400px; 
+  margin:0px; 
+  padding:0px;	
+}
+
+#register_success {
+  color:##67B1DF;
+  font-size:15px; 
+  font-family:Arial, Helvetica, sans-serif;
+  margin-bottom:15px;
+}
+
+#register_failed {
+  color:#CC0000;
+  font-size:15px;
+  margin-bottom:15px;
+}
+
+#MB_overlay {
+	position: absolute;
+	margin: auto;
+	top: 0;	left: 0;
+	width: 100%; height: 100%;
+	z-index: 9999;
+	background-color: #000!important;
+}
+#MB_overlay[id] { position: fixed; }
+
+#MB_window {
+	position: absolute;
+	top: 0;
+	border: 0 solid;
+	text-align: left;
+	z-index: 10000;
+}
+#MB_window[id] { position: fixed!important; }
+
+#MB_frame {
+	position: relative;
+	background-color: #FFFFFF;
+	height: 100%;
+}
+
+#MB_header {
+	margin: 0;
+	padding: 0;
+}
+
+#MB_content {
+	padding: 6px .75em;
+	overflow: auto;
+}
+
+#MB_caption {
+	font: bold 100% "Lucida Grande", Arial, sans-serif;
+	text-shadow: #FFF 0 1px 0;
+	padding: .5em 2em .5em .75em;
+	margin: 0;
+	text-align: left;
+}
+
+#MB_close {
+	display: block;
+	position: absolute;
+	right: 5px; top: 4px;
+	padding: 2px 3px;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 13px;
+}
+#MB_close:hover {
+	background: transparent;
+}
+
+#MB_loading {
+	padding: 1.5em;
+	text-indent: -10000px;
+	background: transparent url(spinner.gif) 50% 0 no-repeat;
+}
+
+/* Color scheme */
+#MB_frame {
+	padding-bottom: 7px;
+	-webkit-border-radius: 7px; 
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+}
+#MB_window {
+	background-color: #EFEFEF;
+	color: #000;
+	-webkit-box-shadow: 0 8px 64px #000; 
+	-moz-box-shadow: 0 0 64px #000; 
+	box-shadow: 0 0 64px #000;
+	
+	-webkit-border-radius: 7px; 
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+}
+#MB_content { border-top: 1px solid #F9F9F9; }
+#MB_header {
+  background-color: #DDD;
+  border-bottom: 1px solid #CCC;
+}
+#MB_caption { color: #000 }
+#MB_close { color: #777 }
+#MB_close:hover { color: #000 }
+
+
+/* Alert message */
+.MB_alert {
+	margin: 10px 0;
+	text-align: center;
+}

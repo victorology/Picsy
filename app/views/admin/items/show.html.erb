@@ -1,0 +1,50 @@
+<h1>Show Item</h1>
+
+<p>Title : <br />
+<%= @item.title%></p>
+
+<p>URL : <br />
+<%= link_to @item.url,@item.url %> </p>
+
+<p>Photo : <br />
+<%= image_tag @item.true_image_url, :size => "160x100" %>		
+
+<p>Deal Price :<br />
+<%= number_to_currency @item.deal_price %> 원</p>
+
+<p>Original Price :<br />
+<%= number_to_currency @item.original_price%> 원</p>	
+
+<p>Discount :<br />
+<%= @item.discount %>% 할인 </p>
+
+<p>Start Date :<br />
+<%= @item.begin_date.strftime("%B %d, %Y %I:%M %p") %></p>	
+
+<p>End Date :<br />
+<%= @item.finish_date.strftime("%B %d, %Y %I:%M %p") %></p>	
+
+<p>Category: <br />
+<%= @item.item_type.name %></p>	
+
+<p>Location(s): <br />
+<% @item.categories.each_with_index do |cat,i| %>
+	<%= i+1 %>. <%= cat.name %> <br />
+<% end %>	
+</p>
+
+<p>Sales Count: <br />
+<%= @item.sales_cnt %></p>
+
+<p>Max Sales Count: <br />
+<%= @item.max_sales_cnt %></p>
+
+<p>Deal Status: <br />
+<%= @item.deal_status_in_word %></p>
+
+<p>RSS Url: <br />
+<%= @item.rss_source %></p>
+
+
+<%= link_to 'Edit', edit_admin_item_path(@item) %> |
+<%= link_to 'Back', admin_items_path %>

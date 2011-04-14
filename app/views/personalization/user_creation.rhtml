@@ -1,0 +1,27 @@
+<body onload="parent.$('register_iframe').style.height='138px';">
+<div id="register">
+  <% if  flash[:user_creation]  %>
+    <div id="register_success"><h1><%= raw flash[:user_creation] %></h1></div>
+  <% else %>
+    <div id="register_failed"><h1><%= raw flash[:user_creation_fail_notice]  %> </h1></div>
+  <% end %>
+
+  <% if flash[:user_creation] %>
+  <ul id="social_network">
+    <div class="twitter_block">
+      <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pumpl.com" data-text="PUMPL » 최고의 할인을 '펌' 하는 피플, 펌플!" data-count="vertical" data-via="PUMPL">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>	
+    </div>
+
+    <div class="flike">
+      <script src="http://connect.facebook.net/ko_KR/all.js#xfbml=1"></script><fb:like href="http://pumpl.com" layout="box_count" show_faces="false" width="225" font="arial"></fb:like>
+    </div>
+  </ul>
+
+  <div id="fb-root"></div>
+
+  <script type="text/javascript">fb_init();</script>
+  <% end %>
+</div>
+</body>
+
+

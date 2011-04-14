@@ -1,0 +1,111 @@
+/* CSS Document */
+
+.clear{clear:both;}
+
+
+
+.left_spacing{ margin-left:10px;}
+
+
+ .flo_left{ float:left;}
+ 
+ .right_spacing{margin:0px 10px 0px 0px;}
+
+ 
+ /*------------------------------details page styles --------------------------------------*/
+ .detail_left{width:350px; height:280px; float:left; background: url(../images/detail-left-line.gif) no-repeat right;}
+ .detail_right{width:560px; height:auto;  float:left; margin:0px 0px 0px 20px;}
+ .inner_detail_top, .inner_detail_bottom{ width:320px; height:13px; background-color:#bab5af; font:bold 14px Arial, Helvetica, sans-serif; padding:5px 8px 8px 8px}
+ .inner_detail_bottom{ width:550px; margin:0px 0px 0px 10px; padding:3px 0px; height:24px;}
+.detail_img_block{ width:550px; margin:0px auto; height:auto;}
+.detail_img{border:2px solid #131118; width:242px; height:184px; float:left; margin:0px 0px 0px 10px;}
+.brown_button{ background:url(../images/button.gif) no-repeat; width:76px; height:24px; margin:0px 10px 0px 10px; padding:0px; font:700 12px Arial, Helvetica, sans-serif; text-align:center; color:#FFFFFF; border:0px;}
+.flo_right{ float:right;}
+.top_view{ margin:0px 0px 0px 130px;}
+.back{ color:#9a6119; font:14px Arial, Helvetica, sans-serif; background:#e8e8e8; padding:5px; margin:0px 0px 0px 0px;}
+.detaile_bottom{ width:900px; height:20px; margin:0px; padding:0px; position:relative;
+top:5px;}
+
+
+.black_overlay{
+display: none;
+position: fixed;
+top: 0%;
+left: 0%;
+width: 100%;
+height:100%;
+background-color: black;
+z-index:1001;
+-moz-opacity: 0.8;
+opacity:.80;
+filter: alpha(opacity=80);
+}
+
+.white_content {
+display: none;
+position: absolute;
+top: 25%;
+left: 25%;
+width:450px;
+padding: 16px;
+/*-moz-border-radius:11px;
+-webkit-border-radius:11px;*/
+background:#FFFFFF;
+border-top: 10px solid #67B1DF;
+border-bottom:10px solid #67B1DF;
+border-left: 10px solid #67B1DF;
+border-right:10px solid #67B1DF;
+z-index:1002;
+overflow: auto;
+behavior:url(../border-radius.htc);
+}
+
+.white_content_login {
+display: none;
+position: absolute;
+top: 25%;
+left: 25%;
+width: 450px;
+padding: 16px;
+/*-moz-border-radius:11px;
+-webkit-border-radius:11px;*/
+background:#FFFFFF;
+border-top: 10px solid #67B1DF;
+border-bottom:10px solid #67B1DF;
+border-left: 10px solid #67B1DF;
+border-right:10px solid #67B1DF;
+z-index:1002;
+overflow: auto;
+behavior:url(../border-radius.htc);
+}
+
+.site_link{text-align:right; padding:5px 20px 0px 15px;}
+.number_padding{padding:5px 20px 0px 15px;}
+
+.powered_text{font:12px Arial, Helvetica, sans-serif; text-align:left; padding:0px 0px 0px 23px;}
+h3, h4{ margin:0px; padding:0px 10px 0px 0px; float:left; font-size:16px;}
+h4{ font-size:13px;}
+.enlarge{padding:0px 0px 0px 70px; position:relative; top:-3px;}
+.enlarge_1{padding:0px 0px 0px 140px; position:relative; top:-3px;}
+
+
+/*------------------------------ Registration Form styles--------------------------------*/
+.white_content ul{list-style:none; width:400px;}
+.white_content ul li{ display:block; clear:both; height:30px;}
+.white_content ul li .left_caption{ float:left;width:120px; }
+.white_content ul li .right_caption{ width:250px;float:left; }
+.white_content h4{float:left;font:700 15px Arial, Helvetica, sans-serif; color:#aecfe4; padding:0px; margin:0px; height:auto;}
+.clear{ clear:both;}
+.check_bx{width:110px; padding:0px 0px 0px 0px; background-color:#fff; color:#000; float:left;}
+.parent_chk{width:150px; padding:0px 0px 0px 0px; background-color:#fff; color:#000; clear:both; float:left; margin:10px 0px 0px 0px; font-size:12px ; font-weight:bold;}
+
+.child_chk {width:250px; padding:0px 0px 0px 0px; color:#444; clear:both; float:left; margin:5px 0px 0px 20px;}
+.step{ width:80px; height:30px; background-color:#aecfe4; border:2px solid #ccc; color:#FFFFFF; text-align:center; line-height:30px; margin-left:120px;}
+
+.step:hover{ border:2px solid #fff; color:#000;}
+
+.save{width:110px;height:30px; background-color:#aecfe4; border:2px solid #ccc; color:#FFFFFF; text-align:center; line-height:30px;}
+
+.save:hover{ border:2px solid #fff; color:#000;}
+.twitter_block{ width:100px; float:left;height:20px;}
+.flike{ width:100px; float:left;height20px;}
