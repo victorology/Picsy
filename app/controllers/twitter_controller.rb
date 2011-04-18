@@ -13,7 +13,7 @@ class TwitterController < ApplicationController
   def xauth_token
     begin
       if current_user.twitter_secret.blank? or current_user.twitter_token.blank?   
-        consumer =  OAuth::Consumer.new TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, {:site => 'https://api.twitter.com'}   
+        consumer =  OAuth::Consumer.new TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, {:site => 'https://api.twitter.com'}  
         token = consumer.get_access_token(nil,{},
           :x_auth_username => params[:x_auth_username],
           :x_auth_password => params[:x_auth_password],

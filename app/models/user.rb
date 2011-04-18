@@ -16,9 +16,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :nickname
   validates_length_of :password, :minimum => 4, :too_short => "minimum is 4 characters", :on => :create
   
-  has_many :user_deals
-  has_many :item_types, :through => :user_deals, :conditions => ["user_deals.entity='ItemType'"]
-  has_many :categories, :through => :user_deals, :conditions => ["user_deals.entity='Category'"]
   has_many :photos
   
   before_save :downcase_email
