@@ -4,6 +4,7 @@ db/schema.rb
 log/*.log
 tmp/**/*
 .DS_Store
+config/database.yml
 public/system/images/**/**/*
 public/images/crawl/*
 public/images/crawl/*
