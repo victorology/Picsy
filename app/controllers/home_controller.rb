@@ -1,11 +1,7 @@
 class HomeController < ApplicationController
-  before_filter :find_items, :only => :index
   
   def index
-    ### redirect page that come from facebook
-    if params[:code]
-      redirect_to confirm_facebook_index_path(:code => params[:code])
-    end  
+    render :text => "Picsy"
   end 
   
   def welcome

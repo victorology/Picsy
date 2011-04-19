@@ -37,6 +37,12 @@ class User < ActiveRecord::Base
     self.update_attribute(:session_api,UUID.new.generate.gsub("-",""))
   end  
   
+  def self.find_for_database_authentication(conditions={})
+    self.where("nickname = ?", conditions[:email]).limit(1).first ||
+    self.where("email = ?", conditions[:email]).limit(1).first
+  end
+  
+  
   protected
   
   def downcase_email
