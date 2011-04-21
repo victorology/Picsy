@@ -38,6 +38,12 @@ Picsy::Application.routes.draw do
     end  
   end  
   
+  resources :launch do
+    collection do
+      get 'invite'
+    end
+  end    
+  
   resources :poster
   
   resources :me2day
@@ -144,7 +150,7 @@ Picsy::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "home#index"
+  root :to => "launch#index"
 
   # See how all your routes lay out with "rake routes"
 

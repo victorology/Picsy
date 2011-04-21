@@ -1,0 +1,9 @@
+<div style="text-align:center;">
+<h1>Picsy is coming soon</h1>
+<p>To get invitation to our private beta, <br />
+enter your email address below!</p>	
+
+<%= form @invite, :url => invite_launch_path do |f| %>
+<%= f.text_field :email%>
+<% end %>
+</div>	
