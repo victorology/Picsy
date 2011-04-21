@@ -195,7 +195,7 @@ GEM
       mime-types (>= 1.16)
       oauth (>= 0.4.1)
     tzinfo (0.3.26)
-    uuid (2.3.1)
+    uuid (2.3.2)
       macaddr (~> 1.0)
     warden (0.10.7)
       rack (>= 1.0.0)
@@ -238,6 +238,6 @@ DEPENDENCIES
   spork (= 0.8.4)
   thin
   twitter_oauth (= 0.4.3)
-  uuid (= 2.3.1)
+  uuid (= 2.3.2)
   whenever (= 0.6.2)
   will_paginate (= 3.0.pre2)

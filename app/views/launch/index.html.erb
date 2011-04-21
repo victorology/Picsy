@@ -1,9 +1,11 @@
 <div style="text-align:center;">
-<h1>Picsy is coming soon</h1>
-<p>To get invitation to our private beta, <br />
-enter your email address below!</p>	
-
-<%= form @invite, :url => invite_launch_path do |f| %>
-<%= f.text_field :email%>
-<% end %>
+  <h1>Picsy is coming soon</h1>
+  <p>To get invitation to our private beta, <br />
+  enter your email address below!</p>	
+ 
+  <%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
+    <p> <%= f.error_messages %></p>
+    <%= f.text_field :email %><br /><br />
+    <%= submit_tag "Submit" %>
+  <% end %>
 </div>	

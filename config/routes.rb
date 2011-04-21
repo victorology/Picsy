@@ -6,6 +6,12 @@ Picsy::Application.routes.draw do
     post "check_register", :to => "devise/sessions#check_register"
   end
   
+  resources :launch do
+    collection do
+      post 'invite'
+      get 'thank_you'
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -37,13 +43,7 @@ Picsy::Application.routes.draw do
       get 'run_scheduling'
     end  
   end  
-  
-  resources :launch do
-    collection do
-      get 'invite'
-    end
-  end    
-  
+    
   resources :poster
   
   resources :me2day
@@ -158,6 +158,8 @@ Picsy::Application.routes.draw do
   match 't:code' => 'photos#shortened'
   match 'q:code' => 'photos#shortened'
   match 'x:code' => 'photos#shortened'
+  
+  match 'v:code' => 'launch#index'
   
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

@@ -13,6 +13,15 @@
                                               DELETE /users(.:format)                                   {:action=>"destroy", :controller=>"devise/registrations"}
                                 check_sign_in POST   /check_sign_in(.:format)                           {:action=>"check_sign_in", :controller=>"devise/sessions"}
                                check_register POST   /check_register(.:format)                          {:action=>"check_register", :controller=>"devise/sessions"}
+                          invite_launch_index POST   /launch/invite(.:format)                           {:action=>"invite", :controller=>"launch"}
+                       thank_you_launch_index GET    /launch/thank_you(.:format)                        {:action=>"thank_you", :controller=>"launch"}
+                                 launch_index GET    /launch(.:format)                                  {:action=>"index", :controller=>"launch"}
+                                              POST   /launch(.:format)                                  {:action=>"create", :controller=>"launch"}
+                                   new_launch GET    /launch/new(.:format)                              {:action=>"new", :controller=>"launch"}
+                                  edit_launch GET    /launch/:id/edit(.:format)                         {:action=>"edit", :controller=>"launch"}
+                                       launch GET    /launch/:id(.:format)                              {:action=>"show", :controller=>"launch"}
+                                              PUT    /launch/:id(.:format)                              {:action=>"update", :controller=>"launch"}
+                                              DELETE /launch/:id(.:format)                              {:action=>"destroy", :controller=>"launch"}
                                  items_filter        /items/filter(.:format)                            {:controller=>"items", :action=>"filter"}
                                    items_more        /items/more(.:format)                              {:controller=>"items", :action=>"more"}
                                                      /personalization/sub_categories/:id(.:format)      {:controller=>"personalization", :action=>"sub_categories"}
@@ -35,14 +44,6 @@
                                          home GET    /home/:id(.:format)                                {:action=>"show", :controller=>"home"}
                                               PUT    /home/:id(.:format)                                {:action=>"update", :controller=>"home"}
                                               DELETE /home/:id(.:format)                                {:action=>"destroy", :controller=>"home"}
-                          invite_launch_index GET    /launch/invite(.:format)                           {:action=>"invite", :controller=>"launch"}
-                                 launch_index GET    /launch(.:format)                                  {:action=>"index", :controller=>"launch"}
-                                              POST   /launch(.:format)                                  {:action=>"create", :controller=>"launch"}
-                                   new_launch GET    /launch/new(.:format)                              {:action=>"new", :controller=>"launch"}
-                                  edit_launch GET    /launch/:id/edit(.:format)                         {:action=>"edit", :controller=>"launch"}
-                                       launch GET    /launch/:id(.:format)                              {:action=>"show", :controller=>"launch"}
-                                              PUT    /launch/:id(.:format)                              {:action=>"update", :controller=>"launch"}
-                                              DELETE /launch/:id(.:format)                              {:action=>"destroy", :controller=>"launch"}
                                  poster_index GET    /poster(.:format)                                  {:action=>"index", :controller=>"poster"}
                                               POST   /poster(.:format)                                  {:action=>"create", :controller=>"poster"}
                                    new_poster GET    /poster/new(.:format)                              {:action=>"new", :controller=>"poster"}
