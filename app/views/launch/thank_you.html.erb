@@ -5,7 +5,12 @@
 	
 	<div>
 		<% fb_url = CGI.escape "http://#{request.host_with_port}/v#{cookies[:guid]}" %>
-		<%= link_to "Facebook","http://www.facebook.com/sharer.php?u=#{fb_url}" %> || 
-
+		<%= link_to "Facebook","http://www.facebook.com/sharer.php?u=#{fb_url}" %> || Twitter || Me2day
+	</div>	
+	<p>Or copy and paste the following link to share<br />
+	wherever you want!</p>
+	
+	<div>
+		<h3><%= link_to "http://#{request.host_with_port}/v#{cookies[:guid]}","http://#{request.host_with_port}/v#{cookies[:guid]}" %></h3>
 	</div>	
 </div>	
