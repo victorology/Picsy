@@ -2,7 +2,14 @@ class LaunchController < ApplicationController
   layout "launch"
   
   def index
-    @invite = Invite.new
+    
+    ### ceck cookies
+    @invite = Invite.where(:guid => cookies[:guid]).first
+    if @invite.nil?
+      @invite = Invite.new
+    else
+      render :action => :thank_you
+    end    
   end
   
   def invite
@@ -14,7 +21,7 @@ class LaunchController < ApplicationController
       cookies.permanent[:guid] = @invite.guid
       redirect_to thank_you_launch_index_path
     else
-      render :index
+      render :action => :index
     end    
   end    
   
