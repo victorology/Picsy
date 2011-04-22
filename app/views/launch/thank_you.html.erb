@@ -9,6 +9,7 @@
 	</div>	
 	<p>Or copy and paste the following link to share<br />
 	wherever you want!</p>
+        <p>Credit : <%= @invite.references.size %></p>
 	
 	<div>
 		<h3><%= link_to "http://#{request.host_with_port}/v#{cookies[:guid]}","http://#{request.host_with_port}/v#{cookies[:guid]}" %></h3>

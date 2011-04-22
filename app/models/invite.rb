@@ -1,7 +1,10 @@
 class Invite < ActiveRecord::Base
   validates_presence_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
+
   after_save :guid_update
+  has_many :references, :class_name  => "Invite", :foreign_key => "reference_id"
+  belongs_to :reference, :class_name  => "Invite", :foreign_key => "reference_id"
 
   protected
   def guid_update

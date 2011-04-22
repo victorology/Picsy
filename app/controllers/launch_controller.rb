@@ -2,6 +2,9 @@ class LaunchController < ApplicationController
   layout "launch"
   
   def index
+    if params[:code]
+      @reference_id = Invite.where(:guid => params[:code]).first.id
+    end  
     
     ### ceck cookies
     @invite = Invite.where(:guid => cookies[:guid]).first
@@ -26,5 +29,6 @@ class LaunchController < ApplicationController
   end    
   
   def thank_you
+    @invite = Invite.where(:guid => cookies[:guid]).first
   end  
 end

@@ -6,6 +6,7 @@
   <%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
     <p> <%= f.error_messages %></p>
     <%= f.text_field :email %><br /><br />
+    <%= f.hidden_field :reference_id, :value => @reference_id %>
     <%= submit_tag "Submit" %>
   <% end %>
 </div>	
