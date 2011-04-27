@@ -70,6 +70,12 @@ Picsy::Application.routes.draw do
     end  
   end
   
+  resources :tumblr do
+    collection do
+      
+    end  
+  end  
+  
   resources :facebook do
     collection do
       get 'confirm'

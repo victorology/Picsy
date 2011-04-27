@@ -78,6 +78,27 @@
  You need to logged in via API first
 <% end %>
 
+<h2>Connect to Tumblr</h2>
+<% if @photo_user.session_api %>
+<form action="/tumblr" method="post">
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>
+	
+	<p>Twitter Username: <br />
+	<%= text_field_tag "tumblr_username" %></p>
+	
+	<p>Twitter Password: <br />
+	<%= password_field_tag "tumblr_password" %></p>	
+	
+	<%= submit_tag "Connect" %></p>	
+		
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
 
 <h2>Upload Photo API</h2>
 <% if @photo_user.session_api %>

@@ -37,6 +37,9 @@ FACEBOOK_APPLICATION_ID = "175899045777547"
 FACEBOOK_APPLICATION_SECRET = "dfe3b5b2f167e7369c46efd580b9f8aa"
 FACEBOOK_CALLBACK = "http://localpumpl.com/"
 
+## TUMBLR CONFIGURATION
+TUMBLR_SECRET_KEY = ""
+
 ## this api is created by aditya, it's for temporary purpose
 ## for the real API key need to ask to Victor
 ME2DAY_KEY = "85700c4d74697b45cff0b499c09c253e"
