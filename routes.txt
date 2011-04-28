@@ -94,6 +94,14 @@
                                       twitter GET    /twitter/:id(.:format)                             {:action=>"show", :controller=>"twitter"}
                                               PUT    /twitter/:id(.:format)                             {:action=>"update", :controller=>"twitter"}
                                               DELETE /twitter/:id(.:format)                             {:action=>"destroy", :controller=>"twitter"}
+                         connect_tumblr_index POST   /tumblr/connect(.:format)                          {:action=>"connect", :controller=>"tumblr"}
+                                 tumblr_index GET    /tumblr(.:format)                                  {:action=>"index", :controller=>"tumblr"}
+                                              POST   /tumblr(.:format)                                  {:action=>"create", :controller=>"tumblr"}
+                                   new_tumblr GET    /tumblr/new(.:format)                              {:action=>"new", :controller=>"tumblr"}
+                                  edit_tumblr GET    /tumblr/:id/edit(.:format)                         {:action=>"edit", :controller=>"tumblr"}
+                                       tumblr GET    /tumblr/:id(.:format)                              {:action=>"show", :controller=>"tumblr"}
+                                              PUT    /tumblr/:id(.:format)                              {:action=>"update", :controller=>"tumblr"}
+                                              DELETE /tumblr/:id(.:format)                              {:action=>"destroy", :controller=>"tumblr"}
                        confirm_facebook_index GET    /facebook/confirm(.:format)                        {:action=>"confirm", :controller=>"facebook"}
                    confirm_api_facebook_index GET    /facebook/confirm_api(.:format)                    {:action=>"confirm_api", :controller=>"facebook"}
                         unlink_facebook_index GET    /facebook/unlink(.:format)                         {:action=>"unlink", :controller=>"facebook"}
@@ -169,3 +177,4 @@ do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categor
                                                      /t:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
                                                      /q:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
                                                      /x:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
+                                                     /v:code(.:format)                                  {:controller=>"launch", :action=>"index"}

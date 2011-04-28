@@ -38,7 +38,8 @@ FACEBOOK_APPLICATION_SECRET = "dfe3b5b2f167e7369c46efd580b9f8aa"
 FACEBOOK_CALLBACK = "http://localpumpl.com/"
 
 ## TUMBLR CONFIGURATION
-TUMBLR_SECRET_KEY = ""
+TUMBLR_SECRET = "picsy_dev"
+TUMBLR_SALT = "Op9cLyhggHtP8oYAC+DdPcRDLmrh0cGo7gdAB5dCQ=2Kx"
 
 ## this api is created by aditya, it's for temporary purpose
 ## for the real API key need to ask to Victor

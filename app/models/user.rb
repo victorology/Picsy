@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :facebook_token, :facebook_nickname
+  attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :facebook_token, :facebook_nickname, :tumblr_email, :tumblr_secret, :tumblr_nickname
 
   validates_presence_of :email, :nickname
   validates_presence_of :password, :on => :create 
@@ -41,6 +41,16 @@ class User < ActiveRecord::Base
     self.where("nickname = ?", conditions[:email]).limit(1).first ||
     self.where("email = ?", conditions[:email]).limit(1).first
   end
+  
+  def self.tumblr_pwd_encrypt(pwd)
+    key = EzCrypto::Key.with_password TUMBLR_SECRET, TUMBLR_SALT
+    return key.encrypt64(pwd)
+  end
+  
+  def self.tumblr_pwd_decrypt(pwd)
+    key = EzCrypto::Key.with_password TUMBLR_SECRET, TUMBLR_SALT
+    return key.decrypt64(pwd)
+  end      
   
   
   protected
