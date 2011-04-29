@@ -40,6 +40,13 @@ class Photo < ActiveRecord::Base
       clnt = HTTPClient.new
       response = clnt.post("http://www.tumblr.com/api/write",body)
       
+      unless response.status == 201
+        errors[:base] << "Bad request, most likely your image is larger than 10 MB or connection timeout"
+        return false
+      end
+    elsif self.user.tumblr_connected? == false and self.post_to_tumblr == "yes"
+      errors[:base] << "Can't post photo to tumblr, you need to link your account first"  
+      return false  
     end  
     
   end  
@@ -73,7 +80,9 @@ class Photo < ActiveRecord::Base
         write_attribute(:fb_thumbnail_url,rs["picture"])
       end  
     
-    
+    elsif self.user.facebook_connected? == false and self.post_to_facebook == "yes" 
+      errors[:base] << "Can't post photo to facebook, you need to link your account first" 
+      return false
     end  
   end  
   
