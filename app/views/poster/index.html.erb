@@ -124,6 +124,9 @@
 	<p> Post to Twitter<br />
 	<%= select :photo, :post_to_twitter, options_for_select(["yes", "no"], "no") %></p>
 	
+	<p> Post to Tumblr<br />
+	<%= select :photo, :post_to_tumblr, options_for_select(["yes", "no"], "no") %></p>
+	
 	<%= submit_tag "Upload" %>
 </form>
 <% else %>

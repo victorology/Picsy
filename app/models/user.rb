@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     return (self.facebook_token.blank?) ? false : true
   end  
   
+  def tumblr_connected?
+    return (self.tumblr_secret.blank?) ? false : true
+  end  
+  
   
   def update_session_api
     self.update_attribute(:session_api,UUID.new.generate.gsub("-",""))

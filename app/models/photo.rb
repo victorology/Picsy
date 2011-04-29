@@ -1,7 +1,7 @@
 class Photo < ActiveRecord::Base
   belongs_to :user
   
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :post_to_facebook, :post_to_twitter
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :post_to_facebook, :post_to_twitter, :post_to_tumblr
   has_attached_file :image, 
     :styles => { :medium => "75x100#"}, 
     :url => "/system/uphotos/:pattern_nickname/:pattern_code/:style/:basename.:extension"
@@ -26,6 +26,12 @@ class Photo < ActiveRecord::Base
     end  
     return rs
   end 
+  
+  def tumblr_photo
+    if self.user.tumblr_connected? == true and self.post_to_tumblr == "yes"
+      clnt = HTTPClient.new
+    end  
+  end  
   
   def fb_photo
     
@@ -96,7 +102,7 @@ class Photo < ActiveRecord::Base
   end
   
   def check_post_to
-    ["facebook","twitter"].each do |svc|
+    ["facebook","twitter","tumblr"].each do |svc|
       write_attribute("post_to_#{svc}".to_sym,"no") if read_attribute("post_to_#{svc}".to_sym) != "yes"
     end  
   end  
