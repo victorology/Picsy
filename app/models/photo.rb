@@ -11,7 +11,7 @@ class Photo < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 100.megabytes
   
   before_create :generate_code, :check_post_to
-  before_create :fb_photo
+  before_create :fb_photo, :tumblr_photo
       
   def generate_code
     charset = %w{1 2 3 4 6 7 9 A C D E F G H J K L M N P Q R T V W X Y Z}
@@ -28,9 +28,20 @@ class Photo < ActiveRecord::Base
   end 
   
   def tumblr_photo
+    
     if self.user.tumblr_connected? == true and self.post_to_tumblr == "yes"
+      body = {
+        :email => self.user.tumblr_email,
+        :password => User.tumblr_pwd_decrypt(self.user.tumblr_secret),
+        :type => "photo",
+        :caption => self.title,
+        :data => File.open(self.image.queued_for_write[:original].path) 
+      }
       clnt = HTTPClient.new
+      response = clnt.post("http://www.tumblr.com/api/write",body)
+      
     end  
+    
   end  
   
   def fb_photo
