@@ -94,6 +94,21 @@ module ApplicationHelper
       page.hide 'more'
     end
   end
+
+  def flash_messages
+    message = ""
+    if !flash[:notice].blank?
+      message += flash[:notice]
+    elsif !flash[:error].blank?
+      message += flash[:error]
+    end
+    message
+  end
+
+  def clear_flash
+    flash[:notice] = nil
+    flash[:error] = nil
+  end
   
   
 end

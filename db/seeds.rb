@@ -21,4 +21,10 @@ user.confirmed_at = Time.now
 user.is_admin = false
 user.save
 
+### another user data, it's used for test purpose only
+user = User.create(:email => "test.prawirasoft@gmail.com",:password => "work1234", :password_confirmation => "work1234", :nickname => "test")
+user.confirmed_at = Time.now
+user.is_admin = false
+user.save
+
   

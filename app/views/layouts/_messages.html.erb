@@ -1,0 +1,10 @@
+<%- if current_user != nil%>
+  <%= flash_messages %>
+  <script>
+    new Effect.Fade('flash-messages', { duration: 4.0 });
+  </script>
+  <%= clear_flash %>
+  <br/>
+<%else%>
+  <%= flash_messages %>
+<%end%>

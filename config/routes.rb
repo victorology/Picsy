@@ -12,7 +12,9 @@ Picsy::Application.routes.draw do
       get 'thank_you'
     end
   end
-  
+
+  resources :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

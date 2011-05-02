@@ -28,8 +28,10 @@ Picsy::Application.configure do
 end
 
 ## TWITTER CONFIGURATION
-TWITTER_CONSUMER_KEY = "OSfFsclVxhB1nfIzEVkBkg"
-TWITTER_CONSUMER_SECRET = "35EHXmEmUjwiSgX3k6K1EFU06DAijfKXlZlNwTJAqJo"
+#TWITTER_CONSUMER_KEY = "OSfFsclVxhB1nfIzEVkBkg"
+#TWITTER_CONSUMER_SECRET = "35EHXmEmUjwiSgX3k6K1EFU06DAijfKXlZlNwTJAqJo"
+TWITTER_CONSUMER_KEY = "LJ0V9gINOA0UQFRhvNWgIg"
+TWITTER_CONSUMER_SECRET = "p1C0tnLkKa0RyNmGYwIAm13RtzTryc3VWNKU0W38Y8o"
 TWITTER_CONFIRM_PATH = "twitter/confirm"
 
 ## FACEBOOK CONFIGURATION
@@ -44,4 +46,3 @@ TUMBLR_SALT = "Op9cLyhggHtP8oYAC+DdPcRDLmrh0cGo7gdAB5dCQ=2Kx"
 ## this api is created by aditya, it's for temporary purpose
 ## for the real API key need to ask to Victor
 ME2DAY_KEY = "85700c4d74697b45cff0b499c09c253e"
-

@@ -1,0 +1,18 @@
+<% form_tag do %>
+<%= render :partial => "layouts/messages" %>
+  <h1>Users</h1>
+  <p>
+  <th>Name:</th>
+  <th>Email:</th>
+  </p>
+  <% @user.each do |a| %>
+    <p>
+      <%= a.first_name %>
+      <%= a.last_name %>
+      <%= a.email %>
+      <% if current_user.id == a.id %>
+        <%= link_to "edit", edit_user_path(a) %>
+      <% end %>
+    </p>
+  <% end %><br />
+<% end %>

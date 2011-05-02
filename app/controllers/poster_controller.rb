@@ -7,7 +7,7 @@ class PosterController < ApplicationController
       session["warden.user.user.key"] = nil
       @user = User.new
       @photo = Photo.new
-      @photo_user = User.find(:first, :conditions => {:nickname => "aditya"})
+      @photo_user = User.find(:first, :conditions => {:nickname => "test"})
       @photo_user.update_session_api if @photo_user.session_api.blank?
       
       #@fb_user = User.find(:first,:conditions => {:facebook_handle => true, :email => "aditya.jamop@gmail.com"})
