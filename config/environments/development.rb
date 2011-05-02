@@ -43,6 +43,13 @@ FACEBOOK_CALLBACK = "http://localpumpl.com/"
 TUMBLR_SECRET = "picsy_dev"
 TUMBLR_SALT = "Op9cLyhggHtP8oYAC+DdPcRDLmrh0cGo7gdAB5dCQ=2Kx"
 
-## this api is created by aditya, it's for temporary purpose
-## for the real API key need to ask to Victor
-ME2DAY_KEY = "85700c4d74697b45cff0b499c09c253e"
+
+
+=begin
+OLD KEY 85700c4d74697b45cff0b499c09c253e
+4e19bc31dfeb694da5b8b8f3138d63ec
+2a8512295365b1fe59b9ecc691c4fcb1
+ef3a3dcc953c1d5fd55c5e98bd32da70
+=end
+
+ME2DAY_KEY = "ef3a3dcc953c1d5fd55c5e98bd32da70"
