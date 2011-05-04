@@ -64,8 +64,24 @@ class FacebookController < ApplicationController
   
   def unlink
     current_user.update_attributes(:facebook_token => nil, :facebook_nickname => nil)
-    flash[:notice] = "your account has been unlinked from facebook successfully"
-    redirect_to connections_path
+    respond_to do |format|
+      format.html {
+        flash[:notice] = "your account has been unlinked from facebook successfully"
+        redirect_to connections_path
+      }
+      format.json {
+        @raw_result = {
+          :code => 0,
+          :error_message => nil,
+          :value => {
+            :facebook => {
+              :unlink => current_user.facebook_connected? ? "failed" : "success"
+            },
+          }
+        }
+        render :json => JSON.generate(@raw_result)    
+      }  
+    end  
   end
   
   def assign_categories_locations

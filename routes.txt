@@ -22,6 +22,13 @@
                                        launch GET    /launch/:id(.:format)                              {:action=>"show", :controller=>"launch"}
                                               PUT    /launch/:id(.:format)                              {:action=>"update", :controller=>"launch"}
                                               DELETE /launch/:id(.:format)                              {:action=>"destroy", :controller=>"launch"}
+                                        users GET    /users(.:format)                                   {:action=>"index", :controller=>"users"}
+                                              POST   /users(.:format)                                   {:action=>"create", :controller=>"users"}
+                                     new_user GET    /users/new(.:format)                               {:action=>"new", :controller=>"users"}
+                                    edit_user GET    /users/:id/edit(.:format)                          {:action=>"edit", :controller=>"users"}
+                                         user GET    /users/:id(.:format)                               {:action=>"show", :controller=>"users"}
+                                              PUT    /users/:id(.:format)                               {:action=>"update", :controller=>"users"}
+                                              DELETE /users/:id(.:format)                               {:action=>"destroy", :controller=>"users"}
                                  items_filter        /items/filter(.:format)                            {:controller=>"items", :action=>"filter"}
                                    items_more        /items/more(.:format)                              {:controller=>"items", :action=>"more"}
                                                      /personalization/sub_categories/:id(.:format)      {:controller=>"personalization", :action=>"sub_categories"}
@@ -95,6 +102,7 @@
                                               PUT    /twitter/:id(.:format)                             {:action=>"update", :controller=>"twitter"}
                                               DELETE /twitter/:id(.:format)                             {:action=>"destroy", :controller=>"twitter"}
                          connect_tumblr_index POST   /tumblr/connect(.:format)                          {:action=>"connect", :controller=>"tumblr"}
+                          unlink_tumblr_index GET    /tumblr/unlink(.:format)                           {:action=>"unlink", :controller=>"tumblr"}
                                  tumblr_index GET    /tumblr(.:format)                                  {:action=>"index", :controller=>"tumblr"}
                                               POST   /tumblr(.:format)                                  {:action=>"create", :controller=>"tumblr"}
                                    new_tumblr GET    /tumblr/new(.:format)                              {:action=>"new", :controller=>"tumblr"}

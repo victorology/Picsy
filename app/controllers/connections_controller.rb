@@ -15,6 +15,10 @@ class ConnectionsController < ApplicationController
             :twitter => {
               :is_connected => current_user.twitter_connected?,
               :nickname => current_user.twitter_nickname
+            },
+            :tumblr => {
+              :is_connected => current_user.tumblr_connected?,
+              :nickname => current_user.tumblr_nickname
             }
           }
         }

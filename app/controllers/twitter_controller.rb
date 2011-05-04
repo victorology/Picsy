@@ -113,8 +113,24 @@ class TwitterController < ApplicationController
   
   def unlink
     current_user.update_attributes(:twitter_token => nil, :twitter_secret => nil, :twitter_nickname => nil)
-    flash[:notice] = "your account has been unlinked from twitter successfully"
-    redirect_to connections_path
+    respond_to do |format|
+      format.html {
+        flash[:notice] = "your account has been unlinked from twitter successfully"
+        redirect_to connections_path
+      }
+      format.json {
+        @raw_result = {
+          :code => 0,
+          :error_message => nil,
+          :value => {
+            :twitter => {
+              :unlink => current_user.twitter_connected? ? "failed" : "success"
+            },
+          }
+        }
+        render :json => JSON.generate(@raw_result)
+      }  
+    end   
   end  
   
   def assign_categories_locations

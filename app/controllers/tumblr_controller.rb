@@ -54,4 +54,26 @@ class TumblrController < ApplicationController
     
     render :text => JSON.generate(@raw_result), :content_type => "application/json"
   end  
+  
+  def unlink
+    current_user.update_attributes(:tumblr_secret => nil, :tumblr_nickname => nil)
+    respond_to do |format|
+      format.html {
+        flash[:notice] = "your account has been unlinked from tumblr successfully"
+        redirect_to connections_path
+      }
+      format.json {
+        @raw_result = {
+          :code => 0,
+          :error_message => nil,
+          :value => {
+            :tumblr => {
+              :unlink => current_user.facebook_connected? ? "failed" : "success"
+            },
+          }
+        }
+        render :json => JSON.generate(@raw_result)    
+      }  
+    end
+  end  
 end

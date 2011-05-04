@@ -75,6 +75,7 @@ Picsy::Application.routes.draw do
   resources :tumblr do
     collection do
       post 'connect'
+      get 'unlink'
     end  
   end  
   
