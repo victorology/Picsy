@@ -115,7 +115,7 @@ GEM
     money (3.1.0)
     multi_json (1.0.0)
     multipart-post (1.1.0)
-    mysql2 (0.3.2)
+    mysql2 (0.2.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -228,7 +228,7 @@ DEPENDENCIES
   mechanize (= 1.0.0)
   mini_magick (= 3.2.1)
   money (= 3.1.0)
-  mysql2
+  mysql2 (= 0.2.7)
   nokogiri (= 1.4.3.1)
   oauth (= 0.4.4)
   paperclip (= 2.3.11)
