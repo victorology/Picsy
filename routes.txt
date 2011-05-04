@@ -93,6 +93,7 @@
                      xauth_form_twitter_index GET    /twitter/xauth_form(.:format)                      {:action=>"xauth_form", :controller=>"twitter"}
     assign_categories_locations_twitter_index GET    /twitter/assign_categories_locations(.:format)     {:action=>"assign_categories_locations", :controller=>"twitter"}
                          unlink_twitter_index GET    /twitter/unlink(.:format)                          {:action=>"unlink", :controller=>"twitter"}
+                                              POST   /twitter/unlink(.:format)                          {:action=>"unlink", :controller=>"twitter"}
  do_assign_categories_locations_twitter_index POST   /twitter/do_assign_categories_locations(.:format)  {:action=>"do_assign_categories_locations", :controller=>"twitter"}
                                 twitter_index GET    /twitter(.:format)                                 {:action=>"index", :controller=>"twitter"}
                                               POST   /twitter(.:format)                                 {:action=>"create", :controller=>"twitter"}
@@ -103,6 +104,7 @@
                                               DELETE /twitter/:id(.:format)                             {:action=>"destroy", :controller=>"twitter"}
                          connect_tumblr_index POST   /tumblr/connect(.:format)                          {:action=>"connect", :controller=>"tumblr"}
                           unlink_tumblr_index GET    /tumblr/unlink(.:format)                           {:action=>"unlink", :controller=>"tumblr"}
+                                              POST   /tumblr/unlink(.:format)                           {:action=>"unlink", :controller=>"tumblr"}
                                  tumblr_index GET    /tumblr(.:format)                                  {:action=>"index", :controller=>"tumblr"}
                                               POST   /tumblr(.:format)                                  {:action=>"create", :controller=>"tumblr"}
                                    new_tumblr GET    /tumblr/new(.:format)                              {:action=>"new", :controller=>"tumblr"}
@@ -113,6 +115,7 @@
                        confirm_facebook_index GET    /facebook/confirm(.:format)                        {:action=>"confirm", :controller=>"facebook"}
                    confirm_api_facebook_index GET    /facebook/confirm_api(.:format)                    {:action=>"confirm_api", :controller=>"facebook"}
                         unlink_facebook_index GET    /facebook/unlink(.:format)                         {:action=>"unlink", :controller=>"facebook"}
+                                              POST   /facebook/unlink(.:format)                         {:action=>"unlink", :controller=>"facebook"}
    assign_categories_locations_facebook_index GET    /facebook/assign_categories_locations(.:format)    {:action=>"assign_categories_locations", :controller=>"facebook"}
 do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categories_locations(.:format) {:action=>"do_assign_categories_locations", :controller=>"facebook"}
                                facebook_index GET    /facebook(.:format)                                {:action=>"index", :controller=>"facebook"}

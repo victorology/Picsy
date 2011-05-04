@@ -68,6 +68,7 @@ Picsy::Application.routes.draw do
       get 'xauth_form'
       get 'assign_categories_locations'
       get 'unlink'
+      post 'unlink'
       post 'do_assign_categories_locations'
     end  
   end
@@ -76,6 +77,7 @@ Picsy::Application.routes.draw do
     collection do
       post 'connect'
       get 'unlink'
+      post 'unlink'
     end  
   end  
   
@@ -84,6 +86,7 @@ Picsy::Application.routes.draw do
       get 'confirm'
       get 'confirm_api'
       get 'unlink'
+      post 'unlink'
       get 'assign_categories_locations'
       post 'do_assign_categories_locations'
     end   

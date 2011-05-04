@@ -103,7 +103,7 @@
 
 <h2>Facebook Unlink API</h2>
 <% if @photo_user.session_api %>
-<form action="/facebook/unlink.json" method="get">
+<form action="/facebook/unlink.json" method="post">
 	<p>ID <br />
 	<%= text_field_tag "id",@photo_user.id %></p>
 	
@@ -118,7 +118,7 @@
 
 <h2>Twitter Unlink API</h2>
 <% if @photo_user.session_api %>
-<form action="/twitter/unlink.json" method="get">
+<form action="/twitter/unlink.json" method="post">
 	<p>ID <br />
 	<%= text_field_tag "id",@photo_user.id %></p>
 	
@@ -133,7 +133,7 @@
 
 <h2>Tumblr Unlink API</h2>
 <% if @photo_user.session_api %>
-<form action="/tumblr/unlink.json" method="get">
+<form action="/tumblr/unlink.json" method="post">
 	<p>ID <br />
 	<%= text_field_tag "id",@photo_user.id %></p>
 	
