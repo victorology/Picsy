@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.6'
+gem 'rails', '3.0.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -28,7 +28,7 @@ gem 'devise'									,"1.1.3"
 gem 'hominid'									,"2.2.0"
 gem 'paperclip'								,"2.3.11"
 gem 'will_paginate'						,"3.0.pre2"
-gem 'whenever'								,"0.6.2"
+gem 'whenever'								,"0.6.7"
 gem 'mechanize'								,"1.0.0"
 gem 'httpclient'							,"2.2.0.2"
 gem 'twitter_oauth'						,"0.4.3"
