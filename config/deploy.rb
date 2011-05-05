@@ -17,15 +17,22 @@ namespace :deploy do
 end
  
 namespace :bundler do
- 
-  task :bundle_new_release, :roles => :app do
-    # make sure use ruby 1.9.2
+  desc "Symlink bundled gems on each release"
+  task :symlink_bundled_gems, :roles => :app do
     run "rvm use 1.9.2"
-    #bundler.create_symlink
-    run "cd #{current_path} && bundle install --local"
+    run "mkdir -p #{shared_path}/bundled_gems"
+    run "ln -nfs #{shared_path}/bundled_gems #{release_path}/vendor/bundle"
   end
+
+  desc "Install for production"
+  task :install, :roles => :app do
+    run "cd #{release_path} && bundle install"
+  end
+
 end
 
+after 'deploy:update_code', 'bundler:symlink_bundled_gems'
+after 'deploy:update_code', 'bundler:install'
+
  
-after 'deploy:update_code', 'bundler:bundle_new_release' 
 
