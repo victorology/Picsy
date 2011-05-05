@@ -3,7 +3,7 @@ set :user, :victor
 set :deploy_to, "/passenger/nginx/picsy"
 set :port, "13481"
 set :rails_env, "production"
-set :branch, "production"
+set :branch, "master"
 
 role :web, "175.126.73.169"                          
 role :app, "175.126.73.169"  

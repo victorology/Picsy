@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 require 'capistrano/ext/multistage'
 
-set :stages, "production"
+set :stages, ["production"]
 set :default_stage, "production"
 set :application, "picsy"
 set :repository,  "git@github.com:victorology/Picsy.git"
