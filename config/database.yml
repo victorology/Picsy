@@ -38,11 +38,6 @@ test: &test
   username: root
   password: root
 
-pre:
-  adapter: mysql2
-  database: picsy_pre
-  username: picsy
-  password: d34ld34l
 
 cucumber:
   <<: *test

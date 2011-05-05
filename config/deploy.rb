@@ -19,6 +19,8 @@ end
 namespace :bundler do
  
   task :bundle_new_release, :roles => :app do
+    # make sure use ruby 1.9.2
+    run "rvm use 1.9.2"
     #bundler.create_symlink
     run "cd #{current_path} && bundle install --local"
   end
