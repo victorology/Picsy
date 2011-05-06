@@ -43,6 +43,7 @@ gem 'me2day-ruby'             ,"0.2.1", :require => "me2day"
 gem 'httparty'								,"0.7.4"
 gem 'ruby-hmac'								,"0.4.0", :require => "hmac"
 gem 'ezcrypto'								,"0.7.2"
+gem 'magic_encoding'					,"0.0.2"
 
 
 # Bundle gems for the local environment. Make sure to

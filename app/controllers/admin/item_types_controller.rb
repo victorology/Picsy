@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Admin::ItemTypesController < ApplicationController
   before_filter :authenticate_user!
   # GET /admin/item_types

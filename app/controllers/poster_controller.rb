@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PosterController < ApplicationController
   ### this controller is used for testing purpose only
   ### particularly to test POST request against PUMPL API

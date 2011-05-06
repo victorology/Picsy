@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module PersonalizationHelper
   
   ### pls note that, Category in UI means ItemTypes in the table

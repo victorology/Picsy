@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 
 class TumblrController < ApplicationController
   protect_from_forgery :except => [:connect]

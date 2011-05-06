@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ApplicationHelper
   def number_to_currency(number,options = {})
     rs = super(number,options).to_s

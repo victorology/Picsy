@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PersonalizationController < ApplicationController
   before_filter :authenticate_user!, :except => [:user_creation,:selected_deals,:sub_categories, :new_user, :user_sign_in, :ajax_user_creation]
   before_filter :convert_api_params, :only => [:user_creation]

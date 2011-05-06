@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Me2dayController < ApplicationController
   def index
     #clnt = HTTPClient.new

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Admin::ItemsHelper
   
   def check_parent_category(cat)

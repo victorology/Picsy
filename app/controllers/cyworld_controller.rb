@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CyworldController < ApplicationController
   require 'base64'
   require 'cgi'

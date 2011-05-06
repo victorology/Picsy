@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FacebookController < ApplicationController
   protect_from_forgery :except => [:confirm_api]
   before_filter :authenticate_user!

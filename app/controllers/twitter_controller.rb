@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TwitterController < ApplicationController
   protect_from_forgery :except => [:xauth_token,:xauth_login]
   before_filter :authenticate_user! 
