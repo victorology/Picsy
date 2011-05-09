@@ -48,7 +48,11 @@ Picsy::Application.routes.draw do
     
   resources :poster
   
-  resources :me2day
+  resources :me2day do
+    collection do
+      get 'confirm'
+    end  
+  end  
   
   resources :cyworld
   

@@ -2,10 +2,25 @@
 class LaunchController < ApplicationController
   layout "launch"
   
-  def index
+  def index    
+    # me2day confirm
+    if params[:token]
+      redirect_to confirm_me2day_index_path(
+        :token => params[:token],
+        :result => params[:result],
+        :user_id => params[:user_id],
+        :user_key => params[:user_key]
+      )
+    end
+    
     if params[:code]
       @reference_id = Invite.where(:guid => params[:code]).first.id
     end  
+    
+    # facebook confirm
+    #if params[:code]
+    #  redirect_to confirm_facebook_index_path(:code => params[:code])
+    #end 
     
     ### ceck cookies
     @invite = Invite.where(:guid => cookies[:guid]).first

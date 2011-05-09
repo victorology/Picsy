@@ -1,1 +1,1 @@
-unicorn_rails -p 3301
+thin start -p 3301
