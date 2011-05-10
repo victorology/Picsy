@@ -16,7 +16,7 @@ class Me2dayController < ApplicationController
             :app_key => ME2DAY_KEY
         )
 
-       # @client.noop
+       @client.noop
       #  => {"error"=>{"code"=>"0", "description"=>nil, "message"=>"\354\204\261\352\263\265\355\226\210\354\212\265\353\213\210\353\213\244."}}
 
        # @client.create_post 'me2_id', 'post[body]' => "오늘의 미친 짓!"
