@@ -8,7 +8,7 @@ class Me2dayController < ApplicationController
   def confirm
     #token, user_id, user_key, result = request.params["token"], request.params["user_id"], request.params["user_key"], request.params["result"]
 
-    #if params[:result] == 'true'
+    if params[:result] == 'true'
 
         @client = Me2day::Client.new(
             :user_id => params[:user_id],
@@ -20,9 +20,22 @@ class Me2dayController < ApplicationController
       #  => {"error"=>{"code"=>"0", "description"=>nil, "message"=>"\354\204\261\352\263\265\355\226\210\354\212\265\353\213\210\353\213\244."}}
 
        # @client.create_post 'me2_id', 'post[body]' => "오늘의 미친 짓!"
-       debugger
-       a.a
-    #end
+       
+      current_user.update_attribute(:me2day_id => params[:user_id], :me2day_key => params[:user_key])
+      
+      @raw_result = {
+        :code => 0,
+        :error_message => nil,
+        :value => {
+          :is_me2day_connected => true
+        }
+      }
+      respond_to do |format|
+         format.json {
+           render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+         }  
+      end
+    end
     
   end  
 end

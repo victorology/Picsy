@@ -11,25 +11,26 @@ class LaunchController < ApplicationController
         :user_id => params[:user_id],
         :user_key => params[:user_key]
       )
-    end
+    else  
     
-    if params[:code]
-      @reference_id = Invite.where(:guid => params[:code]).first.id
-    end  
+      if params[:code]
+        @reference_id = Invite.where(:guid => params[:code]).first.id
+      end  
     
-    # facebook confirm
-    #if params[:code]
-    #  redirect_to confirm_facebook_index_path(:code => params[:code])
-    #end 
+      # facebook confirm
+      #if params[:code]
+      #  redirect_to confirm_facebook_index_path(:code => params[:code])
+      #end 
     
-    ### ceck cookies
-    @invite = Invite.where(:guid => cookies[:guid]).first
-    if @invite.nil?
-      @invite = Invite.new
-    else
-      Rails.logger.info "INVITE EMAIL #{@invite.email}"
-      render :action => :thank_you
-    end    
+      ### check cookies
+      @invite = Invite.where(:guid => cookies[:guid]).first
+      if @invite.nil?
+        @invite = Invite.new
+      else
+        Rails.logger.info "INVITE EMAIL #{@invite.email}"
+        render :action => :thank_you
+      end
+    end      
   end
   
   def invite
