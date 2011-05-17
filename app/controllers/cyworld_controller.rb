@@ -4,8 +4,7 @@ class CyworldController < ApplicationController
   require 'cgi'
   require 'openssl'
   
-  def index
-=begin  
+  def index 
     clnt = HTTPClient.new 
     
     uri = "https://oauth.nate.com/OAuth/GetRequestToken/V1a"
@@ -15,13 +14,14 @@ class CyworldController < ApplicationController
       'oauth_signature_method' => "HMAC-SHA1",
       'oauth_signature' => sig,
       'oauth_nonce' => nonce,
-      'oauth_version' => "1.0"
+      'oauth_version' => "1.0",
+      'oauth_callback' => 'http://pumpl.com/cyworld/confirm'
     }
 
 
     res = clnt.post(uri, body)
     render :text => res.content
-=end    
+
 
 =begin
 OAuth::Consumer.new(consumer_key, consumer_secret,
@@ -30,7 +30,7 @@ OAuth::Consumer.new(consumer_key, consumer_secret,
                                :authorize_path => "/oauth/authorize",
                                :access_token_path => "/oauth/access_token",
                                :http_method => :get)
-=end                               
+                         
 
 
     @consumer=OAuth::Consumer.new("a869b27692b1d1ca4bab30c9d33b102f04d679b66",nil,{
@@ -45,9 +45,11 @@ OAuth::Consumer.new(consumer_key, consumer_secret,
     request_token = @consumer.get_request_token
     session[:request_token] = request_token
     
+    render :text => request_token.authorize_url
+=end     
     
 
-    render :text => request_token.authorize_url
+    
 
   end
   
