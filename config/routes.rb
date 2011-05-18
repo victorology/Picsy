@@ -13,7 +13,11 @@ Picsy::Application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do 
+    collection do
+      post 'update_profile'
+    end
+  end    
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

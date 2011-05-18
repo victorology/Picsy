@@ -23,6 +23,30 @@
 	<%= submit_tag "Send" %>
 </form>
 
+<% if @photo_user.session_api %>
+<h2>Edit Profile API</h2>
+<form action="/users/update_profile.json" method="post">
+	<p> Nickname <br />
+	<%= text_field_tag "user[nickname]", @photo_user.nickname %> </p>
+	
+	<p> Email :<br />
+	<%= text_field_tag "user[email]", @photo_user.email %> </p>
+	
+	<p> Phone Number :<br />
+	<%= text_field_tag "user[phone_number]", @photo_user.phone_number %> </p>
+	
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>
+	
+	<%= submit_tag "Send" %>
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
+
 <h2>List of Connections API</h2>
 <% if @photo_user.session_api %>
 <form action="/connections.json" method="get">

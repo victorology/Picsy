@@ -7,22 +7,42 @@ class UsersController < ApplicationController
     @user = User.all
   end
 
-  def edit
-    @user = User.find(params[:id])
-    if current_user.id != @user.id
-      flash[:notice] = "it's not yours "
-      redirect_to users_path
-    end
-  end
+  #def edit_profile
+  #  @user = User.find(params[:id])
+  #  if current_user.id != @user.id
+  #    flash[:notice] = "it's not yours "
+  #    redirect_to users_path
+  #  end
+  #end
 
-  def update
+  def update_profile
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      flash[:notice] = 'success edit user.'
-      redirect_to users_path
+      code = 1
+      error_message = nil
+      user_data = {
+        :nickname => @user.nickname,
+        :email => @user.email,
+        :phone_number => @user.phone_number
+      }
     else
-      flash[:notice] = 'failed edit user'
-      redirect_to users_path
+      code = 0
+      error_message = @user.errors.full_messages.join(", ")
+      user_data = nil
+    end  
+    
+    @raw_result = {
+      :code => code,
+      :error_message => error_message,
+      :value => {
+        :user => user_data
+      }
+    }
+    
+    respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }  
     end
   end
 end

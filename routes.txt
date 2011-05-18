@@ -22,6 +22,7 @@
                                        launch GET    /launch/:id(.:format)                              {:action=>"show", :controller=>"launch"}
                                               PUT    /launch/:id(.:format)                              {:action=>"update", :controller=>"launch"}
                                               DELETE /launch/:id(.:format)                              {:action=>"destroy", :controller=>"launch"}
+                         update_profile_users POST   /users/update_profile(.:format)                    {:action=>"update_profile", :controller=>"users"}
                                         users GET    /users(.:format)                                   {:action=>"index", :controller=>"users"}
                                               POST   /users(.:format)                                   {:action=>"create", :controller=>"users"}
                                      new_user GET    /users/new(.:format)                               {:action=>"new", :controller=>"users"}

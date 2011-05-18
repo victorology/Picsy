@@ -10,19 +10,19 @@ User.destroy_all
 Setting.destroy_all
 
 ### admin data for temporary, once change pwd feature is built, this data must be removed
-admin = User.create(:email => "admin@pumpl.com",:password => "super4dmin", :password_confirmation => "super4dmin", :nickname => "admin")
+admin = User.create(:email => "admin@pumpl.com",:password => "super4dmin", :password_confirmation => "super4dmin", :nickname => "admin", :phone_number => "999999")
 admin.confirmed_at = Time.now
 admin.is_admin = true
 admin.save
 
 ### user data, it's used for test purpose only
-user = User.create(:email => "aditya.jamop@gmail.com",:password => "work1234", :password_confirmation => "work1234", :nickname => "aditya")
+user = User.create(:email => "aditya.jamop@gmail.com",:password => "work1234", :password_confirmation => "work1234", :nickname => "aditya", :phone_number => "88888")
 user.confirmed_at = Time.now
 user.is_admin = false
 user.save
 
 ### another user data, it's used for test purpose only
-user = User.create(:email => "test.prawirasoft@gmail.com",:password => "work1234", :password_confirmation => "work1234", :nickname => "test")
+user = User.create(:email => "v@victor.is",:password => "test1234", :password_confirmation => "test1234", :nickname => "victor", :phone_number => "77777")
 user.confirmed_at = Time.now
 user.is_admin = false
 user.save
