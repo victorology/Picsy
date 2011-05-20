@@ -74,5 +74,53 @@ class Devise::SessionsController < ApplicationController
       }
     end  
   end
+  
+  def update_password
+    @api_user = User.find(:first, :conditions => {:id => params[:id], :session_api => params[:session_api]})
+    
+    params[:user] = {
+      :email => @api_user.email,
+      :password => params[:old_password]  
+    } 
+    
+    sign_out :user if signed_in?(:user)
+    resource = warden.authenticate(:scope => resource_name)
+    
+    if resource
+      resource.password = params[:password]
+      resource.password_confirmation = params[:password_confirmation]
+      if params[:password].blank?
+        @msg = "new password can't be blank"
+      elsif params[:password] != params[:password_confirmation]
+        @msg = "new password and new password confirmation doesn't match"  
+      elsif current_user.save
+        resource.update_session_api
+        @user = {
+          :nickname => resource.nickname,
+          :email => resource.email,
+          :id => resource.id,
+          :session_api => resource.session_api
+        }
+      else
+        @msg = "Password and Password confirmation doesn't match"
+      end    
+    else
+      @msg = "The old password you entered incorrect, please try it again"
+    end
+    
+    respond_to do |format|
+      format.json {
+        @raw_result = {
+          :code => (resource.blank?) ? 1 : 0,
+          :error_message => @msg,
+          :value => {
+            :user => @user,
+          }
+        }
+        
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }
+    end  
+  end  
    
 end

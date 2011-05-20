@@ -16,6 +16,12 @@ class UsersController < ApplicationController
   #end
 
   def update_profile
+    params[:user] = {
+      :nickname => params[:nickname],
+      :email => params[:email],
+      :phone_number => params[:phone_number]
+    }
+    
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       code = 1
@@ -45,4 +51,5 @@ class UsersController < ApplicationController
       }  
     end
   end
+  
 end

@@ -3,6 +3,7 @@ Picsy::Application.routes.draw do
   
   devise_scope :user do
     post "check_sign_in", :to => "devise/sessions#check_sign_in"
+    post "update_password", :to => "devise/sessions#update_password"
     post "check_register", :to => "devise/sessions#check_register"
   end
   
@@ -16,6 +17,7 @@ Picsy::Application.routes.draw do
   resources :users do 
     collection do
       post 'update_profile'
+      post 'update_password'
     end
   end    
 

@@ -16,7 +16,7 @@
 
 <form action="/check_sign_in.json" method="post">
 	<p> Nickname or Email : <br />
-	<%= text_field_tag "user[email]" %> </p>
+	<%= text_field_tag "user[email]",@photo_user.nickname %> </p>
 	
 	<p> Password :<br />
 	<%= password_field_tag "user[password]" %> </p>
@@ -27,13 +27,37 @@
 <h2>Edit Profile API</h2>
 <form action="/users/update_profile.json" method="post">
 	<p> Nickname <br />
-	<%= text_field_tag "user[nickname]", @photo_user.nickname %> </p>
+	<%= text_field_tag "nickname", @photo_user.nickname %> </p>
 	
 	<p> Email :<br />
-	<%= text_field_tag "user[email]", @photo_user.email %> </p>
+	<%= text_field_tag "email", @photo_user.email %> </p>
 	
 	<p> Phone Number :<br />
-	<%= text_field_tag "user[phone_number]", @photo_user.phone_number %> </p>
+	<%= text_field_tag "phone_number", @photo_user.phone_number %> </p>
+	
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>
+	
+	<%= submit_tag "Send" %>
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
+
+<% if @photo_user.session_api %>
+<h2>Edit Password API</h2>
+<form action="/update_password.json" method="post">
+	<p> Old Password <br />
+	<%= text_field_tag "old_password" %> </p>
+	
+	<p> New Password :<br />
+	<%= text_field_tag "password" %> </p>
+	
+	<p> New Password Confirmation :<br />
+	<%= text_field_tag "password_confirmation" %> </p>
 	
 	<p>ID <br />
 	<%= text_field_tag "id",@photo_user.id %></p>
@@ -64,7 +88,6 @@
 <% else %>
  You need to logged in via API first
 <% end %>
-
 
 <h2>Connect to Twitter</h2>
 <% if @photo_user.session_api %>
