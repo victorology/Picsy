@@ -17,7 +17,7 @@ Picsy::Application.routes.draw do
   resources :users do 
     collection do
       post 'update_profile'
-      post 'update_password'
+      post 'update_profile_photo'
     end
   end    
 

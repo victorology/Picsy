@@ -6,6 +6,7 @@ tmp/**/*
 .DS_Store
 config/database.yml
 public/system/images/**/**/*
+public/system/carrierwave/**/**/*
 public/images/crawl/*
 public/images/crawl/*
 public/images/crawl/*

@@ -22,8 +22,8 @@ class UsersController < ApplicationController
       :phone_number => params[:phone_number]
     }
     
-    @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
+    #@user = User.find(params[:id])
+    if @api_user.update_attributes(params[:user])
       code = 1
       error_message = nil
       user_data = {
@@ -51,5 +51,32 @@ class UsersController < ApplicationController
       }  
     end
   end
+  
+  def update_profile_photo
+    
+    @api_user.profile_photo = params[:profile_photo]
+    if params[:profile_photo].blank?
+      @msg = "profile photo can't be blank"
+    elsif @api_user.save
+      @photo_url = "http://#{request.host_with_port}#{@api_user.profile_photo.url}"
+    else
+      @msg = @api_user.errors.full_messages.join(",")
+    end  
+    
+    @raw_result = {
+      :code => (@msg.blank?) ? 1 : 0,
+      :error_message => @msg,
+      :value => {
+        :url => @photo_url
+      }
+    }
+    
+    respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }  
+    end   
+       
+  end  
   
 end
