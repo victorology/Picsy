@@ -130,5 +130,22 @@ class UsersController < ApplicationController
       }  
     end  
   end 
+
+  def following_and_followers_list 
+    @raw_result = {
+      :code => 1,
+      :error_message => nil,
+      :value => {
+        :following  => @api_user.following.to_json(:only => [:id, :nickname, :email]),
+        :followers => @api_user.followers.to_json(:only => [:id, :nickname, :email])
+      }
+    }
+
+    respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }  
+    end  
+  end
   
 end

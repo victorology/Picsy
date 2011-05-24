@@ -20,6 +20,7 @@ Picsy::Application.routes.draw do
       post 'update_profile_photo'
       post 'follow'
       post 'unfollow'
+      get 'following_and_followers_list'
     end
   end    
 
