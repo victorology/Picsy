@@ -77,6 +77,58 @@ class UsersController < ApplicationController
       }  
     end   
        
-  end  
+  end 
+
+  def follow
+    if @api_user.id == params[:following_id].to_i
+      @msg = "can't follow yourself"
+    else
+      @user_following = @api_user.user_following.find_or_initialize_by_following_id(params[:following_id])
+      unless @user_following.save
+        @msg = @user_following.errors.full_messsages.join(". ")
+      end
+    end
+
+    @raw_result = {
+      :code => (@msg.blank?) ? 1 : 0,
+      :error_message => @msg,
+      :value => {
+        :total_following => "#{@api_user.following.size} user(s)" ,
+        :following_ids => @api_user.following.collect(&:id).join(",")
+      }
+    }
+    
+    respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }  
+    end   
+  end
+
+  def unfollow
+    @user_following  = @api_user.user_following.find_by_following_id(params[:following_id])
+    if @user_following 
+      unless @user_following.destroy
+        @msg = "Unfollow failed : #{@user_following.errors.full_messsages.join(". ")}"
+      end 
+    else
+      @msg = "You only can unfollow user that already followed"
+    end
+
+    @raw_result = {
+      :code => (@msg.blank?) ? 1 : 0,
+      :error_message => @msg,
+      :value => {
+        :total_following  => "#{@api_user.following.size} user(s)",
+        :following_ids => @api_user.following.collect(&:id).join(",")
+      }
+    }
+
+    respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }  
+    end  
+  end 
   
 end

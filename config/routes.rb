@@ -18,6 +18,8 @@ Picsy::Application.routes.draw do
     collection do
       post 'update_profile'
       post 'update_profile_photo'
+      post 'follow'
+      post 'unfollow'
     end
   end    
 

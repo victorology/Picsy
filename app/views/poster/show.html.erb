@@ -295,4 +295,28 @@
 
 	</form>
 
+<h2>Follow User</h2>
+<form action="/users/follow.json" method="post">
+	<p> User : <br />
+	<b><%= @photo_user.nickname %></b></p>	
+        <p>Following ID: <br />
+	<%= text_field_tag "following_id" %></p>
+
+	<%= hidden_field_tag "id",@photo_user.id %>
+	<%= hidden_field_tag "session_api", @photo_user.session_api %>
+	<%= submit_tag "Follow" %>
+</form>
+
+<h2>Unfollow User</h2>
+<form action="/users/unfollow.json" method="post">
+	<p> User : <br />
+	<b><%= @photo_user.nickname %></b></p>	
+        <p>Following ID: <br />
+	<%= text_field_tag "following_id" %></p>
+
+	<%= hidden_field_tag "id",@photo_user.id %>
+	<%= hidden_field_tag "session_api", @photo_user.session_api %>
+	<%= submit_tag "Unfollow" %>
+</form>
+
 <p><%= link_to "back to HOME", "/"%></p>
