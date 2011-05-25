@@ -98,7 +98,6 @@ class FacebookController < ApplicationController
     
     if @user.save
       sign_in @user
-      selected_deals(@user.id)
       session[:facebook] = nil
       @result = true 
     end
