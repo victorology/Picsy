@@ -137,7 +137,7 @@ class PersonalizationController < ApplicationController
     if @result == true
       flash[:notice] = "Thank you for signing up"
 	  else
-      flash[:user_creation_fail_notice] = "Failed to register due to <br /> #{@user.errors.full_messages.join('<br />')}"
+      flash[:user_creation_fail_notice] = "Failed to register due to: #{@user.errors.full_messages.join(', ')}"
 	  end	  
 	  
 	  respond_to do |format|
