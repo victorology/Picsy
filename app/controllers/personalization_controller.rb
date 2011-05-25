@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class PersonalizationController < ApplicationController
-  before_filter :authenticate_user!, :except => [:user_creation,:selected_deals,:sub_categories, :new_user, :user_sign_in, :ajax_user_creation]
+  before_filter :authenticate_user!, :except => [:user_creation, :sub_categories, :new_user, :user_sign_in, :ajax_user_creation]
   before_filter :convert_api_params, :only => [:user_creation]
   protect_from_forgery :except => [:user_creation]
   
@@ -120,7 +120,6 @@ class PersonalizationController < ApplicationController
     if @user.valid?
       @user.save
       sign_in @user
-      selected_deals(@user.id)
       @user.update_session_api if params[:format] == "json"
       @registered_user = {
         :id => @user.id,
@@ -164,7 +163,6 @@ class PersonalizationController < ApplicationController
     if @user.valid?
       @user.save
       sign_in @user
-      selected_deals(@user.id)
       @result = true
     else
       @result = false  

@@ -147,7 +147,6 @@ class TwitterController < ApplicationController
     
     if @user.save
       sign_in @user
-      selected_deals(@user.id)
       session[:twitter] = nil
       @result = true 
     end

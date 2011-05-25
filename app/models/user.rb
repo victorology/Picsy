@@ -20,6 +20,12 @@ class User < ActiveRecord::Base
   validates_length_of :password, :minimum => 4, :too_short => "minimum is 4 characters", :on => :create
   
   has_many :photos
+
+  #follower and following
+  has_many :user_following, :foreign_key => "follower_id"
+  has_many :user_followers, :class_name => "UserFollowing", :foreign_key => "following_id"
+  has_many :following, :through => :user_following, :source => "following"
+  has_many :followers, :through => :user_followers, :source => "follower"
   
   before_save :downcase_email
   
