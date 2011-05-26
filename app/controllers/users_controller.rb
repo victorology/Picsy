@@ -136,8 +136,8 @@ class UsersController < ApplicationController
       :code => 1,
       :error_message => nil,
       :value => {
-        :following  => @api_user.following.to_json(:only => [:id, :nickname, :email]),
-        :followers => @api_user.followers.to_json(:only => [:id, :nickname, :email])
+        :following  => @api_user.following.collect{|user| user_hash user},
+        :followers => @api_user.followers.collect{|user| user_hash user}
       }
     }
 
@@ -147,5 +147,16 @@ class UsersController < ApplicationController
       }  
     end  
   end
-  
+
+  protected
+  def user_hash(user)
+    rs = {
+      :id => user.id,
+      :nickname => user.nickname,
+      :email => user.email
+    }
+
+    return rs  
+  end
+
 end

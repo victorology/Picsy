@@ -37,6 +37,31 @@ class PhotosController < ApplicationController
     end
 
   end  
+
+  def feed
+    if @api_user.following.empty?
+      @msg = "You have to follow at least one user to see a feed of photos"
+    else
+      @photos = @api_user.get_following_photos
+      if @photos.empty?
+        @msg = "Users that you follow don't have any uploaded photos yet"
+      end
+    end
+
+    @raw_result = {
+      :code => (@msg.blank?) ? 1 : 0,
+      :error_message => @msg,
+      :value => {
+        :photos  => @photos.collect {|photo| photo_hash photo, true}
+      }
+    }
+
+   respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }  
+    end 
+  end
   
   def create
 
@@ -81,7 +106,7 @@ class PhotosController < ApplicationController
   end  
   
   protected
-  def photo_hash(photo)
+  def photo_hash(photo, show_owner = false)
     rs = {
       :title => photo.title,
       :original_width => photo.width,
@@ -94,8 +119,19 @@ class PhotosController < ApplicationController
       :thumbnail_url => "http://"+request.host_with_port+photo.image.url(:medium),
       :original_url =>  "http://"+request.host_with_port+photo.image.url,
     }
+
+    rs.merge!(photo_url_hash)  
+
+    if show_owner
+      owner = photo.user
+      owner_hash = {
+        :owner_id => owner.id,
+        :owner_nickname => owner.nickname,
+      }
+      rs.merge!(owner_hash)  
+    end
       
-    return rs.merge(photo_url_hash)  
+    return rs 
   end
   
   def shortened_url(photo)

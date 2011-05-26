@@ -70,6 +70,7 @@ Picsy::Application.routes.draw do
   resources :photos do 
     collection do 
       get 'mine'
+      get 'feed'
     end
   end    
   

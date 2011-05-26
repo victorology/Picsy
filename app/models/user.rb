@@ -66,7 +66,10 @@ class User < ActiveRecord::Base
     key = EzCrypto::Key.with_password TUMBLR_SECRET, TUMBLR_SALT
     return key.decrypt64(pwd)
   end      
-  
+
+  def get_following_photos(limit = 10)
+    Photo.where("user_id IN (?)", self.following.collect(&:id)).order("created_at DESC").limit(limit)
+  end
   
   protected
   
