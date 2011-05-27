@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :facebook_token, :facebook_nickname, :tumblr_email, :tumblr_secret, :tumblr_nickname, :phone_number, :password, :profile_photo
+  attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :facebook_token, :facebook_nickname, :facebook_id, :tumblr_email, :tumblr_secret, :tumblr_nickname, :phone_number, :password, :profile_photo
 
   validates_presence_of :email, :nickname
   validates_presence_of :password, :on => :create 
@@ -69,6 +69,30 @@ class User < ActiveRecord::Base
 
   def get_following_photos(limit = 10)
     Photo.where("user_id IN (?)", self.following.collect(&:id)).order("created_at DESC").limit(limit)
+  end
+
+  def facebook_friends
+    if self.facebook_connected? == true   
+      clnt = HTTPClient.new
+      body = {:access_token => self.facebook_token}
+      response = clnt.get("https://graph.facebook.com/me/friends",body)
+
+      rs = JSON.parse(response.content)
+      if rs["error"]
+        if rs["error"]["message"].include?("Error validating access token")
+          self.update_attributes(:facebook_token => nil, :facebook_nickname => nil, :facebook_id => nil)
+          message = "this user account isn't connected to Facebook, please authorize it first"
+        else
+          message = rs["error"]["message"]
+        end
+        return [false, message]    
+      else
+        return [true, rs['data']]
+      end
+    elsif self.facebook_connected? == false 
+      message = "Can't retrieve facebook friend ids, you need to link your account first" 
+      return [false, message]
+    end  
   end
   
   protected

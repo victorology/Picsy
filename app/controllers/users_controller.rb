@@ -148,6 +148,44 @@ class UsersController < ApplicationController
     end  
   end
 
+  def find_friends
+    @friends = []
+    @following_ids = @api_user.following.collect(&:id)
+
+    #find facebook friends
+    facebook_status, facebook_data = @api_user.facebook_friends
+    if facebook_status
+      @facebook_friends = facebook_data
+      unless @facebook_friends.empty?
+        @facebook_friend_ids = @facebook_friends.map{|k| k['id']}
+        @friends = @friends += User.where("facebook_id in (?) AND id NOT in (?)", @facebook_friend_ids, @following_ids)
+      end
+    else
+      @msg = facebook_data
+    end
+
+    #find twitter friends
+    #TODO : WILL BE IMPLEMENTED LATER
+
+    if facebook_status && @friends.empty?
+      @msg = "You don't have friends that already connected to facebook or you've been following them"
+    end
+
+    @raw_result = {
+      :code => (@msg.blank?) ? 1 : 0,
+      :error_message => @msg,
+      :value => {
+        :friends => @friends.collect{|user| user_hash user}
+      }
+    }
+
+    respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }  
+    end  
+  end
+
   protected
   def user_hash(user)
     rs = {

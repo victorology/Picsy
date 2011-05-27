@@ -37,8 +37,9 @@ class FacebookController < ApplicationController
           :is_facebook_connected => true
         }
       }
-      
-      current_user.update_attributes(:facebook_token => access_token.token, :facebook_nickname => fb_nickname(client))
+      current_user.update_attributes(:facebook_token => access_token.token, 
+                                     :facebook_nickname => fb_nickname(client), 
+                                     :facebook_id => client.me.info['id'])
     
     rescue OAuth2::HTTPError
       @raw_result = {
@@ -64,7 +65,7 @@ class FacebookController < ApplicationController
   end  
   
   def unlink
-    current_user.update_attributes(:facebook_token => nil, :facebook_nickname => nil)
+    current_user.update_attributes(:facebook_token => nil, :facebook_nickname => nil, :facebook_id => nil)
     respond_to do |format|
       format.html {
         flash[:notice] = "your account has been unlinked from facebook successfully"

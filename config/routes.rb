@@ -21,6 +21,7 @@ Picsy::Application.routes.draw do
       post 'follow'
       post 'unfollow'
       get 'following_and_followers_list'
+      get 'find_friends'
     end
   end    
 
