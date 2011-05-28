@@ -149,32 +149,49 @@ class UsersController < ApplicationController
   end
 
   def find_friends
-    @friends = []
     @following_ids = @api_user.following.collect(&:id)
+    @friends = User.where("id NOT in (?)", @following_ids)
 
     #find facebook friends
     facebook_status, facebook_data = @api_user.facebook_friends
     if facebook_status
       @facebook_friends = facebook_data
-      unless @facebook_friends.empty?
-        @facebook_friend_ids = @facebook_friends.map{|k| k['id']}
-        @friends = @friends += User.where("facebook_id in (?) AND id NOT in (?)", @facebook_friend_ids, @following_ids)
-      end
+      @facebook_friend_ids = @facebook_friends.empty? ? [] : @facebook_friends.map{|k| k['id']}
     else
-      @msg = facebook_data
+      @facebook_msg = facebook_data
+      @facebook_friend_ids = []
     end
 
-    #find twitter friends
-    #TODO : WILL BE IMPLEMENTED LATER
-
-    if facebook_status && @friends.empty?
-      @msg = "You don't have friends that already connected to facebook or you've been following them"
+    #find twitter friend ids
+    twitter_status, twitter_data = @api_user.twitter_friend_ids
+    if twitter_status
+      @twitter_friend_ids = twitter_data
+    else
+      @twitter_friend_ids = []
+      @twitter_msg = twitter_data
     end
+
+    if @facebook_friend_ids || @twitter_friend_ids
+      @friends = @friends.where("facebook_id in (?) OR twitter_id in (?)", @facebook_friend_ids, @twitter_friend_ids) 
+    else #set @friends to empty if either @facebook_friend_ids or @twitter_friend_ids is NULL
+      @friends = []
+    end
+
+    @errors_messages = []
+    if (facebook_status || twitter_status) && @friends.empty?
+      social_networks = []
+      social_networks << 'facebook' if facebook_status 
+      social_networks << 'twitter' if twitter_status 
+      @errors_messages << "You don't have any friends that already connected to #{social_networks.join('/')} or you've been following them"
+    end
+    @errors_messages += [@facebook_msg, @twitter_msg].compact
 
     @raw_result = {
-      :code => (@msg.blank?) ? 1 : 0,
-      :error_message => @msg,
-      :value => {
+      :code => (@errors_messages.empty?) ? 1 : 0,
+      :error_message => @errors_messages.join(" - "),
+      :value => { 
+        :is_facebook_connected => @api_user.facebook_connected?,
+        :is_twitter_connected => @api_user.twitter_connected?,
         :friends => @friends.collect{|user| user_hash user}
       }
     }

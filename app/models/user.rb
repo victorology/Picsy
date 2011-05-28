@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :facebook_token, :facebook_nickname, :facebook_id, :tumblr_email, :tumblr_secret, :tumblr_nickname, :phone_number, :password, :profile_photo
+  attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :twitter_id, :facebook_token, :facebook_nickname, :facebook_id, :tumblr_email, :tumblr_secret, :tumblr_nickname, :phone_number, :password, :profile_photo
 
   validates_presence_of :email, :nickname
   validates_presence_of :password, :on => :create 
@@ -83,16 +83,36 @@ class User < ActiveRecord::Base
           self.update_attributes(:facebook_token => nil, :facebook_nickname => nil, :facebook_id => nil)
           message = "this user account isn't connected to Facebook, please authorize it first"
         else
-          message = rs["error"]["message"]
+          message = "failed connect to facebook : #{rs["error"]["message"]}"
         end
         return [false, message]    
       else
         return [true, rs['data']]
       end
     elsif self.facebook_connected? == false 
-      message = "Can't retrieve facebook friend ids, you need to link your account first" 
+      message = "Can't retrieve facebook friends, you need to link your account first" 
       return [false, message]
     end  
+  end
+
+  def twitter_friend_ids
+    if self.twitter_connected? == true
+      clnt = HTTPClient.new
+      body = {:user_id => self.twitter_id}
+      response = clnt.get("http://api.twitter.com/1/friends/ids.json",body)
+
+      rs = JSON.parse(response.content)
+      if rs.is_a?(Hash) && rs["error"]
+        return [false, "failed connect to twitter : #{rs["error"]}"]
+      elsif rs.is_a?(Array)
+        return [true, rs] 
+      else
+        return [false, rs]
+      end
+    else
+      message = "Can't retrieve twitter friends ids, you need to link your account first" 
+      return [false, message]
+    end
   end
   
   protected

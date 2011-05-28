@@ -9,7 +9,7 @@ class TwitterController < ApplicationController
     session[:request_token] = request_token.token
     session[:request_secret] = request_token.secret
     redirect_to request_token.authorize_url
-  end  
+  end
   
   def xauth_token
     begin
@@ -39,7 +39,7 @@ class TwitterController < ApplicationController
         :value => nil
       }   
     end
-    
+
     respond_to do |format|
       format.json {
         render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
@@ -92,12 +92,12 @@ class TwitterController < ApplicationController
       session[:request_secret],
       :oauth_verifier => params[:oauth_verifier]
     )
-      
+    
     if client.authorized? == true and session[:request_token] and session[:request_secret] 
       if current_user.twitter_token == access_token.token and current_user.twitter_secret == access_token.secret
         flash[:notice] = "you have linked to twitter already"
       else  
-        current_user.update_attributes(:twitter_token => access_token.token, :twitter_secret => access_token.secret, :twitter_nickname => client.info["screen_name"])
+        current_user.update_attributes(:twitter_token => access_token.token, :twitter_secret => access_token.secret, :twitter_nickname => client.info["screen_name"], :twitter_id => client.info["id"])
         flash[:notice] = "your account has been linked successfully to twitter"
         #session[:twitter] = {}
         #session[:twitter][:nickname] = access_token.params[:screen_name]
@@ -113,7 +113,7 @@ class TwitterController < ApplicationController
   end   
   
   def unlink
-    current_user.update_attributes(:twitter_token => nil, :twitter_secret => nil, :twitter_nickname => nil)
+    current_user.update_attributes(:twitter_token => nil, :twitter_secret => nil, :twitter_nickname => nil, :twitter_id => nil)
     respond_to do |format|
       format.html {
         flash[:notice] = "your account has been unlinked from twitter successfully"
