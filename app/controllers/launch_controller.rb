@@ -26,6 +26,7 @@ class LaunchController < ApplicationController
       @invite = Invite.where(:guid => cookies[:guid]).first
       if @invite.nil?
         @invite = Invite.new
+        render :layout => false
       else
         Rails.logger.info "INVITE EMAIL #{@invite.email}"
         render :action => :thank_you
@@ -44,7 +45,7 @@ class LaunchController < ApplicationController
         cookies.permanent[:guid] = @invite.guid
         redirect_to thank_you_launch_index_path
       else
-        render :action => :index
+        render :action => :index, :layout => false
       end    
     else
       cookies.permanent[:guid] = @invite.guid
