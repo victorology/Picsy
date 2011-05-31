@@ -5,11 +5,6 @@
 		<p>PUMPL is currently being previewed among a select group of users.</p>
 		<p>If you would also like a sneak peak of PUMPL, enter your email address and we will send you an invite!</p>
 		
-		<!--
-		<form>
-			<input type="text" name="email" id="email" value="이메일" onFocus="clearText(this)" onBlur="clearText(this)">
-			<input type="submit">
-		</form> -->
 		<%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
 	    <p style="color:red;"><%= @invite.errors.full_messages.join(',') if @invite.errors.size > 0 %></p>
 	    <%= f.text_field :email, :value => "이메일", :onFocus => "clearText(this)", :onBlur => "clearText(this)" %>
@@ -19,17 +14,5 @@
 
 	</div> <!-- #launch_content -->
 	
-<!-- original rails code
-	<div style="text-align:center;">
-	  <h1>Picsy is coming soon</h1>
-	  <p>To get invitation to our private beta, <br />
-	  enter your email address below!</p>	
 
-	  <%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
-	    <p> <%= f.error_messages %></p>
-	    <%= f.text_field :email %><br /><br />
-	    <%= f.hidden_field :reference_id, :value => @reference_id %>
-	    <%= submit_tag "Submit" %>
-	  <% end %>
-	</div> -->
 

@@ -12,22 +12,3 @@
 	<div><%= link_to "http://#{request.host_with_port}/v#{cookies[:guid]}","http://#{request.host_with_port}/v#{cookies[:guid]}" %></div>
 	<p>Credit : <%= @invite.references.size %></p>
 </div>
-<!--	
-<div style="text-align:center;">
-	<h1>Thanks for registering!</h2>
-	<p>The more friends you invite, the sooner you’ll<br />
-	get access! Share with your friends below!</p>
-	
-	<div>
-		<% fb_url = CGI.escape "http://#{request.host_with_port}/v#{cookies[:guid]}" %>
-		<%= link_to "Facebook","http://www.facebook.com/sharer.php?u=#{fb_url}" %> || Twitter || Me2day
-	</div>	
-	<p>Or copy and paste the following link to share<br />
-	wherever you want!</p>
-        <p>Credit : <%= @invite.references.size %></p>
-	
-	<div>
-		<h3><%= link_to "http://#{request.host_with_port}/v#{cookies[:guid]}","http://#{request.host_with_port}/v#{cookies[:guid]}" %></h3>
-	</div>	
-</div>	
--->
