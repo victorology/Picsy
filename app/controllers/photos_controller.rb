@@ -11,7 +11,14 @@ class PhotosController < ApplicationController
   end  
   
   def show
+    # this code probably should be used later, need Victor confirmation
+    #if params[:code]
+    #  @reference_id = Invite.where(:guid => params[:code]).first.id
+    #end
+    
+    @invite = Invite.new
     @photo = Photo.find(:first, :conditions => ["photos.code = ? AND users.nickname = ?",params[:code], params[:nickname]], :include => :user)
+    render :layout => "photo"
   end  
   
   def mine

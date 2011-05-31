@@ -1,4 +1,45 @@
 
+
+<div id="container">
+	
+	<div id="main">
+		
+		<div id="content">
+		
+			<%= image_tag @photo.true_image_url %>
+		
+		</div> <!-- #content -->
+	
+		<div id="sidebar">
+			
+			<div id="sidebar_content">
+
+				<span class="right"><a href="http://pumpl.com"><img src="/images/index/logo_taken_with.png" alt="Taken with PUMPL"></a></span>
+				<div id="title"><%= @photo.title %> <span class="byline">by <%= @photo.user.nickname %></span></div>
+				<div id="time">taken <%= time_ago_in_words @photo.created_at%> ago</div>
+				<p><strong><%= @photo.user.nickname %></strong> is currently among a select group of users previewing PUMPL.</p>
+				<p>If you would also like a sneak peak of PUMPL, enter your email address and we will send you an invite!</p>
+
+					<%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
+				    <p style="color:red;"><%= @invite.errors.full_messages.join(',') if @invite.errors.size > 0 %></p>
+				    <%= f.text_field :email, :value => "이메일", :onFocus => "clearText(this)", :onBlur => "clearText(this)" %>
+				    <%= f.hidden_field :reference_id, :value => @reference_id %>
+				    <%= submit_tag "Submit" %>
+				  <% end %>
+			</div> <!-- #sidebar_content -->
+		
+		</div> <!-- #sidebar -->
+	
+	</div> <!-- #main -->
+
+	
+	<div id="footer">
+		&nbsp;
+	</div> <!-- #footer -->
+		
+</div> <!-- #container -->
+
+<!--
 <div style="font-size:24px;">Title : <%= @photo.title %></div>
 
 <p>Thumbnail : <br />
@@ -6,5 +47,5 @@
 
 <p>Original : <br />
 <%= image_tag @photo.true_image_url %></p>
-
+-->
 	  
