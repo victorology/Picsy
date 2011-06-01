@@ -27,13 +27,13 @@ class UsersController < ApplicationController
       code = 1
       error_message = nil
       user_data = {
-        :nickname => @user.nickname,
-        :email => @user.email,
-        :phone_number => @user.phone_number
+        :nickname => @api_user.nickname,
+        :email => @api_user.email,
+        :phone_number => @api_user.phone_number
       }
     else
       code = 0
-      error_message = @user.errors.full_messages.join(", ")
+      error_message = @api_user.errors.full_messages.join(", ")
       user_data = nil
     end  
     
