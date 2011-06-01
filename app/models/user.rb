@@ -68,8 +68,9 @@ class User < ActiveRecord::Base
   end      
 
   def get_following_photos(limit = 10)
-    Photo.where("user_id IN (?)", self.following.collect(&:id)).order("created_at DESC").limit(limit)
+    Photo.where("user_id IN (?)", [self.id] + self.following.collect(&:id)).order("created_at DESC").limit(limit)
   end
+
 
   def facebook_friends
     if self.facebook_connected? == true   
