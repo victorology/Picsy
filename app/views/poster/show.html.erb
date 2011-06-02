@@ -51,13 +51,13 @@
 <h2>Edit Password API</h2>
 <form action="/update_password.json" method="post">
 	<p> Old Password <br />
-	<%= text_field_tag "old_password" %> </p>
+	<%= password_field_tag "old_password" %> </p>
 	
 	<p> New Password :<br />
-	<%= text_field_tag "password" %> </p>
+	<%= password_field_tag "password" %> </p>
 	
 	<p> New Password Confirmation :<br />
-	<%= text_field_tag "password_confirmation" %> </p>
+	<%= password_field_tag "password_confirmation" %> </p>
 	
 	<p>ID <br />
 	<%= text_field_tag "id",@photo_user.id %></p>
