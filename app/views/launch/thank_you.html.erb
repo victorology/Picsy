@@ -1,14 +1,38 @@
 <div id="launch_content">
-	<img src="/images/index/logo.png">
-	<p>Thanks for registering!</p>
-	<p>The more friends you invite, the sooner you’ll get access! Share with your friends below!</p>
+	<div>
+	  <img src="/images/index/logo.png">
+	  <p>Thanks for registering! The more friends you invite, the sooner you get access! Share with your friends below!</p>
 	
-	<p>
-		<% fb_url = CGI.escape "http://#{request.host_with_port}/v#{cookies[:guid]}" %>
-		<%= link_to "Facebook","http://www.facebook.com/sharer.php?u=#{fb_url}" %> || Twitter || Me2day
-	</p>	
-	<p>Or copy and paste the following link to share wherever you want!</p>
+	  <p><a href="http://twitter.com/share" target="_blank">Tweet</a></p>
+
+		<div></div>	
+	  <p>Or copy and paste the following link to share wherever you want!</p>
 	
-	<div><%= link_to "http://#{request.host_with_port}/v#{cookies[:guid]}","http://#{request.host_with_port}/v#{cookies[:guid]}" %></div>
-	<p>Credit : <%= @invite.references.size %></p>
+	  <div><%= text_field_tag "copas", "http://#{request.host_with_port}/v#{cookies[:guid]}" %></div>
+	  <p>You have currently referred <%= @invite.references.size %> friends</p>
+	</div>
 </div>
+
+<!--
+<div>
+
+	<div>
+
+		<div>
+			<img src="http://images/index/logo.png">
+			<p>Thanks for registering! The more friends you invite, the sooner you get access! Share with your friends below!</p>
+			<div style="float:left"><a href="http://twitter.com/share" target="_blank">Tweet</a></div>
+
+			<div></div>
+			<p>Or copy and paste the link below to share wherever you want!</p>
+			<input type="text" name="url" value="http://pumpl.com">
+			<p>You have currently referred 0 friends.</p>
+		</div> 
+
+	</div>
+
+	
+
+</div>
+
+-->
