@@ -11,13 +11,7 @@
 		  <script src="http://connect.facebook.net/ko_KR/all.js#appId=170487786345007&amp;xfbml=1"></script>
 		  <fb:like href='<%= "http://#{request.host_with_port}/v#{cookies[:guid]}" %>' send="false" layout="button_count" width="90" show_faces="false" action="recommend" font="arial"></fb:like>
 	  <p>Or copy and paste the following link to share wherever you want!</p>
-	  <div><%= text_field_tag "copas", "http://#{request.host_with_port}/v#{cookies[:guid]}" %></div>
+	  <div><%= text_field_tag "url", "http://#{request.host_with_port}/v#{cookies[:guid]}",:onClick=>"SelectAll('url');"%></div>
 	  <p>You have currently referred <%= @invite.references.size %> friends</p>
 	</div>
 </div>
-
-<!--
-
-<input type="text" name="url" id="url" value="http://pumpl.com" onClick="SelectAll('url');">
-
--->
