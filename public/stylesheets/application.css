@@ -79,6 +79,11 @@ strong {
 	background-color: #181818;
 }
 
+#content img {
+    max-width: 100% !important;
+  	height: auto;
+}
+
 #sidebar {
 	float: left;
 	padding: 25px;

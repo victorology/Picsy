@@ -7,10 +7,10 @@
 		<p>If you would also like a sneak peak of PUMPL, enter your email address and we will send you an invite!</p>
 		
 		<%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
-	    <p style="color:red;"><%= @invite.errors.full_messages.join(',') if @invite.errors.size > 0 %></p>
 	    <%= f.text_field :email, :value => "이메일", :onFocus => "clearText(this)", :onBlur => "clearText(this)" %>
 	    <%= f.hidden_field :reference_id, :value => @reference_id %>
 	    <%= submit_tag "Submit" %>
+			<p style="color:red;"><%= @invite.errors.full_messages.join(',') if @invite.errors.size > 0 %></p>
 	  <% end %>
 	
 		<div>
