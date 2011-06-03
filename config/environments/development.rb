@@ -54,3 +54,6 @@ ef3a3dcc953c1d5fd55c5e98bd32da70
 
 ME2DAY_KEY = "2a8512295365b1fe59b9ecc691c4fcb1"
 #ME2DAY_KEY= "ef3a3dcc953c1d5fd55c5e98bd32da70"
+
+require 'openssl'
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE

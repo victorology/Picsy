@@ -126,7 +126,14 @@ class PhotosController < ApplicationController
       :thumbnail_url => "http://"+request.host_with_port+photo.image.url(:medium),
       :original_url =>  "http://"+request.host_with_port+photo.image.url,
     }
-
+    
+    ## additional value
+    fb_hash = {
+      :fb_original_url => photo.fb_original_url,
+      :fb_thumbnail_url => photo.fb_thumbnail_url
+    }
+    
+    rs.merge!(fb_hash) if photo.post_to_facebook == "yes"
     rs.merge!(photo_url_hash)  
 
     if show_owner
