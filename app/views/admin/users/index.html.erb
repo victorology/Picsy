@@ -1,0 +1,27 @@
+<h3>Users</h3>
+
+<p>Add User || Delete</p>
+<table border="1">
+	<tr>
+		<th>&nbsp;</th>
+		<th>Username</th>
+		<th>Email</th>
+		<th>Photos</th>
+		<th>Twitter</th>
+		<th>Facebook</th>
+		<th>Tumblr</th>
+	</tr>
+	
+	<% @users.each do |user| %>
+	  <tr>
+		  <td><%= check_box_tag "" %></td>
+	    <td><%= user.nickname %></td>
+	    <td><%= user.email %></td>
+	    <td><%= user.photos.size %></td>
+	    <td>Coming Soon</td>
+	    <td><%= user.photos.collect {|ph| ph.fb_original_url.blank? != false }.size %></td>
+	    <td>Coming Soon</td>
+	  </tr>
+	<% end %>
+			
+</table>

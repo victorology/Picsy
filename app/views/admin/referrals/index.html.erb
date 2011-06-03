@@ -1,0 +1,16 @@
+<h3>Referrals</h3>
+
+<table border="1">
+	<tr>
+		<th>Email</th>
+		<th>Referrals</th>
+	</tr>
+	
+	<% @invites.each do |invite| %>
+	  <tr>
+	    <td><%= invite.email %></td>
+	    <td><%= invite.references.size %></td>
+	  </tr>
+	<% end %>
+			
+</table>	

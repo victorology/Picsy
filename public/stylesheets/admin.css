@@ -1,0 +1,26 @@
+#menu {
+  float:left;
+  margin-right:30px;
+  border-width:1px;
+  border-top:0;
+  border-style:solid;
+  padding:15px;
+  width:15%;
+  height:100px;
+}
+
+#header {
+  text-align:center;
+  font-size: 32px;	
+  width: 80%;
+  border-width:1px;
+  border-style:solid;
+}
+
+#main {
+  width: 80%;
+}
+
+#container{
+  width: 100px;	
+}

@@ -25,6 +25,10 @@
                                               DELETE /launch/:id(.:format)                              {:action=>"destroy", :controller=>"launch"}
                          update_profile_users POST   /users/update_profile(.:format)                    {:action=>"update_profile", :controller=>"users"}
                    update_profile_photo_users POST   /users/update_profile_photo(.:format)              {:action=>"update_profile_photo", :controller=>"users"}
+                                 follow_users POST   /users/follow(.:format)                            {:action=>"follow", :controller=>"users"}
+                               unfollow_users POST   /users/unfollow(.:format)                          {:action=>"unfollow", :controller=>"users"}
+           following_and_followers_list_users GET    /users/following_and_followers_list(.:format)      {:action=>"following_and_followers_list", :controller=>"users"}
+                           find_friends_users GET    /users/find_friends(.:format)                      {:action=>"find_friends", :controller=>"users"}
                                         users GET    /users(.:format)                                   {:action=>"index", :controller=>"users"}
                                               POST   /users(.:format)                                   {:action=>"create", :controller=>"users"}
                                      new_user GET    /users/new(.:format)                               {:action=>"new", :controller=>"users"}
@@ -84,6 +88,7 @@
                                               PUT    /connections/:id(.:format)                         {:action=>"update", :controller=>"connections"}
                                               DELETE /connections/:id(.:format)                         {:action=>"destroy", :controller=>"connections"}
                                   mine_photos GET    /photos/mine(.:format)                             {:action=>"mine", :controller=>"photos"}
+                                  feed_photos GET    /photos/feed(.:format)                             {:action=>"feed", :controller=>"photos"}
                                        photos GET    /photos(.:format)                                  {:action=>"index", :controller=>"photos"}
                                               POST   /photos(.:format)                                  {:action=>"create", :controller=>"photos"}
                                     new_photo GET    /photos/new(.:format)                              {:action=>"new", :controller=>"photos"}
@@ -136,38 +141,27 @@ do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categor
                                    admin_home GET    /admin/home/:id(.:format)                          {:action=>"show", :controller=>"admin/home"}
                                               PUT    /admin/home/:id(.:format)                          {:action=>"update", :controller=>"admin/home"}
                                               DELETE /admin/home/:id(.:format)                          {:action=>"destroy", :controller=>"admin/home"}
-                           select_admin_items POST   /admin/items/select(.:format)                      {:action=>"select", :controller=>"admin/items"}
-                     index_images_admin_items GET    /admin/items/index_images(.:format)                {:action=>"index_images", :controller=>"admin/items"}
-                    manage_images_admin_items POST   /admin/items/manage_images(.:format)               {:action=>"manage_images", :controller=>"admin/items"}
-                              hide_admin_item POST   /admin/items/:id/hide(.:format)                    {:action=>"hide", :controller=>"admin/items"}
-                                  admin_items GET    /admin/items(.:format)                             {:action=>"index", :controller=>"admin/items"}
-                                              POST   /admin/items(.:format)                             {:action=>"create", :controller=>"admin/items"}
-                               new_admin_item GET    /admin/items/new(.:format)                         {:action=>"new", :controller=>"admin/items"}
-                              edit_admin_item GET    /admin/items/:id/edit(.:format)                    {:action=>"edit", :controller=>"admin/items"}
-                                   admin_item GET    /admin/items/:id(.:format)                         {:action=>"show", :controller=>"admin/items"}
-                                              PUT    /admin/items/:id(.:format)                         {:action=>"update", :controller=>"admin/items"}
-                                              DELETE /admin/items/:id(.:format)                         {:action=>"destroy", :controller=>"admin/items"}
-                             admin_categories GET    /admin/categories(.:format)                        {:action=>"index", :controller=>"admin/categories"}
-                                              POST   /admin/categories(.:format)                        {:action=>"create", :controller=>"admin/categories"}
-                           new_admin_category GET    /admin/categories/new(.:format)                    {:action=>"new", :controller=>"admin/categories"}
-                          edit_admin_category GET    /admin/categories/:id/edit(.:format)               {:action=>"edit", :controller=>"admin/categories"}
-                               admin_category GET    /admin/categories/:id(.:format)                    {:action=>"show", :controller=>"admin/categories"}
-                                              PUT    /admin/categories/:id(.:format)                    {:action=>"update", :controller=>"admin/categories"}
-                                              DELETE /admin/categories/:id(.:format)                    {:action=>"destroy", :controller=>"admin/categories"}
-                              admin_item_logs GET    /admin/item_logs(.:format)                         {:action=>"index", :controller=>"admin/item_logs"}
-                                              POST   /admin/item_logs(.:format)                         {:action=>"create", :controller=>"admin/item_logs"}
-                           new_admin_item_log GET    /admin/item_logs/new(.:format)                     {:action=>"new", :controller=>"admin/item_logs"}
-                          edit_admin_item_log GET    /admin/item_logs/:id/edit(.:format)                {:action=>"edit", :controller=>"admin/item_logs"}
-                               admin_item_log GET    /admin/item_logs/:id(.:format)                     {:action=>"show", :controller=>"admin/item_logs"}
-                                              PUT    /admin/item_logs/:id(.:format)                     {:action=>"update", :controller=>"admin/item_logs"}
-                                              DELETE /admin/item_logs/:id(.:format)                     {:action=>"destroy", :controller=>"admin/item_logs"}
-                             admin_item_types GET    /admin/item_types(.:format)                        {:action=>"index", :controller=>"admin/item_types"}
-                                              POST   /admin/item_types(.:format)                        {:action=>"create", :controller=>"admin/item_types"}
-                          new_admin_item_type GET    /admin/item_types/new(.:format)                    {:action=>"new", :controller=>"admin/item_types"}
-                         edit_admin_item_type GET    /admin/item_types/:id/edit(.:format)               {:action=>"edit", :controller=>"admin/item_types"}
-                              admin_item_type GET    /admin/item_types/:id(.:format)                    {:action=>"show", :controller=>"admin/item_types"}
-                                              PUT    /admin/item_types/:id(.:format)                    {:action=>"update", :controller=>"admin/item_types"}
-                                              DELETE /admin/item_types/:id(.:format)                    {:action=>"destroy", :controller=>"admin/item_types"}
+                              admin_referrals GET    /admin/referrals(.:format)                         {:action=>"index", :controller=>"admin/referrals"}
+                                              POST   /admin/referrals(.:format)                         {:action=>"create", :controller=>"admin/referrals"}
+                           new_admin_referral GET    /admin/referrals/new(.:format)                     {:action=>"new", :controller=>"admin/referrals"}
+                          edit_admin_referral GET    /admin/referrals/:id/edit(.:format)                {:action=>"edit", :controller=>"admin/referrals"}
+                               admin_referral GET    /admin/referrals/:id(.:format)                     {:action=>"show", :controller=>"admin/referrals"}
+                                              PUT    /admin/referrals/:id(.:format)                     {:action=>"update", :controller=>"admin/referrals"}
+                                              DELETE /admin/referrals/:id(.:format)                     {:action=>"destroy", :controller=>"admin/referrals"}
+                                  admin_users GET    /admin/users(.:format)                             {:action=>"index", :controller=>"admin/users"}
+                                              POST   /admin/users(.:format)                             {:action=>"create", :controller=>"admin/users"}
+                               new_admin_user GET    /admin/users/new(.:format)                         {:action=>"new", :controller=>"admin/users"}
+                              edit_admin_user GET    /admin/users/:id/edit(.:format)                    {:action=>"edit", :controller=>"admin/users"}
+                                   admin_user GET    /admin/users/:id(.:format)                         {:action=>"show", :controller=>"admin/users"}
+                                              PUT    /admin/users/:id(.:format)                         {:action=>"update", :controller=>"admin/users"}
+                                              DELETE /admin/users/:id(.:format)                         {:action=>"destroy", :controller=>"admin/users"}
+                                 admin_photos GET    /admin/photos(.:format)                            {:action=>"index", :controller=>"admin/photos"}
+                                              POST   /admin/photos(.:format)                            {:action=>"create", :controller=>"admin/photos"}
+                              new_admin_photo GET    /admin/photos/new(.:format)                        {:action=>"new", :controller=>"admin/photos"}
+                             edit_admin_photo GET    /admin/photos/:id/edit(.:format)                   {:action=>"edit", :controller=>"admin/photos"}
+                                  admin_photo GET    /admin/photos/:id(.:format)                        {:action=>"show", :controller=>"admin/photos"}
+                                              PUT    /admin/photos/:id(.:format)                        {:action=>"update", :controller=>"admin/photos"}
+                                              DELETE /admin/photos/:id(.:format)                        {:action=>"destroy", :controller=>"admin/photos"}
                         personalization_index GET    /personalization(.:format)                         {:action=>"show", :controller=>"personalization"}
            user_sign_in_personalization_index GET    /personalization/user_sign_in(.:format)            {:action=>"user_sign_in", :controller=>"personalization"}
            sign_in_done_personalization_index GET    /personalization/sign_in_done(.:format)            {:action=>"sign_in_done", :controller=>"personalization"}

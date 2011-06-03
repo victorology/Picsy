@@ -144,20 +144,9 @@ Picsy::Application.routes.draw do
   #   end
   namespace :admin do
     resources :home
-    resources :items do
-      collection do
-        post "select"
-        get "index_images"
-        post "manage_images"
-      end
-      
-      member do
-        post "hide"
-      end  
-    end  
-    resources :categories
-    resources :item_logs
-    resources :item_types
+    resources :referrals
+    resources :users
+    resources :photos
   end   
 
   resources :personalization do

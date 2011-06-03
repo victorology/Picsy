@@ -98,14 +98,7 @@ class PersonalizationController < ApplicationController
   end
   
   def mydeals
-    hold_category_item_type
-    @items = Item.mydeals(current_user,params[:controller],params[:page])
-    @next_items = Item.mydeals(current_user,params[:controller],params[:page].to_i + 1)
-    if @items.size > 0
-      render :template => "home/index"
-    else
-      render :action => "mydeals"
-    end    
+    redirect_to admin_home_index_path  
   end  
 
   def sub_categories  
