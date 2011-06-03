@@ -2,37 +2,16 @@
 	<div>
 	  <img src="/images/index/logo.png">
 	  <p>Thanks for registering! The more friends you invite, the sooner you get access! Share with your friends below!</p>
-	
-	  <p><a href="http://twitter.com/share" target="_blank">Tweet</a></p>
-
-		<div></div>	
+		<div style="float:left"><a href="http://twitter.com/share" class="twitter-share-button" data-text="PUMPL is launching soon and I'm one of the first in line! Join me. #PUMPL" data-count="horizontal" data-via="PUMPL" data-related="victorology:PUMPL's founder" data-lang="ko">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+		<div id="fb-root"></div><script src="http://connect.facebook.net/ko_KR/all.js#appId=170487786345007&amp;xfbml=1"></script><fb:like href="http://pumpl.com" send="false" layout="button_count" width="90" show_faces="false" action="recommend" font="arial"></fb:like>
 	  <p>Or copy and paste the following link to share wherever you want!</p>
-	
 	  <div><%= text_field_tag "copas", "http://#{request.host_with_port}/v#{cookies[:guid]}" %></div>
 	  <p>You have currently referred <%= @invite.references.size %> friends</p>
 	</div>
 </div>
 
 <!--
-<div>
 
-	<div>
-
-		<div>
-			<img src="http://images/index/logo.png">
-			<p>Thanks for registering! The more friends you invite, the sooner you get access! Share with your friends below!</p>
-			<div style="float:left"><a href="http://twitter.com/share" target="_blank">Tweet</a></div>
-
-			<div></div>
-			<p>Or copy and paste the link below to share wherever you want!</p>
-			<input type="text" name="url" value="http://pumpl.com">
-			<p>You have currently referred 0 friends.</p>
-		</div> 
-
-	</div>
-
-	
-
-</div>
+<input type="text" name="url" id="url" value="http://pumpl.com" onClick="SelectAll('url');">
 
 -->
