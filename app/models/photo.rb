@@ -90,11 +90,11 @@ class Photo < ActiveRecord::Base
   ## options[:thumbnail]
   
   def true_image_url(options = {})
-    if self.fb_original_url.blank?
+    #if self.fb_original_url.blank?
       return options[:thumbnail] == true ? self.image.url(:medium) : self.image.url
-    else
-      return options[:thumbnail] == true ? self.fb_thumbnail_url : self.fb_original_url
-    end    
+    #else
+    #  return options[:thumbnail] == true ? self.fb_thumbnail_url : self.fb_original_url
+    #end    
   end  
   
   def pattern_code
