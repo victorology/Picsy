@@ -5,7 +5,7 @@ class FacebookController < ApplicationController
   
   def index
     client = facebook_connect
-    authorize_path = client.authorize_url.gsub("offline_access","offline_access,email,user_photos,publish_stream")
+    authorize_path = client.authorize_url.gsub("offline_access","offline_access,email,user_photos,publish_stream")+"&display=touch"
     
     respond_to do |format|
       format.json {
