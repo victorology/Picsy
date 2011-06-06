@@ -2,7 +2,7 @@
 class Photo < ActiveRecord::Base
   belongs_to :user
   
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :post_to_facebook, :post_to_twitter, :post_to_tumblr
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :post_to_facebook, :post_to_twitter, :post_to_tumblr, :host_with_port
   has_attached_file :image, 
     :styles => { :medium => "75x100#"}, 
     :url => "/system/uphotos/:pattern_nickname/:pattern_code/:style/:basename.:extension"
@@ -55,17 +55,10 @@ class Photo < ActiveRecord::Base
   def fb_photo
     
     if self.user.facebook_connected? == true and self.post_to_facebook == "yes"   
-      #curl -F 'access_token=...' \
-      #     -F 'source=@file.png' \
-      #     -F 'message=Caption for the photo' \
-      #     https://graph.facebook.com/me/photos
       
       clnt = HTTPClient.new
-      source = File.open(self.image.queued_for_write[:original].path)
-      body = {:access_token => self.user.facebook_token, :source => source,:message => self.title}
       
-      #obtain fb album id
-      
+      #obtain fb album id      
       album_response = clnt.get("https://graph.facebook.com/me/albums", {:access_token => self.user.facebook_token})
       
       JSON.parse(album_response.body)["data"].each do |album|
@@ -81,6 +74,10 @@ class Photo < ActiveRecord::Base
       end  
       
       ## post photo to facebook
+      source = File.open(self.image.queued_for_write[:original].path)
+      
+      body = {:access_token => self.user.facebook_token, :source => source,:message => "#{self.title} taken with PUMPL "+self.shortened_url}
+      
       response = clnt.post("https://graph.facebook.com/#{@album_id}/photos",body)
      
       c = Curl::Easy.perform("https://graph.facebook.com/#{JSON.parse(response.content)['id']}/?access_token=#{self.user.facebook_token}")
@@ -156,6 +153,14 @@ class Photo < ActiveRecord::Base
     end
     return self.send("image_#{type}").try(:to_s)
   end  
+  
+  def shortened_url
+    
+    prefix = ["z","t","q","x"]
+    prefix_rand = prefix[rand(prefix.size)]
+    
+    return (self.host_with_port+"/#{prefix_rand}#{self.code}").gsub("www.","")
+  end
   
     
 

@@ -76,6 +76,8 @@ class PhotosController < ApplicationController
       format.json {
         @photo = Photo.new(params[:photo])
         @photo.user_id = current_user.id
+        @photo.host_with_port = "http://"+request.host_with_port
+        
         if @photo.save
           
           ### twitter upload, it's supposed to be put in the model
