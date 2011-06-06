@@ -63,7 +63,25 @@ class Photo < ActiveRecord::Base
       clnt = HTTPClient.new
       source = File.open(self.image.queued_for_write[:original].path)
       body = {:access_token => self.user.facebook_token, :source => source,:message => self.title}
-      response = clnt.post("https://graph.facebook.com/me/photos",body)
+      
+      #obtain fb album id
+      
+      album_response = clnt.get("https://graph.facebook.com/me/albums", {:access_token => self.user.facebook_token})
+      
+      JSON.parse(album_response.body)["data"].each do |album|
+        if album["name"] == FB_ALBUM_NAME
+          @album_id = album["id"]
+          break
+        end  
+      end  
+      
+      if @album_id.blank?
+        album_response = clnt.post("https://graph.facebook.com/me/albums",{:access_token => self.user.facebook_token, :name => FB_ALBUM_NAME})
+        @album_id = JSON.parse(album_response.body)["id"]
+      end  
+      
+      ## post photo to facebook
+      response = clnt.post("https://graph.facebook.com/#{@album_id}/photos",body)
      
       c = Curl::Easy.perform("https://graph.facebook.com/#{JSON.parse(response.content)['id']}/?access_token=#{self.user.facebook_token}")
       rs = JSON.parse(c.body_str)
