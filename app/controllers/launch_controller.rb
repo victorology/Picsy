@@ -49,7 +49,11 @@ class LaunchController < ApplicationController
       end    
     else
       cookies.permanent[:guid] = @invite.guid
-      redirect_to thank_you_launch_index_path
+      if params[:came_from]
+        redirect_to params[:came_from]+"?mode=thank_you"
+      else  
+        redirect_to thank_you_launch_index_path
+      end  
     end    
   end    
   

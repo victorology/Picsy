@@ -18,14 +18,19 @@
 				<div id="title"><%= @photo.title %> <span class="byline">by <%= @photo.user.nickname %></span></div>
 				<div id="time"><%= time_ago_in_words @photo.created_at%> ago</div>
 				<p><strong><%= @photo.user.nickname %></strong> is currently among a select group of users previewing PUMPL.</p>
+				<% if params[:mode] == "thank_you" %>
+				  <%= render :partial => "launch/thank_you" %> 
+				<% else %>
 				<p>If you would also like a sneak peak of PUMPL, enter your email address and we will send you an invite!</p>
 
 					<%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
 				    <%= f.text_field :email, :value => "이메일", :onFocus => "clearText(this)", :onBlur => "clearText(this)" %>
+				    <%= hidden_field_tag :came_from, request.request_uri %>
 				    <%= f.hidden_field :reference_id, :value => @reference_id %>
 				    <%= submit_tag "Submit" %>
 						<p style="color:red;"><%= @invite.errors.full_messages.join(',') if @invite.errors.size > 0 %></p>
 				  <% end %>
+				<% end %>
 			</div> <!-- #sidebar_content -->
 		
 		</div> <!-- #sidebar -->
