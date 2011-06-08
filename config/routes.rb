@@ -145,7 +145,9 @@ Picsy::Application.routes.draw do
   namespace :admin do
     resources :home
     resources :referrals
-    resources :users
+    resources :users do
+      delete 'multiple_destroy', :on => :collection
+    end
     resources :photos
   end   
 

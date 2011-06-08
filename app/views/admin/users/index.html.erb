@@ -1,6 +1,6 @@
 <h3>Users</h3>
-
-<p>Add User || Delete</p>
+<%= form_for :user, :url => multiple_destroy_admin_users_path, :html => {:method => :delete} do |f| %>
+<p><%= link_to "Add User", new_admin_user_path %> || <%= submit_tag "Delete" %></p>
 <table border="1">
 	<tr>
 		<th>&nbsp;</th>
@@ -14,7 +14,7 @@
 	
 	<% @users.each do |user| %>
 	  <tr>
-		  <td><%= check_box_tag "" %></td>
+	    <td><%= check_box_tag "user_ids[]", user.id, nil %></td>
 	    <td><%= user.nickname %></td>
 	    <td><%= user.email %></td>
 	    <td><%= user.photos.size %></td>
@@ -25,3 +25,4 @@
 	<% end %>
 			
 </table>
+<% end %>

@@ -1,0 +1,25 @@
+<h2>Add User</h2>
+<div>
+<%= form_for @user, :url => admin_users_path do |f| %>
+  <%= f.error_messages %>
+	<p>First Name : <br />
+	<%= f.text_field :first_name %> </p>
+	
+	<p>Last Name : <br />
+	<%= f.text_field :last_name %> </p>
+	
+	<p>Nickname : <br />
+	<%= f.text_field :nickname %> </p>
+	
+	<p> Email : <br />
+	<%= f.text_field :email %> </p>
+	
+	<p> Password :<br />
+	<%= f.password_field :password %> </p>
+	
+	<p> Admin : <br />
+	<%= f.select :is_admin, [['False', false], ['True', true]] %> </p>
+	
+	<%= submit_tag "Create" %>
+<% end %>
+</div>

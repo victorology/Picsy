@@ -18,6 +18,9 @@
 </div>
 
   <div id="main">
+    <% if flash[:message] %>
+      <div style="color:red"><%= flash[:message] %></div>
+    <% end %>
     <%= yield %>
   </div>
 
