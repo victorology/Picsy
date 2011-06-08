@@ -18,9 +18,9 @@
 	    <td><%= user.nickname %></td>
 	    <td><%= user.email %></td>
 	    <td><%= user.photos.size %></td>
-	    <td>Coming Soon</td>
-	    <td><%= user.photos.collect {|ph| ph.fb_original_url.blank? != false }.size %></td>
-	    <td>Coming Soon</td>
+	    <td><%= user.photos_amount("twitter") %></td>
+	    <td><%= user.photos_amount("facebook") %></td>
+	    <td><%= user.photos_amount("tumblr") %></td>
 	  </tr>
 	<% end %>
 			

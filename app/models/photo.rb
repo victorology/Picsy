@@ -2,7 +2,7 @@
 class Photo < ActiveRecord::Base
   belongs_to :user
   
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :post_to_facebook, :post_to_twitter, :post_to_tumblr, :host_with_port
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :host_with_port
   has_attached_file :image, 
     :styles => { :medium => "75x100#"}, 
     :url => "/system/uphotos/:pattern_nickname/:pattern_code/:style/:basename.:extension"
