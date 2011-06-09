@@ -18,7 +18,7 @@
 				<div id="title"><%= @photo.title %> <span class="byline">by <%= @photo.user.nickname %></span></div>
 				<div id="time"><%= time_ago_in_words @photo.created_at%> ago</div>
 				<p><strong><%= @photo.user.nickname %></strong> is currently among a select group of users previewing PUMPL.</p>
-				<% if params[:mode] == "thank_you" %>
+				<% if params[:mode] == "thank_you" || cookies[:guid] %>
 				  <%= render :partial => "launch/thank_you" %> 
 				<% else %>
 				<p>If you would also like a sneak peak of PUMPL, enter your email address and we will send you an invite!</p>
