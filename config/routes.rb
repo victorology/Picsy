@@ -148,7 +148,9 @@ Picsy::Application.routes.draw do
     resources :users do
       delete 'multiple_destroy', :on => :collection
     end
-    resources :photos
+    resources :photos do
+      delete 'multiple_destroy', :on => :collection
+    end
   end   
 
   resources :personalization do

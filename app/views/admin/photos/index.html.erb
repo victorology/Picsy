@@ -1,10 +1,13 @@
 <h3>Photos</h3>
-<p>Delete</p>
- 
+
+<%= form_for :photo, :url => multiple_destroy_admin_photos_path, :html => {:method => :delete} do |f| %>
+<%= submit_tag "Delete" %>
 <table>
 <% @photos.each_with_index do |photo,idx| %>
   <%= raw("<tr>") if (idx+1).modulo(6) == 0 %>
-	  <td style="text-align:left;width:130px;" valign="top"><%= image_tag photo.true_image_url(:thumbnail => true)%><br /><%= check_box_tag "photo_#{photo.id}" %><%= photo.title%></td>
+	  <td style="text-align:left;width:130px;" valign="top"><%= image_tag photo.true_image_url(:thumbnail => true)%><br />
+	  <%= check_box_tag "photo_ids[]", photo.id, nil %><%= photo.title%></td>
 	<%= raw("</tr>") if (idx+1).modulo(6) == 5 %>
 <% end %>	
 </table>
+<% end %>

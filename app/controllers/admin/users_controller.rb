@@ -26,7 +26,7 @@ class Admin::UsersController < ApplicationController
       User.destroy_all(["id IN (?)", params[:user_ids]])
       flash[:message] = "User(s) was successfully deleted"
     else
-      flash[:message] = "Please check at least one user"
+      flash[:message] = "Please choose at least one user"
     end
     redirect_to :action => "index"
   end
