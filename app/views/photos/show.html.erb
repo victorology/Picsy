@@ -17,7 +17,7 @@
 				<span class="right"><a href="http://pumpl.com"><img src="/images/index/logo_taken_with.png" alt="Taken with PUMPL"></a></span>
 				<div id="title"><%= @photo.title %> <span class="byline">by <%= @photo.user.nickname %></span></div>
 				<div id="time"><%= time_ago_in_words @photo.created_at%> ago</div>
-				<% if params[:mode] == "thank_you" %>
+				<% if params[:mode] == "thank_you" || cookies[:guid] %>
 				  <%= render :partial => "launch/thank_you" %> 
 				<% else %>
 				<p><strong><%= @photo.user.nickname %></strong> is currently among a select group of users previewing PUMPL.</p>
