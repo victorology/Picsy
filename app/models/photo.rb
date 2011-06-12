@@ -12,7 +12,7 @@ class Photo < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 100.megabytes
   
   before_create :generate_code, :check_post_to
-  before_create :fb_photo, :tumblr_photo
+  before_create :fb_photo_to_album, :tumblr_photo
       
   def generate_code
     charset = %w{1 2 3 4 6 7 9 A C D E F G H J K L M N P Q R T V W X Y Z}
@@ -101,6 +101,39 @@ class Photo < ActiveRecord::Base
       return false
     end  
   end  
+
+  def fb_photo_to_album
+    if self.user.facebook_connected? == true and !self.post_to_facebook_album.blank?   
+      @album_id = self.post_to_facebook_album
+      
+      ## post photo to facebook
+      clnt = HTTPClient.new
+      source = File.open(self.image.queued_for_write[:original].path)
+      
+      body = {:access_token => self.user.facebook_token, :source => source,:message => "#{self.title} taken with PUMPL "+self.shortened_url}
+      
+      response = clnt.post("https://graph.facebook.com/#{@album_id}/photos",body)
+     
+      c = Curl::Easy.perform("https://graph.facebook.com/#{JSON.parse(response.content)['id']}/?access_token=#{self.user.facebook_token}")
+      rs = JSON.parse(c.body_str)
+      
+      if rs["error"]
+        if rs["error"]["message"].include?("Error validating access token")
+          self.user.update_attributes(:facebook_token => nil, :facebook_nickname => nil, :facebook_id => nil)
+          errors[:base] << "this user account isn't connected to Facebook, please authorize it first"
+        else
+          errors[:base] << rs["error"]["message"]
+        end    
+        return false
+      else  
+        write_attribute(:fb_original_url,rs["source"])
+        write_attribute(:fb_thumbnail_url,rs["picture"])
+      end  
+    elsif self.user.facebook_connected? == false and !self.post_to_facebook_album.blank?   
+      errors[:base] << "Can't post photo to facebook, you need to link your account first" 
+      return false
+    end  
+  end
   
   ## options[:thumbnail]
   

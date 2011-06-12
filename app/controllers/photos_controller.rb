@@ -93,6 +93,14 @@ class PhotosController < ApplicationController
 
             client.update("#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}")  
           end
+
+          if @photo.user.facebook_connected? == true and @photo.post_to_facebook_wall == "yes"
+            clnt = HTTPClient.new
+
+            body = {:access_token => @photo.user.facebook_token, :link => photo_hash(@photo)[:page_url], 
+                    :picture => photo_hash(@photo)[:original_url], :name => @photo.title} 
+            clnt.post("https://graph.facebook.com/#{@photo.user.facebook_id}/feed", body)
+          end
           
           @raw_result = {
             :code => 0,
@@ -149,7 +157,7 @@ class PhotosController < ApplicationController
       
     return rs 
   end
-  
+
   def shortened_url(photo)
     return ("http://"+request.host_with_port+"/#{prefix_rand}#{photo.code}").gsub("www.","")
   end  

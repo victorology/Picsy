@@ -125,7 +125,18 @@ class User < ActiveRecord::Base
       return [false, message]
     end
   end
-  
+
+  def facebook_albums
+    if self.facebook_connected? == true
+      clnt = HTTPClient.new
+      album_response = clnt.get("https://graph.facebook.com/me/albums", {:access_token => self.facebook_token})
+
+      albums = JSON.parse(album_response.body)["data"].reject{|album| album["type"] == "wall"}
+      return albums.sort{|x,y| x['name'] <=> y['name']}
+    else
+      return []
+    end
+  end
   
   protected
   
