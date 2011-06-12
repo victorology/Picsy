@@ -36,7 +36,7 @@ class Photo < ActiveRecord::Base
         :email => self.user.tumblr_email,
         :password => User.tumblr_pwd_decrypt(self.user.tumblr_secret),
         :type => "photo",
-        :caption => self.title,
+        :caption => "#{self.title} taken with PUMPL "+self.shortened_url,
         :data => File.open(self.image.queued_for_write[:original].path) 
       }
       clnt = HTTPClient.new
