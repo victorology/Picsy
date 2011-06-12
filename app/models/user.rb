@@ -126,15 +126,22 @@ class User < ActiveRecord::Base
     end
   end
 
-  def facebook_albums
+  def find_or_create_by_facebook_album(name)
     if self.facebook_connected? == true
-      clnt = HTTPClient.new
+      clnt = HTTPClient.new      
       album_response = clnt.get("https://graph.facebook.com/me/albums", {:access_token => self.facebook_token})
-
-      albums = JSON.parse(album_response.body)["data"].reject{|album| album["type"] == "wall"}
-      return albums.sort{|x,y| x['name'] <=> y['name']}
+      
+      JSON.parse(album_response.body)["data"].each do |album|
+        if album["name"] == name
+          return album["id"]
+          break
+        end  
+      end  
+      
+      album_response = clnt.post("https://graph.facebook.com/me/albums",{:access_token => self.facebook_token, :name => name})
+      return JSON.parse(album_response.body)["id"]
     else
-      return []
+      return nil
     end
   end
   

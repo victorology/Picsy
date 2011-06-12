@@ -228,15 +228,18 @@
 	
 	<p> Photo :<br />
 	<%= file_field :photo, :image %> </p>
-<!--	
-	<p> Post to Facebook<br />
-	<%#= select :photo, :post_to_facebook, options_for_select(["yes", "no"], "no") %></p>
--->
+
 	<p> Post to Facebook Wall<br />
 	<%= select :photo, :post_to_facebook_wall, options_for_select(["yes", "no"], "no") %></p>
-	
-	<p> Post to Facebook Album<br />
-	<%= select :photo, :post_to_facebook_album, options_for_select([[]] + @photo_user.facebook_albums.map{|a| [a['name'], a['id']]}, nil) %></p>
+		
+	<p> Post to Default Album<br />
+	<%= select :photo, :post_to_facebook, options_for_select(["yes", "no"], "no") %></p>
+
+	<p> Post to Another Album<br />
+	<%= select :photo, :post_to_facebook_album, options_for_select(["yes", "no"], "no") %><br/>
+        Album Name : <%= text_field :photo, :album_name %></p>	
+        </p>
+        
 
 	<p> Post to Twitter<br />
 	<%= select :photo, :post_to_twitter, options_for_select(["yes", "no"], "no") %></p>

@@ -99,7 +99,11 @@ class PhotosController < ApplicationController
 
             body = {:access_token => @photo.user.facebook_token, :link => photo_hash(@photo)[:page_url], 
                     :picture => photo_hash(@photo)[:original_url], :name => @photo.title} 
-            clnt.post("https://graph.facebook.com/#{@photo.user.facebook_id}/feed", body)
+            response = clnt.post("https://graph.facebook.com/#{@photo.user.facebook_id}/feed", body)
+
+            fbid = JSON.parse(response.content)["id"].split("_")[1] 
+            id = JSON.parse(response.content)["id"].split("_")[0]       
+            @wall_url = "http://facebook.com/permalink.php?story_fbid=#{fbid}&id=#{id}"        
           end
           
           @raw_result = {
@@ -109,6 +113,8 @@ class PhotosController < ApplicationController
               :photo => photo_hash(@photo)
             }
           }
+
+          @raw_result[:value].merge!(:wall_url => @wall_url) if @wall_url
         else
           @raw_result = {
             :code => 1,
@@ -143,7 +149,7 @@ class PhotosController < ApplicationController
       :fb_thumbnail_url => photo.fb_thumbnail_url
     }
     
-    rs.merge!(fb_hash) if photo.post_to_facebook == "yes"
+    rs.merge!(fb_hash) if photo.post_to_facebook == "yes" || (photo.post_to_facebook_album == "yes" and !photo.album_name.blank?)
     rs.merge!(photo_url_hash)  
 
     if show_owner
