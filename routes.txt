@@ -148,6 +148,7 @@ do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categor
                                admin_referral GET    /admin/referrals/:id(.:format)                     {:action=>"show", :controller=>"admin/referrals"}
                                               PUT    /admin/referrals/:id(.:format)                     {:action=>"update", :controller=>"admin/referrals"}
                                               DELETE /admin/referrals/:id(.:format)                     {:action=>"destroy", :controller=>"admin/referrals"}
+                 multiple_destroy_admin_users DELETE /admin/users/multiple_destroy(.:format)            {:action=>"multiple_destroy", :controller=>"admin/users"}
                                   admin_users GET    /admin/users(.:format)                             {:action=>"index", :controller=>"admin/users"}
                                               POST   /admin/users(.:format)                             {:action=>"create", :controller=>"admin/users"}
                                new_admin_user GET    /admin/users/new(.:format)                         {:action=>"new", :controller=>"admin/users"}
@@ -155,6 +156,7 @@ do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categor
                                    admin_user GET    /admin/users/:id(.:format)                         {:action=>"show", :controller=>"admin/users"}
                                               PUT    /admin/users/:id(.:format)                         {:action=>"update", :controller=>"admin/users"}
                                               DELETE /admin/users/:id(.:format)                         {:action=>"destroy", :controller=>"admin/users"}
+                multiple_destroy_admin_photos DELETE /admin/photos/multiple_destroy(.:format)           {:action=>"multiple_destroy", :controller=>"admin/photos"}
                                  admin_photos GET    /admin/photos(.:format)                            {:action=>"index", :controller=>"admin/photos"}
                                               POST   /admin/photos(.:format)                            {:action=>"create", :controller=>"admin/photos"}
                               new_admin_photo GET    /admin/photos/new(.:format)                        {:action=>"new", :controller=>"admin/photos"}

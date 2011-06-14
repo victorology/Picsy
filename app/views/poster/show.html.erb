@@ -23,6 +23,15 @@
 	<%= submit_tag "Send" %>
 </form>
 
+<h2>Reset password API</h2>
+
+<form action="/users/password.json" method="post">
+	<p> Email : <br />
+	<%= text_field_tag "user[email]"%> </p>
+	
+	<%= submit_tag "Send" %>
+</form>
+
 <% if @photo_user.session_api %>
 <h2>Edit Profile API</h2>
 <form action="/users/update_profile.json" method="post">
