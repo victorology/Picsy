@@ -9,14 +9,15 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :twitter_id, :facebook_token, :facebook_nickname, :facebook_id, :tumblr_email, :tumblr_secret, :tumblr_nickname, :phone_number, :password, :profile_photo, :is_admin
+  
+  validates :nickname, :presence => true, :nickname_format => true, :uniqueness => true
 
-  validates_presence_of :email, :nickname
+  validates_presence_of :email
   validates_presence_of :password, :on => :create 
   validates_uniqueness_of :email
   
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   
-  validates_uniqueness_of :nickname
   validates_length_of :password, :minimum => 4, :too_short => "minimum is 4 characters", :on => :create
   
   has_many :photos

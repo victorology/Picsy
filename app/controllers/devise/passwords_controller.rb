@@ -12,20 +12,30 @@ class Devise::PasswordsController < ApplicationController
 
   # POST /resource/password
   def create
+    ## check nickname
+    unless params[resource_name][:email].include?("@")
+      pre_resource = resource_class.where(:nickname => params[resource_name][:email]).first 
+      params[resource_name][:email]= pre_resource.email unless pre_resource.blank? 
+    end    
+    
+    ## check email and send reset link
     self.resource = resource_class.send_reset_password_instructions(params[resource_name])
     
     if resource.errors.empty?
       set_flash_message(:notice, :send_instructions) #if is_navigational_format?
       #tfarespond_with resource, :location => after_sending_reset_password_instructions_path_for(resource_name)
+      msg = nil
       success = true
     else
+      msg = resource.errors.full_messages.join(",")
+      msg.gsub!("Email","Email or Nickname") if msg.include?("Email")
       success = false
       #respond_with_navigational(resource){ render_with_scope :new }
     end
     
     @raw_result = {
       :code => (success == true) ? 1 : 0,
-      :error_message => resource.errors.full_messages.join(","),
+      :error_message => msg,
       :value => {
         :send_reset_link => success
       }
