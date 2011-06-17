@@ -46,11 +46,11 @@ class PhotosController < ApplicationController
   end  
 
   def feed
-    if @api_user.following.empty?
+    if @api_user.following.blank?
       @msg = "You have to follow at least one user to see a feed of photos"
     else
       @photos = @api_user.get_following_photos
-      if @photos.empty?
+      if @photos.blank?
         @msg = "Users that you follow don't have any uploaded photos yet"
       end
     end
@@ -59,7 +59,7 @@ class PhotosController < ApplicationController
       :code => (@msg.blank?) ? 1 : 0,
       :error_message => @msg,
       :value => {
-        :photos  => @photos.collect {|photo| photo_hash photo, true}
+        :photos  => @photos.blank? ? nil : @photos.collect {|photo| photo_hash photo, true}
       }
     }
 
