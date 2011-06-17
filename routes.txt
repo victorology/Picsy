@@ -134,6 +134,14 @@ do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categor
                                      facebook GET    /facebook/:id(.:format)                            {:action=>"show", :controller=>"facebook"}
                                               PUT    /facebook/:id(.:format)                            {:action=>"update", :controller=>"facebook"}
                                               DELETE /facebook/:id(.:format)                            {:action=>"destroy", :controller=>"facebook"}
+                     confirm_foursquare_index GET    /foursquare/confirm(.:format)                      {:action=>"confirm", :controller=>"foursquare"}
+                             foursquare_index GET    /foursquare(.:format)                              {:action=>"index", :controller=>"foursquare"}
+                                              POST   /foursquare(.:format)                              {:action=>"create", :controller=>"foursquare"}
+                               new_foursquare GET    /foursquare/new(.:format)                          {:action=>"new", :controller=>"foursquare"}
+                              edit_foursquare GET    /foursquare/:id/edit(.:format)                     {:action=>"edit", :controller=>"foursquare"}
+                                   foursquare GET    /foursquare/:id(.:format)                          {:action=>"show", :controller=>"foursquare"}
+                                              PUT    /foursquare/:id(.:format)                          {:action=>"update", :controller=>"foursquare"}
+                                              DELETE /foursquare/:id(.:format)                          {:action=>"destroy", :controller=>"foursquare"}
                              admin_home_index GET    /admin/home(.:format)                              {:action=>"index", :controller=>"admin/home"}
                                               POST   /admin/home(.:format)                              {:action=>"create", :controller=>"admin/home"}
                                new_admin_home GET    /admin/home/new(.:format)                          {:action=>"new", :controller=>"admin/home"}

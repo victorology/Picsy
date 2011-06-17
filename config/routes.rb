@@ -105,7 +105,13 @@ Picsy::Application.routes.draw do
       get 'assign_categories_locations'
       post 'do_assign_categories_locations'
     end   
-  end  
+  end 
+  
+  resources :foursquare do 
+    collection do
+      get 'confirm'
+    end  
+  end   
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
