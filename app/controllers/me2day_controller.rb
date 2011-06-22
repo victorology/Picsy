@@ -65,10 +65,11 @@ class Me2dayController < ApplicationController
       }
     end
        
-     respond_to do |format|
+    respond_to do |format|
       format.json {
         render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
-      }     
+      }
+    end       
 =begin      
       token = UserToken.new(:uid => params[:user_id], :token => params[:user_key], :provider => "me2day")
       if current_user
