@@ -54,11 +54,21 @@ class Me2dayController < ApplicationController
         }
       }  
       
-      respond_to do |format|
-        format.json {
-          render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
-        }  
-      end
+
+    else
+      @raw_result = {
+        :code => 1,
+        :error_message => "connection is failed, please try again",
+        :value => {
+          :is_me2day_connected => false
+        }
+      }
+    end
+       
+     respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }     
 =begin      
       token = UserToken.new(:uid => params[:user_id], :token => params[:user_key], :provider => "me2day")
       if current_user
@@ -91,6 +101,6 @@ class Me2dayController < ApplicationController
         end
       end
 =end    
-    end     
+
   end
 end
