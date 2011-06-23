@@ -4,7 +4,7 @@ class Photo < ActiveRecord::Base
   
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :host_with_port
   has_attached_file :image, 
-    :styles => { :medium => "100x100#"}, 
+    :styles => { :medium => "100x100#", :retina => "200x200#"}, 
     :url => "/system/uphotos/:pattern_nickname/:pattern_code/:style/:basename.:extension"
   
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/jpg', 'image/png','image/gif']

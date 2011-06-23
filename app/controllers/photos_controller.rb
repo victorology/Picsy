@@ -138,6 +138,7 @@ class PhotosController < ApplicationController
    
     photo_url_hash = {
       :thumbnail_url => "http://"+request.host_with_port+photo.image.url(:medium),
+      :thumbnail_url_retina => "http://"+request.host_with_port+photo.image.url(:retina),
       :original_url =>  "http://"+request.host_with_port+photo.image.url,
     }
     
