@@ -61,6 +61,7 @@ Picsy::Application.routes.draw do
   resources :me2day do
     collection do
       get 'confirm'
+      post 'connect'
     end  
   end  
   

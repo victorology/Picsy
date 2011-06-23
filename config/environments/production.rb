@@ -73,7 +73,6 @@ FACEBOOK_APPLICATION_SECRET = "f0a6ae80af084bb3f25fde7aa3d2d72e"
 TUMBLR_SECRET = "picsy_prod"
 TUMBLR_SALT = "phKYU0cGo7gdAB5djukKxOp1cLyhggHtP8oYACLO7nns"
 
-## this api is created by aditya, it's for temporary purpose
-## for the real API key need to ask to Victor
-ME2DAY_KEY = "85700c4d74697b45cff0b499c09c253e"
+## ME2DAY config
+ME2DAY_KEY = "2a8512295365b1fe59b9ecc691c4fcb1"
 

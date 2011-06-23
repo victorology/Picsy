@@ -1,41 +1,107 @@
 # -*- encoding : utf-8 -*-
 class Me2dayController < ApplicationController
-  def index
-    auth_url = Me2day::Client.get_auth_url(:app_key => ME2DAY_KEY)
-    redirect_to auth_url        
+  skip_before_filter :protect_from_forgery
+  before_filter :authenticate_user!, :except => [:confirm]
+  
+  def connect
+    authorize_path = Me2day::Client.get_auth_url(:app_key => ME2DAY_KEY)
+    #redirect_to auth_url        
+    
+    respond_to do |format|
+      format.json {
+        @raw_result = {
+          :code => 0,
+          :error_message => nil,
+          :value => {
+            :authorize_url => authorize_path
+          }
+        }
+        render :json => JSON.generate(@raw_result)
+      }
+      format.html {
+        redirect_to authorize_path
+      }
+    end
   end  
   
   def confirm
-    #token, user_id, user_key, result = request.params["token"], request.params["user_id"], request.params["user_key"], request.params["result"]
-
-    if params[:result] == 'true'
-
-        @client = Me2day::Client.new(
-            :user_id => params[:user_id],
-            :user_key => params[:user_key],
-            :app_key => ME2DAY_KEY
-        )
-
-       @client.noop
-      #  => {"error"=>{"code"=>"0", "description"=>nil, "message"=>"\354\204\261\352\263\265\355\226\210\354\212\265\353\213\210\353\213\244."}}
-
-       # @client.create_post 'me2_id', 'post[body]' => "오늘의 미친 짓!"
-       
-      current_user.update_attribute(:me2day_id => params[:user_id], :me2day_key => params[:user_key])
+    if !params[:result].blank? and params[:result].eql?('true')
+      @client = Me2day::Client.new(
+        :user_id => params[:user_id], :user_key => params[:user_key], :app_key => ME2DAY_KEY
+      )
       
+      if @client.noop["message"] == "성공했습니다."
+        current_user.update_attributes(
+          {
+            :me2day_key => params[:user_key],
+            :me2day_id => params[:user_id]  
+          }
+        ) 
+        me2day_connected = true
+        code = 0
+        msg = nil
+      else
+        me2day_connected = false
+        code = 1
+        msg = @client.noop["message"]
+      end     
+        
       @raw_result = {
-        :code => 0,
-        :error_message => nil,
+        :code => code,
+        :error_message => msg,
         :value => {
-          :is_me2day_connected => true
+          :is_me2day_connected => me2day_connected
+        }
+      }  
+      
+
+    else
+      @raw_result = {
+        :code => 1,
+        :error_message => "connection is failed, please try again",
+        :value => {
+          :is_me2day_connected => false
         }
       }
-      respond_to do |format|
-         format.json {
-           render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
-         }  
-      end
     end
-    
-  end  
+       
+    respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }
+    end       
+=begin      
+      token = UserToken.new(:uid => params[:user_id], :token => params[:user_key], :provider => "me2day")
+      if current_user
+        current_user.user_tokens.find_or_create_by_provider_and_uid("me2day", params[:user_id])
+        flash[:notice] = "Authentication successful"
+        redirect_to edit_user_registration_path
+      else
+        authentication = UserToken.find_by_provider_and_uid("me2day", params[:user_id])
+        if authentication
+          flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
+          sign_in_and_redirect(:user, authentication.user)
+        else
+          begin
+            user = User.find_or_initialize_by_email(:email => "#{params[:user_id]}@me2day.net")
+            user = User.new if user.nil?
+            if user.nickname.blank?
+              user_info = @client.get_person(params[:user_id])
+              user.nickname = user_info["nickname"]
+            end
+            user.user_tokens.build(:provider => "me2day", :uid => params[:user_id], :token => params[:user_key])
+          rescue Exception => e
+            logger.error e
+          end
+          if user.save
+            flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
+            sign_in_and_redirect(:user, user)
+          else
+            redirect_to new_user_registration_url
+          end
+        end
+      end
+=end    
+
+  end
 end
