@@ -1,200 +1,202 @@
 (in /Users/adit/Webappz/victor/picsy)
-                             new_user_session GET    /users/sign_in(.:format)                           {:action=>"new", :controller=>"devise/sessions"}
-                                 user_session POST   /users/sign_in(.:format)                           {:action=>"create", :controller=>"devise/sessions"}
-                         destroy_user_session GET    /users/sign_out(.:format)                          {:action=>"destroy", :controller=>"devise/sessions"}
-                                user_password POST   /users/password(.:format)                          {:action=>"create", :controller=>"devise/passwords"}
-                            new_user_password GET    /users/password/new(.:format)                      {:action=>"new", :controller=>"devise/passwords"}
-                           edit_user_password GET    /users/password/edit(.:format)                     {:action=>"edit", :controller=>"devise/passwords"}
-                                              PUT    /users/password(.:format)                          {:action=>"update", :controller=>"devise/passwords"}
-                            user_registration POST   /users(.:format)                                   {:action=>"create", :controller=>"devise/registrations"}
-                        new_user_registration GET    /users/sign_up(.:format)                           {:action=>"new", :controller=>"devise/registrations"}
-                       edit_user_registration GET    /users/edit(.:format)                              {:action=>"edit", :controller=>"devise/registrations"}
-                                              PUT    /users(.:format)                                   {:action=>"update", :controller=>"devise/registrations"}
-                                              DELETE /users(.:format)                                   {:action=>"destroy", :controller=>"devise/registrations"}
-                                check_sign_in POST   /check_sign_in(.:format)                           {:action=>"check_sign_in", :controller=>"devise/sessions"}
-                              update_password POST   /update_password(.:format)                         {:action=>"update_password", :controller=>"devise/sessions"}
-                               check_register POST   /check_register(.:format)                          {:action=>"check_register", :controller=>"devise/sessions"}
-                          invite_launch_index POST   /launch/invite(.:format)                           {:action=>"invite", :controller=>"launch"}
-                       thank_you_launch_index GET    /launch/thank_you(.:format)                        {:action=>"thank_you", :controller=>"launch"}
-                                 launch_index GET    /launch(.:format)                                  {:action=>"index", :controller=>"launch"}
-                                              POST   /launch(.:format)                                  {:action=>"create", :controller=>"launch"}
-                                   new_launch GET    /launch/new(.:format)                              {:action=>"new", :controller=>"launch"}
-                                  edit_launch GET    /launch/:id/edit(.:format)                         {:action=>"edit", :controller=>"launch"}
-                                       launch GET    /launch/:id(.:format)                              {:action=>"show", :controller=>"launch"}
-                                              PUT    /launch/:id(.:format)                              {:action=>"update", :controller=>"launch"}
-                                              DELETE /launch/:id(.:format)                              {:action=>"destroy", :controller=>"launch"}
-                         update_profile_users POST   /users/update_profile(.:format)                    {:action=>"update_profile", :controller=>"users"}
-                   update_profile_photo_users POST   /users/update_profile_photo(.:format)              {:action=>"update_profile_photo", :controller=>"users"}
-                                 follow_users POST   /users/follow(.:format)                            {:action=>"follow", :controller=>"users"}
-                               unfollow_users POST   /users/unfollow(.:format)                          {:action=>"unfollow", :controller=>"users"}
-           following_and_followers_list_users GET    /users/following_and_followers_list(.:format)      {:action=>"following_and_followers_list", :controller=>"users"}
-                           find_friends_users GET    /users/find_friends(.:format)                      {:action=>"find_friends", :controller=>"users"}
-                                        users GET    /users(.:format)                                   {:action=>"index", :controller=>"users"}
-                                              POST   /users(.:format)                                   {:action=>"create", :controller=>"users"}
-                                     new_user GET    /users/new(.:format)                               {:action=>"new", :controller=>"users"}
-                                    edit_user GET    /users/:id/edit(.:format)                          {:action=>"edit", :controller=>"users"}
-                                         user GET    /users/:id(.:format)                               {:action=>"show", :controller=>"users"}
-                                              PUT    /users/:id(.:format)                               {:action=>"update", :controller=>"users"}
-                                              DELETE /users/:id(.:format)                               {:action=>"destroy", :controller=>"users"}
-                                 items_filter        /items/filter(.:format)                            {:controller=>"items", :action=>"filter"}
-                                   items_more        /items/more(.:format)                              {:controller=>"items", :action=>"more"}
-                                                     /personalization/sub_categories/:id(.:format)      {:controller=>"personalization", :action=>"sub_categories"}
-                personalization_user_creation        /personalization/user_creation(.:format)           {:controller=>"personalization", :action=>"user_creation"}
-           personalization_ajax_user_creation        /personalization/ajax_user_creation(.:format)      {:controller=>"personalization", :action=>"ajax_user_creation"}
-                         personalization_show        /personalization/show(.:format)                    {:controller=>"personalization", :action=>"show"}
-                                           my        /my(.:format)                                      {:action=>"mydeals", :controller=>"personalization"}
-                     personalization_new_user        /personalization/new_user(.:format)                {:controller=>"personalization", :action=>"new_user"}
-                                                     /photo/:nickname/z:code(.:format)                  {:controller=>"photos", :action=>"show"}
-                                                     /photo/:nickname/t:code(.:format)                  {:controller=>"photos", :action=>"show"}
-                                                     /photo/:nickname/q:code(.:format)                  {:controller=>"photos", :action=>"show"}
-                                                     /photo/:nickname/x:code(.:format)                  {:controller=>"photos", :action=>"show"}
-                                                     /facebook/confirm_api/:session_api/id/:id.:format  {:controller=>"facebook", :action=>"confirm_api"}
-                         crawl_rss_home_index GET    /home/crawl_rss(.:format)                          {:action=>"crawl_rss", :controller=>"home"}
-                    run_scheduling_home_index GET    /home/run_scheduling(.:format)                     {:action=>"run_scheduling", :controller=>"home"}
-                                   home_index GET    /home(.:format)                                    {:action=>"index", :controller=>"home"}
-                                              POST   /home(.:format)                                    {:action=>"create", :controller=>"home"}
-                                     new_home GET    /home/new(.:format)                                {:action=>"new", :controller=>"home"}
-                                    edit_home GET    /home/:id/edit(.:format)                           {:action=>"edit", :controller=>"home"}
-                                         home GET    /home/:id(.:format)                                {:action=>"show", :controller=>"home"}
-                                              PUT    /home/:id(.:format)                                {:action=>"update", :controller=>"home"}
-                                              DELETE /home/:id(.:format)                                {:action=>"destroy", :controller=>"home"}
-                                 poster_index GET    /poster(.:format)                                  {:action=>"index", :controller=>"poster"}
-                                              POST   /poster(.:format)                                  {:action=>"create", :controller=>"poster"}
-                                   new_poster GET    /poster/new(.:format)                              {:action=>"new", :controller=>"poster"}
-                                  edit_poster GET    /poster/:id/edit(.:format)                         {:action=>"edit", :controller=>"poster"}
-                                       poster GET    /poster/:id(.:format)                              {:action=>"show", :controller=>"poster"}
-                                              PUT    /poster/:id(.:format)                              {:action=>"update", :controller=>"poster"}
-                                              DELETE /poster/:id(.:format)                              {:action=>"destroy", :controller=>"poster"}
-                         confirm_me2day_index GET    /me2day/confirm(.:format)                          {:action=>"confirm", :controller=>"me2day"}
-                         connect_me2day_index POST   /me2day/connect(.:format)                          {:action=>"connect", :controller=>"me2day"}
-                                 me2day_index GET    /me2day(.:format)                                  {:action=>"index", :controller=>"me2day"}
-                                              POST   /me2day(.:format)                                  {:action=>"create", :controller=>"me2day"}
-                                   new_me2day GET    /me2day/new(.:format)                              {:action=>"new", :controller=>"me2day"}
-                                  edit_me2day GET    /me2day/:id/edit(.:format)                         {:action=>"edit", :controller=>"me2day"}
-                                       me2day GET    /me2day/:id(.:format)                              {:action=>"show", :controller=>"me2day"}
-                                              PUT    /me2day/:id(.:format)                              {:action=>"update", :controller=>"me2day"}
-                                              DELETE /me2day/:id(.:format)                              {:action=>"destroy", :controller=>"me2day"}
-                                cyworld_index GET    /cyworld(.:format)                                 {:action=>"index", :controller=>"cyworld"}
-                                              POST   /cyworld(.:format)                                 {:action=>"create", :controller=>"cyworld"}
-                                  new_cyworld GET    /cyworld/new(.:format)                             {:action=>"new", :controller=>"cyworld"}
-                                 edit_cyworld GET    /cyworld/:id/edit(.:format)                        {:action=>"edit", :controller=>"cyworld"}
-                                      cyworld GET    /cyworld/:id(.:format)                             {:action=>"show", :controller=>"cyworld"}
-                                              PUT    /cyworld/:id(.:format)                             {:action=>"update", :controller=>"cyworld"}
-                                              DELETE /cyworld/:id(.:format)                             {:action=>"destroy", :controller=>"cyworld"}
-                                  connections GET    /connections(.:format)                             {:action=>"index", :controller=>"connections"}
-                                              POST   /connections(.:format)                             {:action=>"create", :controller=>"connections"}
-                               new_connection GET    /connections/new(.:format)                         {:action=>"new", :controller=>"connections"}
-                              edit_connection GET    /connections/:id/edit(.:format)                    {:action=>"edit", :controller=>"connections"}
-                                   connection GET    /connections/:id(.:format)                         {:action=>"show", :controller=>"connections"}
-                                              PUT    /connections/:id(.:format)                         {:action=>"update", :controller=>"connections"}
-                                              DELETE /connections/:id(.:format)                         {:action=>"destroy", :controller=>"connections"}
-                                  mine_photos GET    /photos/mine(.:format)                             {:action=>"mine", :controller=>"photos"}
-                                  feed_photos GET    /photos/feed(.:format)                             {:action=>"feed", :controller=>"photos"}
-                                       photos GET    /photos(.:format)                                  {:action=>"index", :controller=>"photos"}
-                                              POST   /photos(.:format)                                  {:action=>"create", :controller=>"photos"}
-                                    new_photo GET    /photos/new(.:format)                              {:action=>"new", :controller=>"photos"}
-                                   edit_photo GET    /photos/:id/edit(.:format)                         {:action=>"edit", :controller=>"photos"}
-                                        photo GET    /photos/:id(.:format)                              {:action=>"show", :controller=>"photos"}
-                                              PUT    /photos/:id(.:format)                              {:action=>"update", :controller=>"photos"}
-                                              DELETE /photos/:id(.:format)                              {:action=>"destroy", :controller=>"photos"}
-                        confirm_twitter_index GET    /twitter/confirm(.:format)                         {:action=>"confirm", :controller=>"twitter"}
-                    xauth_token_twitter_index POST   /twitter/xauth_token(.:format)                     {:action=>"xauth_token", :controller=>"twitter"}
-                    xauth_login_twitter_index POST   /twitter/xauth_login(.:format)                     {:action=>"xauth_login", :controller=>"twitter"}
-                     xauth_form_twitter_index GET    /twitter/xauth_form(.:format)                      {:action=>"xauth_form", :controller=>"twitter"}
-    assign_categories_locations_twitter_index GET    /twitter/assign_categories_locations(.:format)     {:action=>"assign_categories_locations", :controller=>"twitter"}
-                         unlink_twitter_index GET    /twitter/unlink(.:format)                          {:action=>"unlink", :controller=>"twitter"}
-                                              POST   /twitter/unlink(.:format)                          {:action=>"unlink", :controller=>"twitter"}
- do_assign_categories_locations_twitter_index POST   /twitter/do_assign_categories_locations(.:format)  {:action=>"do_assign_categories_locations", :controller=>"twitter"}
-                                twitter_index GET    /twitter(.:format)                                 {:action=>"index", :controller=>"twitter"}
-                                              POST   /twitter(.:format)                                 {:action=>"create", :controller=>"twitter"}
-                                  new_twitter GET    /twitter/new(.:format)                             {:action=>"new", :controller=>"twitter"}
-                                 edit_twitter GET    /twitter/:id/edit(.:format)                        {:action=>"edit", :controller=>"twitter"}
-                                      twitter GET    /twitter/:id(.:format)                             {:action=>"show", :controller=>"twitter"}
-                                              PUT    /twitter/:id(.:format)                             {:action=>"update", :controller=>"twitter"}
-                                              DELETE /twitter/:id(.:format)                             {:action=>"destroy", :controller=>"twitter"}
-                         connect_tumblr_index POST   /tumblr/connect(.:format)                          {:action=>"connect", :controller=>"tumblr"}
-                          unlink_tumblr_index GET    /tumblr/unlink(.:format)                           {:action=>"unlink", :controller=>"tumblr"}
-                                              POST   /tumblr/unlink(.:format)                           {:action=>"unlink", :controller=>"tumblr"}
-                                 tumblr_index GET    /tumblr(.:format)                                  {:action=>"index", :controller=>"tumblr"}
-                                              POST   /tumblr(.:format)                                  {:action=>"create", :controller=>"tumblr"}
-                                   new_tumblr GET    /tumblr/new(.:format)                              {:action=>"new", :controller=>"tumblr"}
-                                  edit_tumblr GET    /tumblr/:id/edit(.:format)                         {:action=>"edit", :controller=>"tumblr"}
-                                       tumblr GET    /tumblr/:id(.:format)                              {:action=>"show", :controller=>"tumblr"}
-                                              PUT    /tumblr/:id(.:format)                              {:action=>"update", :controller=>"tumblr"}
-                                              DELETE /tumblr/:id(.:format)                              {:action=>"destroy", :controller=>"tumblr"}
-                       confirm_facebook_index GET    /facebook/confirm(.:format)                        {:action=>"confirm", :controller=>"facebook"}
-                   confirm_api_facebook_index GET    /facebook/confirm_api(.:format)                    {:action=>"confirm_api", :controller=>"facebook"}
-                        unlink_facebook_index GET    /facebook/unlink(.:format)                         {:action=>"unlink", :controller=>"facebook"}
-                                              POST   /facebook/unlink(.:format)                         {:action=>"unlink", :controller=>"facebook"}
-   assign_categories_locations_facebook_index GET    /facebook/assign_categories_locations(.:format)    {:action=>"assign_categories_locations", :controller=>"facebook"}
-do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categories_locations(.:format) {:action=>"do_assign_categories_locations", :controller=>"facebook"}
-                               facebook_index GET    /facebook(.:format)                                {:action=>"index", :controller=>"facebook"}
-                                              POST   /facebook(.:format)                                {:action=>"create", :controller=>"facebook"}
-                                 new_facebook GET    /facebook/new(.:format)                            {:action=>"new", :controller=>"facebook"}
-                                edit_facebook GET    /facebook/:id/edit(.:format)                       {:action=>"edit", :controller=>"facebook"}
-                                     facebook GET    /facebook/:id(.:format)                            {:action=>"show", :controller=>"facebook"}
-                                              PUT    /facebook/:id(.:format)                            {:action=>"update", :controller=>"facebook"}
-                                              DELETE /facebook/:id(.:format)                            {:action=>"destroy", :controller=>"facebook"}
-                     confirm_foursquare_index GET    /foursquare/confirm(.:format)                      {:action=>"confirm", :controller=>"foursquare"}
-                             foursquare_index GET    /foursquare(.:format)                              {:action=>"index", :controller=>"foursquare"}
-                                              POST   /foursquare(.:format)                              {:action=>"create", :controller=>"foursquare"}
-                               new_foursquare GET    /foursquare/new(.:format)                          {:action=>"new", :controller=>"foursquare"}
-                              edit_foursquare GET    /foursquare/:id/edit(.:format)                     {:action=>"edit", :controller=>"foursquare"}
-                                   foursquare GET    /foursquare/:id(.:format)                          {:action=>"show", :controller=>"foursquare"}
-                                              PUT    /foursquare/:id(.:format)                          {:action=>"update", :controller=>"foursquare"}
-                                              DELETE /foursquare/:id(.:format)                          {:action=>"destroy", :controller=>"foursquare"}
-                             admin_home_index GET    /admin/home(.:format)                              {:action=>"index", :controller=>"admin/home"}
-                                              POST   /admin/home(.:format)                              {:action=>"create", :controller=>"admin/home"}
-                               new_admin_home GET    /admin/home/new(.:format)                          {:action=>"new", :controller=>"admin/home"}
-                              edit_admin_home GET    /admin/home/:id/edit(.:format)                     {:action=>"edit", :controller=>"admin/home"}
-                                   admin_home GET    /admin/home/:id(.:format)                          {:action=>"show", :controller=>"admin/home"}
-                                              PUT    /admin/home/:id(.:format)                          {:action=>"update", :controller=>"admin/home"}
-                                              DELETE /admin/home/:id(.:format)                          {:action=>"destroy", :controller=>"admin/home"}
-                              admin_referrals GET    /admin/referrals(.:format)                         {:action=>"index", :controller=>"admin/referrals"}
-                                              POST   /admin/referrals(.:format)                         {:action=>"create", :controller=>"admin/referrals"}
-                           new_admin_referral GET    /admin/referrals/new(.:format)                     {:action=>"new", :controller=>"admin/referrals"}
-                          edit_admin_referral GET    /admin/referrals/:id/edit(.:format)                {:action=>"edit", :controller=>"admin/referrals"}
-                               admin_referral GET    /admin/referrals/:id(.:format)                     {:action=>"show", :controller=>"admin/referrals"}
-                                              PUT    /admin/referrals/:id(.:format)                     {:action=>"update", :controller=>"admin/referrals"}
-                                              DELETE /admin/referrals/:id(.:format)                     {:action=>"destroy", :controller=>"admin/referrals"}
-                 multiple_destroy_admin_users DELETE /admin/users/multiple_destroy(.:format)            {:action=>"multiple_destroy", :controller=>"admin/users"}
-                                  admin_users GET    /admin/users(.:format)                             {:action=>"index", :controller=>"admin/users"}
-                                              POST   /admin/users(.:format)                             {:action=>"create", :controller=>"admin/users"}
-                               new_admin_user GET    /admin/users/new(.:format)                         {:action=>"new", :controller=>"admin/users"}
-                              edit_admin_user GET    /admin/users/:id/edit(.:format)                    {:action=>"edit", :controller=>"admin/users"}
-                                   admin_user GET    /admin/users/:id(.:format)                         {:action=>"show", :controller=>"admin/users"}
-                                              PUT    /admin/users/:id(.:format)                         {:action=>"update", :controller=>"admin/users"}
-                                              DELETE /admin/users/:id(.:format)                         {:action=>"destroy", :controller=>"admin/users"}
-                multiple_destroy_admin_photos DELETE /admin/photos/multiple_destroy(.:format)           {:action=>"multiple_destroy", :controller=>"admin/photos"}
-                                 admin_photos GET    /admin/photos(.:format)                            {:action=>"index", :controller=>"admin/photos"}
-                                              POST   /admin/photos(.:format)                            {:action=>"create", :controller=>"admin/photos"}
-                              new_admin_photo GET    /admin/photos/new(.:format)                        {:action=>"new", :controller=>"admin/photos"}
-                             edit_admin_photo GET    /admin/photos/:id/edit(.:format)                   {:action=>"edit", :controller=>"admin/photos"}
-                                  admin_photo GET    /admin/photos/:id(.:format)                        {:action=>"show", :controller=>"admin/photos"}
-                                              PUT    /admin/photos/:id(.:format)                        {:action=>"update", :controller=>"admin/photos"}
-                                              DELETE /admin/photos/:id(.:format)                        {:action=>"destroy", :controller=>"admin/photos"}
-                        personalization_index GET    /personalization(.:format)                         {:action=>"show", :controller=>"personalization"}
-           user_sign_in_personalization_index GET    /personalization/user_sign_in(.:format)            {:action=>"user_sign_in", :controller=>"personalization"}
-           sign_in_done_personalization_index GET    /personalization/sign_in_done(.:format)            {:action=>"sign_in_done", :controller=>"personalization"}
-          check_sign_in_personalization_index POST   /personalization/check_sign_in(.:format)           {:action=>"check_sign_in", :controller=>"personalization"}
-                                              GET    /personalization(.:format)                         {:action=>"index", :controller=>"personalization"}
-                                              POST   /personalization(.:format)                         {:action=>"create", :controller=>"personalization"}
-                          new_personalization GET    /personalization/new(.:format)                     {:action=>"new", :controller=>"personalization"}
-                         edit_personalization GET    /personalization/:id/edit(.:format)                {:action=>"edit", :controller=>"personalization"}
-                              personalization GET    /personalization/:id(.:format)                     {:action=>"show", :controller=>"personalization"}
-                                              PUT    /personalization/:id(.:format)                     {:action=>"update", :controller=>"personalization"}
-                                              DELETE /personalization/:id(.:format)                     {:action=>"destroy", :controller=>"personalization"}
-                                 filter_items GET    /items/filter(.:format)                            {:action=>"filter", :controller=>"items"}
-                                        items GET    /items(.:format)                                   {:action=>"index", :controller=>"items"}
-                                              POST   /items(.:format)                                   {:action=>"create", :controller=>"items"}
-                                     new_item GET    /items/new(.:format)                               {:action=>"new", :controller=>"items"}
-                                    edit_item GET    /items/:id/edit(.:format)                          {:action=>"edit", :controller=>"items"}
-                                         item GET    /items/:id(.:format)                               {:action=>"show", :controller=>"items"}
-                                              PUT    /items/:id(.:format)                               {:action=>"update", :controller=>"items"}
-                                              DELETE /items/:id(.:format)                               {:action=>"destroy", :controller=>"items"}
-                                         root        /(.:format)                                        {:controller=>"launch", :action=>"index"}
-                                                     /z:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
-                                                     /t:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
-                                                     /q:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
-                                                     /x:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
-                                                     /v:code(.:format)                                  {:controller=>"launch", :action=>"index"}
+                             new_user_session GET    /users/sign_in(.:format)                            {:action=>"new", :controller=>"devise/sessions"}
+                                 user_session POST   /users/sign_in(.:format)                            {:action=>"create", :controller=>"devise/sessions"}
+                         destroy_user_session GET    /users/sign_out(.:format)                           {:action=>"destroy", :controller=>"devise/sessions"}
+                                user_password POST   /users/password(.:format)                           {:action=>"create", :controller=>"devise/passwords"}
+                            new_user_password GET    /users/password/new(.:format)                       {:action=>"new", :controller=>"devise/passwords"}
+                           edit_user_password GET    /users/password/edit(.:format)                      {:action=>"edit", :controller=>"devise/passwords"}
+                                              PUT    /users/password(.:format)                           {:action=>"update", :controller=>"devise/passwords"}
+                            user_registration POST   /users(.:format)                                    {:action=>"create", :controller=>"devise/registrations"}
+                        new_user_registration GET    /users/sign_up(.:format)                            {:action=>"new", :controller=>"devise/registrations"}
+                       edit_user_registration GET    /users/edit(.:format)                               {:action=>"edit", :controller=>"devise/registrations"}
+                                              PUT    /users(.:format)                                    {:action=>"update", :controller=>"devise/registrations"}
+                                              DELETE /users(.:format)                                    {:action=>"destroy", :controller=>"devise/registrations"}
+                                check_sign_in POST   /check_sign_in(.:format)                            {:action=>"check_sign_in", :controller=>"devise/sessions"}
+                              update_password POST   /update_password(.:format)                          {:action=>"update_password", :controller=>"devise/sessions"}
+                               check_register POST   /check_register(.:format)                           {:action=>"check_register", :controller=>"devise/sessions"}
+                          invite_launch_index POST   /launch/invite(.:format)                            {:action=>"invite", :controller=>"launch"}
+                       thank_you_launch_index GET    /launch/thank_you(.:format)                         {:action=>"thank_you", :controller=>"launch"}
+                                 launch_index GET    /launch(.:format)                                   {:action=>"index", :controller=>"launch"}
+                                              POST   /launch(.:format)                                   {:action=>"create", :controller=>"launch"}
+                                   new_launch GET    /launch/new(.:format)                               {:action=>"new", :controller=>"launch"}
+                                  edit_launch GET    /launch/:id/edit(.:format)                          {:action=>"edit", :controller=>"launch"}
+                                       launch GET    /launch/:id(.:format)                               {:action=>"show", :controller=>"launch"}
+                                              PUT    /launch/:id(.:format)                               {:action=>"update", :controller=>"launch"}
+                                              DELETE /launch/:id(.:format)                               {:action=>"destroy", :controller=>"launch"}
+                         update_profile_users POST   /users/update_profile(.:format)                     {:action=>"update_profile", :controller=>"users"}
+                   update_profile_photo_users POST   /users/update_profile_photo(.:format)               {:action=>"update_profile_photo", :controller=>"users"}
+                                 follow_users POST   /users/follow(.:format)                             {:action=>"follow", :controller=>"users"}
+                               unfollow_users POST   /users/unfollow(.:format)                           {:action=>"unfollow", :controller=>"users"}
+           following_and_followers_list_users GET    /users/following_and_followers_list(.:format)       {:action=>"following_and_followers_list", :controller=>"users"}
+                           find_friends_users GET    /users/find_friends(.:format)                       {:action=>"find_friends", :controller=>"users"}
+                                        users GET    /users(.:format)                                    {:action=>"index", :controller=>"users"}
+                                              POST   /users(.:format)                                    {:action=>"create", :controller=>"users"}
+                                     new_user GET    /users/new(.:format)                                {:action=>"new", :controller=>"users"}
+                                    edit_user GET    /users/:id/edit(.:format)                           {:action=>"edit", :controller=>"users"}
+                                         user GET    /users/:id(.:format)                                {:action=>"show", :controller=>"users"}
+                                              PUT    /users/:id(.:format)                                {:action=>"update", :controller=>"users"}
+                                              DELETE /users/:id(.:format)                                {:action=>"destroy", :controller=>"users"}
+                                 items_filter        /items/filter(.:format)                             {:controller=>"items", :action=>"filter"}
+                                   items_more        /items/more(.:format)                               {:controller=>"items", :action=>"more"}
+                                                     /personalization/sub_categories/:id(.:format)       {:controller=>"personalization", :action=>"sub_categories"}
+                personalization_user_creation        /personalization/user_creation(.:format)            {:controller=>"personalization", :action=>"user_creation"}
+           personalization_ajax_user_creation        /personalization/ajax_user_creation(.:format)       {:controller=>"personalization", :action=>"ajax_user_creation"}
+                         personalization_show        /personalization/show(.:format)                     {:controller=>"personalization", :action=>"show"}
+                                           my        /my(.:format)                                       {:action=>"mydeals", :controller=>"personalization"}
+                     personalization_new_user        /personalization/new_user(.:format)                 {:controller=>"personalization", :action=>"new_user"}
+                                                     /photo/:nickname/z:code(.:format)                   {:controller=>"photos", :action=>"show"}
+                                                     /photo/:nickname/t:code(.:format)                   {:controller=>"photos", :action=>"show"}
+                                                     /photo/:nickname/q:code(.:format)                   {:controller=>"photos", :action=>"show"}
+                                                     /photo/:nickname/x:code(.:format)                   {:controller=>"photos", :action=>"show"}
+                                                     /facebook/confirm_api/:session_api/id/:id.:format   {:controller=>"facebook", :action=>"confirm_api"}
+                                                     /foursquare/confirm_api/:session_api/id/:id.:format {:controller=>"foursquare", :action=>"confirm_api"}
+                         crawl_rss_home_index GET    /home/crawl_rss(.:format)                           {:action=>"crawl_rss", :controller=>"home"}
+                    run_scheduling_home_index GET    /home/run_scheduling(.:format)                      {:action=>"run_scheduling", :controller=>"home"}
+                                   home_index GET    /home(.:format)                                     {:action=>"index", :controller=>"home"}
+                                              POST   /home(.:format)                                     {:action=>"create", :controller=>"home"}
+                                     new_home GET    /home/new(.:format)                                 {:action=>"new", :controller=>"home"}
+                                    edit_home GET    /home/:id/edit(.:format)                            {:action=>"edit", :controller=>"home"}
+                                         home GET    /home/:id(.:format)                                 {:action=>"show", :controller=>"home"}
+                                              PUT    /home/:id(.:format)                                 {:action=>"update", :controller=>"home"}
+                                              DELETE /home/:id(.:format)                                 {:action=>"destroy", :controller=>"home"}
+                                 poster_index GET    /poster(.:format)                                   {:action=>"index", :controller=>"poster"}
+                                              POST   /poster(.:format)                                   {:action=>"create", :controller=>"poster"}
+                                   new_poster GET    /poster/new(.:format)                               {:action=>"new", :controller=>"poster"}
+                                  edit_poster GET    /poster/:id/edit(.:format)                          {:action=>"edit", :controller=>"poster"}
+                                       poster GET    /poster/:id(.:format)                               {:action=>"show", :controller=>"poster"}
+                                              PUT    /poster/:id(.:format)                               {:action=>"update", :controller=>"poster"}
+                                              DELETE /poster/:id(.:format)                               {:action=>"destroy", :controller=>"poster"}
+                         confirm_me2day_index GET    /me2day/confirm(.:format)                           {:action=>"confirm", :controller=>"me2day"}
+                         connect_me2day_index POST   /me2day/connect(.:format)                           {:action=>"connect", :controller=>"me2day"}
+                                 me2day_index GET    /me2day(.:format)                                   {:action=>"index", :controller=>"me2day"}
+                                              POST   /me2day(.:format)                                   {:action=>"create", :controller=>"me2day"}
+                                   new_me2day GET    /me2day/new(.:format)                               {:action=>"new", :controller=>"me2day"}
+                                  edit_me2day GET    /me2day/:id/edit(.:format)                          {:action=>"edit", :controller=>"me2day"}
+                                       me2day GET    /me2day/:id(.:format)                               {:action=>"show", :controller=>"me2day"}
+                                              PUT    /me2day/:id(.:format)                               {:action=>"update", :controller=>"me2day"}
+                                              DELETE /me2day/:id(.:format)                               {:action=>"destroy", :controller=>"me2day"}
+                                cyworld_index GET    /cyworld(.:format)                                  {:action=>"index", :controller=>"cyworld"}
+                                              POST   /cyworld(.:format)                                  {:action=>"create", :controller=>"cyworld"}
+                                  new_cyworld GET    /cyworld/new(.:format)                              {:action=>"new", :controller=>"cyworld"}
+                                 edit_cyworld GET    /cyworld/:id/edit(.:format)                         {:action=>"edit", :controller=>"cyworld"}
+                                      cyworld GET    /cyworld/:id(.:format)                              {:action=>"show", :controller=>"cyworld"}
+                                              PUT    /cyworld/:id(.:format)                              {:action=>"update", :controller=>"cyworld"}
+                                              DELETE /cyworld/:id(.:format)                              {:action=>"destroy", :controller=>"cyworld"}
+                                  connections GET    /connections(.:format)                              {:action=>"index", :controller=>"connections"}
+                                              POST   /connections(.:format)                              {:action=>"create", :controller=>"connections"}
+                               new_connection GET    /connections/new(.:format)                          {:action=>"new", :controller=>"connections"}
+                              edit_connection GET    /connections/:id/edit(.:format)                     {:action=>"edit", :controller=>"connections"}
+                                   connection GET    /connections/:id(.:format)                          {:action=>"show", :controller=>"connections"}
+                                              PUT    /connections/:id(.:format)                          {:action=>"update", :controller=>"connections"}
+                                              DELETE /connections/:id(.:format)                          {:action=>"destroy", :controller=>"connections"}
+                                  mine_photos GET    /photos/mine(.:format)                              {:action=>"mine", :controller=>"photos"}
+                                  feed_photos GET    /photos/feed(.:format)                              {:action=>"feed", :controller=>"photos"}
+                                       photos GET    /photos(.:format)                                   {:action=>"index", :controller=>"photos"}
+                                              POST   /photos(.:format)                                   {:action=>"create", :controller=>"photos"}
+                                    new_photo GET    /photos/new(.:format)                               {:action=>"new", :controller=>"photos"}
+                                   edit_photo GET    /photos/:id/edit(.:format)                          {:action=>"edit", :controller=>"photos"}
+                                        photo GET    /photos/:id(.:format)                               {:action=>"show", :controller=>"photos"}
+                                              PUT    /photos/:id(.:format)                               {:action=>"update", :controller=>"photos"}
+                                              DELETE /photos/:id(.:format)                               {:action=>"destroy", :controller=>"photos"}
+                        confirm_twitter_index GET    /twitter/confirm(.:format)                          {:action=>"confirm", :controller=>"twitter"}
+                    xauth_token_twitter_index POST   /twitter/xauth_token(.:format)                      {:action=>"xauth_token", :controller=>"twitter"}
+                    xauth_login_twitter_index POST   /twitter/xauth_login(.:format)                      {:action=>"xauth_login", :controller=>"twitter"}
+                     xauth_form_twitter_index GET    /twitter/xauth_form(.:format)                       {:action=>"xauth_form", :controller=>"twitter"}
+    assign_categories_locations_twitter_index GET    /twitter/assign_categories_locations(.:format)      {:action=>"assign_categories_locations", :controller=>"twitter"}
+                         unlink_twitter_index GET    /twitter/unlink(.:format)                           {:action=>"unlink", :controller=>"twitter"}
+                                              POST   /twitter/unlink(.:format)                           {:action=>"unlink", :controller=>"twitter"}
+ do_assign_categories_locations_twitter_index POST   /twitter/do_assign_categories_locations(.:format)   {:action=>"do_assign_categories_locations", :controller=>"twitter"}
+                                twitter_index GET    /twitter(.:format)                                  {:action=>"index", :controller=>"twitter"}
+                                              POST   /twitter(.:format)                                  {:action=>"create", :controller=>"twitter"}
+                                  new_twitter GET    /twitter/new(.:format)                              {:action=>"new", :controller=>"twitter"}
+                                 edit_twitter GET    /twitter/:id/edit(.:format)                         {:action=>"edit", :controller=>"twitter"}
+                                      twitter GET    /twitter/:id(.:format)                              {:action=>"show", :controller=>"twitter"}
+                                              PUT    /twitter/:id(.:format)                              {:action=>"update", :controller=>"twitter"}
+                                              DELETE /twitter/:id(.:format)                              {:action=>"destroy", :controller=>"twitter"}
+                         connect_tumblr_index POST   /tumblr/connect(.:format)                           {:action=>"connect", :controller=>"tumblr"}
+                          unlink_tumblr_index GET    /tumblr/unlink(.:format)                            {:action=>"unlink", :controller=>"tumblr"}
+                                              POST   /tumblr/unlink(.:format)                            {:action=>"unlink", :controller=>"tumblr"}
+                                 tumblr_index GET    /tumblr(.:format)                                   {:action=>"index", :controller=>"tumblr"}
+                                              POST   /tumblr(.:format)                                   {:action=>"create", :controller=>"tumblr"}
+                                   new_tumblr GET    /tumblr/new(.:format)                               {:action=>"new", :controller=>"tumblr"}
+                                  edit_tumblr GET    /tumblr/:id/edit(.:format)                          {:action=>"edit", :controller=>"tumblr"}
+                                       tumblr GET    /tumblr/:id(.:format)                               {:action=>"show", :controller=>"tumblr"}
+                                              PUT    /tumblr/:id(.:format)                               {:action=>"update", :controller=>"tumblr"}
+                                              DELETE /tumblr/:id(.:format)                               {:action=>"destroy", :controller=>"tumblr"}
+                       confirm_facebook_index GET    /facebook/confirm(.:format)                         {:action=>"confirm", :controller=>"facebook"}
+                   confirm_api_facebook_index GET    /facebook/confirm_api(.:format)                     {:action=>"confirm_api", :controller=>"facebook"}
+                        unlink_facebook_index GET    /facebook/unlink(.:format)                          {:action=>"unlink", :controller=>"facebook"}
+                                              POST   /facebook/unlink(.:format)                          {:action=>"unlink", :controller=>"facebook"}
+   assign_categories_locations_facebook_index GET    /facebook/assign_categories_locations(.:format)     {:action=>"assign_categories_locations", :controller=>"facebook"}
+do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categories_locations(.:format)  {:action=>"do_assign_categories_locations", :controller=>"facebook"}
+                               facebook_index GET    /facebook(.:format)                                 {:action=>"index", :controller=>"facebook"}
+                                              POST   /facebook(.:format)                                 {:action=>"create", :controller=>"facebook"}
+                                 new_facebook GET    /facebook/new(.:format)                             {:action=>"new", :controller=>"facebook"}
+                                edit_facebook GET    /facebook/:id/edit(.:format)                        {:action=>"edit", :controller=>"facebook"}
+                                     facebook GET    /facebook/:id(.:format)                             {:action=>"show", :controller=>"facebook"}
+                                              PUT    /facebook/:id(.:format)                             {:action=>"update", :controller=>"facebook"}
+                                              DELETE /facebook/:id(.:format)                             {:action=>"destroy", :controller=>"facebook"}
+                     connect_foursquare_index POST   /foursquare/connect(.:format)                       {:action=>"connect", :controller=>"foursquare"}
+                     confirm_foursquare_index GET    /foursquare/confirm(.:format)                       {:action=>"confirm", :controller=>"foursquare"}
+                             foursquare_index GET    /foursquare(.:format)                               {:action=>"index", :controller=>"foursquare"}
+                                              POST   /foursquare(.:format)                               {:action=>"create", :controller=>"foursquare"}
+                               new_foursquare GET    /foursquare/new(.:format)                           {:action=>"new", :controller=>"foursquare"}
+                              edit_foursquare GET    /foursquare/:id/edit(.:format)                      {:action=>"edit", :controller=>"foursquare"}
+                                   foursquare GET    /foursquare/:id(.:format)                           {:action=>"show", :controller=>"foursquare"}
+                                              PUT    /foursquare/:id(.:format)                           {:action=>"update", :controller=>"foursquare"}
+                                              DELETE /foursquare/:id(.:format)                           {:action=>"destroy", :controller=>"foursquare"}
+                             admin_home_index GET    /admin/home(.:format)                               {:action=>"index", :controller=>"admin/home"}
+                                              POST   /admin/home(.:format)                               {:action=>"create", :controller=>"admin/home"}
+                               new_admin_home GET    /admin/home/new(.:format)                           {:action=>"new", :controller=>"admin/home"}
+                              edit_admin_home GET    /admin/home/:id/edit(.:format)                      {:action=>"edit", :controller=>"admin/home"}
+                                   admin_home GET    /admin/home/:id(.:format)                           {:action=>"show", :controller=>"admin/home"}
+                                              PUT    /admin/home/:id(.:format)                           {:action=>"update", :controller=>"admin/home"}
+                                              DELETE /admin/home/:id(.:format)                           {:action=>"destroy", :controller=>"admin/home"}
+                              admin_referrals GET    /admin/referrals(.:format)                          {:action=>"index", :controller=>"admin/referrals"}
+                                              POST   /admin/referrals(.:format)                          {:action=>"create", :controller=>"admin/referrals"}
+                           new_admin_referral GET    /admin/referrals/new(.:format)                      {:action=>"new", :controller=>"admin/referrals"}
+                          edit_admin_referral GET    /admin/referrals/:id/edit(.:format)                 {:action=>"edit", :controller=>"admin/referrals"}
+                               admin_referral GET    /admin/referrals/:id(.:format)                      {:action=>"show", :controller=>"admin/referrals"}
+                                              PUT    /admin/referrals/:id(.:format)                      {:action=>"update", :controller=>"admin/referrals"}
+                                              DELETE /admin/referrals/:id(.:format)                      {:action=>"destroy", :controller=>"admin/referrals"}
+                 multiple_destroy_admin_users DELETE /admin/users/multiple_destroy(.:format)             {:action=>"multiple_destroy", :controller=>"admin/users"}
+                                  admin_users GET    /admin/users(.:format)                              {:action=>"index", :controller=>"admin/users"}
+                                              POST   /admin/users(.:format)                              {:action=>"create", :controller=>"admin/users"}
+                               new_admin_user GET    /admin/users/new(.:format)                          {:action=>"new", :controller=>"admin/users"}
+                              edit_admin_user GET    /admin/users/:id/edit(.:format)                     {:action=>"edit", :controller=>"admin/users"}
+                                   admin_user GET    /admin/users/:id(.:format)                          {:action=>"show", :controller=>"admin/users"}
+                                              PUT    /admin/users/:id(.:format)                          {:action=>"update", :controller=>"admin/users"}
+                                              DELETE /admin/users/:id(.:format)                          {:action=>"destroy", :controller=>"admin/users"}
+                multiple_destroy_admin_photos DELETE /admin/photos/multiple_destroy(.:format)            {:action=>"multiple_destroy", :controller=>"admin/photos"}
+                                 admin_photos GET    /admin/photos(.:format)                             {:action=>"index", :controller=>"admin/photos"}
+                                              POST   /admin/photos(.:format)                             {:action=>"create", :controller=>"admin/photos"}
+                              new_admin_photo GET    /admin/photos/new(.:format)                         {:action=>"new", :controller=>"admin/photos"}
+                             edit_admin_photo GET    /admin/photos/:id/edit(.:format)                    {:action=>"edit", :controller=>"admin/photos"}
+                                  admin_photo GET    /admin/photos/:id(.:format)                         {:action=>"show", :controller=>"admin/photos"}
+                                              PUT    /admin/photos/:id(.:format)                         {:action=>"update", :controller=>"admin/photos"}
+                                              DELETE /admin/photos/:id(.:format)                         {:action=>"destroy", :controller=>"admin/photos"}
+                        personalization_index GET    /personalization(.:format)                          {:action=>"show", :controller=>"personalization"}
+           user_sign_in_personalization_index GET    /personalization/user_sign_in(.:format)             {:action=>"user_sign_in", :controller=>"personalization"}
+           sign_in_done_personalization_index GET    /personalization/sign_in_done(.:format)             {:action=>"sign_in_done", :controller=>"personalization"}
+          check_sign_in_personalization_index POST   /personalization/check_sign_in(.:format)            {:action=>"check_sign_in", :controller=>"personalization"}
+                                              GET    /personalization(.:format)                          {:action=>"index", :controller=>"personalization"}
+                                              POST   /personalization(.:format)                          {:action=>"create", :controller=>"personalization"}
+                          new_personalization GET    /personalization/new(.:format)                      {:action=>"new", :controller=>"personalization"}
+                         edit_personalization GET    /personalization/:id/edit(.:format)                 {:action=>"edit", :controller=>"personalization"}
+                              personalization GET    /personalization/:id(.:format)                      {:action=>"show", :controller=>"personalization"}
+                                              PUT    /personalization/:id(.:format)                      {:action=>"update", :controller=>"personalization"}
+                                              DELETE /personalization/:id(.:format)                      {:action=>"destroy", :controller=>"personalization"}
+                                 filter_items GET    /items/filter(.:format)                             {:action=>"filter", :controller=>"items"}
+                                        items GET    /items(.:format)                                    {:action=>"index", :controller=>"items"}
+                                              POST   /items(.:format)                                    {:action=>"create", :controller=>"items"}
+                                     new_item GET    /items/new(.:format)                                {:action=>"new", :controller=>"items"}
+                                    edit_item GET    /items/:id/edit(.:format)                           {:action=>"edit", :controller=>"items"}
+                                         item GET    /items/:id(.:format)                                {:action=>"show", :controller=>"items"}
+                                              PUT    /items/:id(.:format)                                {:action=>"update", :controller=>"items"}
+                                              DELETE /items/:id(.:format)                                {:action=>"destroy", :controller=>"items"}
+                                         root        /(.:format)                                         {:controller=>"launch", :action=>"index"}
+                                                     /z:code(.:format)                                   {:controller=>"photos", :action=>"shortened"}
+                                                     /t:code(.:format)                                   {:controller=>"photos", :action=>"shortened"}
+                                                     /q:code(.:format)                                   {:controller=>"photos", :action=>"shortened"}
+                                                     /x:code(.:format)                                   {:controller=>"photos", :action=>"shortened"}
+                                                     /v:code(.:format)                                   {:controller=>"launch", :action=>"index"}

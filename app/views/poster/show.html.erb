@@ -177,7 +177,7 @@
 
 <h2>Connect to Foursquare</h2>
 <% if @photo_user.session_api %>
-<form action="/foursquare.json" method="post">
+<form action="/foursquare/connect.json" method="post">
 	
 <p>ID <br />
 <%= text_field_tag "id",@photo_user.id %></p>

@@ -48,6 +48,7 @@ Picsy::Application.routes.draw do
   match 'photo/:nickname/q:code' => 'photos#show'
   match 'photo/:nickname/x:code' => 'photos#show'
   match 'facebook/confirm_api/:session_api/id/:id.:format' => 'facebook#confirm_api'
+  match 'foursquare/confirm_api/:session_api/id/:id.:format' => "foursquare#confirm_api"
   
   resources :home do
     collection do
@@ -110,7 +111,7 @@ Picsy::Application.routes.draw do
   
   resources :foursquare do 
     collection do
-      get 'confirm'
+      post 'connect'
     end  
   end   
   # Sample resource route (maps HTTP verbs to controller actions automatically):
