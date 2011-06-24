@@ -61,9 +61,75 @@ class FoursquareController < ApplicationController
 
   end  
   
+  def search_venues
+    @venues_arr = []
+    opt = {
+      :ll => "#{params[:latitude]},#{params[:longitude]}", 
+      :query => params[:place]
+    }
+    opt.delete_if {|key,value| key.to_s == "query"} if params[:place].blank?
+    
+    
+    if params[:latitude].blank? or params[:longitude].blank?
+      code = 1
+      @err_message = "you need to supply GPS coordinates (latitude & longitude)"
+    elsif  current_user.foursquare_token.blank?
+      code =1
+      @err_message = "foursquare token is invalid, please try to reconnect to foursquare"
+    else   
+      code = 0
+      @venues = client.search_venues opt
+      
+      if !@venues[:meta].blank? and !@venues[:meta][:errorDetail]
+        code = 1
+        @err_message = @venues[:meta][:errorDetail] 
+      elsif !@venues[:groups].blank? and !@venues[:groups][0].blank? and !@venues[:groups][0][:items].blank?
+        ven_hash = {}
+        @venues[:groups][0][:items].each_with_index do |ven,ven_idx|
+          ven.each do |key,value|
+            if @venues[:groups][0][:items][ven_idx][key].class == Hashie::Mash
+              ven[key].each do |key2,value2|
+                ven_hash[key] = Hash.new if ven_hash[key].blank?
+                ven_hash[key][key2] = value2 
+              end 
+            ## don't need categories for now
+            elsif key.to_s!="categories"  
+              ven_hash[key] = value
+            end
+          end  
+          @venues_arr <<  ven_hash
+        end  
+        code = 0
+      else
+        code = 1
+        @err_message = "Failed to retrieve venues, please try again"  
+      end    
+    end  
+  
+    
+    @raw_result = {
+      :code => code,
+      :error_message => @err_message,
+      :value => {
+        :venues => @venues_arr
+      }
+    }
+    
+    respond_to do |format|
+      format.json {
+        render :json => JSON.generate(@raw_result), :content_type => "application/json"
+      }
+    end
+    
+  end  
+  
   protected
   
   def client
-    OAuth2::Client.new(FOURSQUARE_KEY, FOURSQUARE_SECRET, :site => 'https://www.foursquare.com')
+    if params[:session_api].blank? and params[:id].blank?
+      return OAuth2::Client.new(FOURSQUARE_KEY, FOURSQUARE_SECRET, :site => 'https://www.foursquare.com')
+    else
+      client = Foursquare2::Client.new(:oauth_token => current_user.foursquare_token)
+    end    
   end  
 end

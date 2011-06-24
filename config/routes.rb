@@ -112,6 +112,7 @@ Picsy::Application.routes.draw do
   resources :foursquare do 
     collection do
       post 'connect'
+      post 'search_venues'
     end  
   end   
   # Sample resource route (maps HTTP verbs to controller actions automatically):

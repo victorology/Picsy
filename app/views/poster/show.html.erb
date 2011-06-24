@@ -420,4 +420,28 @@
   You need to logged in via API first
 <% end %>
 
+<h2>Foursquare Search Venues API</h2>
+<% if @photo_user.session_api %>
+<form action="/foursquare/search_venues.json" method="post" enctype="multipart/form-data">
+	<p> User : <br />
+	<b><%= @photo_user.nickname %></b></p>	
+	
+	<p>Place Name<br />
+	<%= text_field_tag "place" %></p>
+
+	<p>Latitude<br />
+	<%= text_field_tag "latitude", "35.191818" %></p>
+	
+	<p>Longitude<br />
+	<%= text_field_tag "longitude","129.058185" %></p>	
+	
+	<%= hidden_field_tag "id",@photo_user.id %>
+	<%= hidden_field_tag "session_api", @photo_user.session_api %>
+	<%= submit_tag "Retrieve" %>
+</form>
+<% else %>
+  You need to logged in via API first
+<% end %>
+
+
 <p><%= link_to "back to HOME", "/"%></p>

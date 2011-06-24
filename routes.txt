@@ -137,7 +137,7 @@ do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categor
                                               PUT    /facebook/:id(.:format)                             {:action=>"update", :controller=>"facebook"}
                                               DELETE /facebook/:id(.:format)                             {:action=>"destroy", :controller=>"facebook"}
                      connect_foursquare_index POST   /foursquare/connect(.:format)                       {:action=>"connect", :controller=>"foursquare"}
-                     confirm_foursquare_index GET    /foursquare/confirm(.:format)                       {:action=>"confirm", :controller=>"foursquare"}
+               search_venues_foursquare_index POST   /foursquare/search_venues(.:format)                 {:action=>"search_venues", :controller=>"foursquare"}
                              foursquare_index GET    /foursquare(.:format)                               {:action=>"index", :controller=>"foursquare"}
                                               POST   /foursquare(.:format)                               {:action=>"create", :controller=>"foursquare"}
                                new_foursquare GET    /foursquare/new(.:format)                           {:action=>"new", :controller=>"foursquare"}
