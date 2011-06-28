@@ -52,15 +52,34 @@ class Devise::PasswordsController < ApplicationController
 
   # PUT /resource/password
   def update
-    self.resource = resource_class.reset_password_by_token(params[resource_name])
-
-    if resource.errors.empty?
-      set_flash_message(:notice, :updated) if is_navigational_format?
-      sign_in(resource_name, resource)
-      respond_with resource, :location => redirect_location(resource_name, resource)
+     
+    if params[resource_name][:password].blank? 
+      success = false
+      flash[:notice] = "password can't be blank"    
+    elsif params[resource_name][:password_confirmation].blank? 
+      success = false
+      flash[:notice] = "password confirmation can't be blank"  
+    elsif params[resource_name][:password_confirmation] != params[resource_name][:password]
+      success = false
+      flash[:notice] = "password and password confirmation don't match"
+    else  
+      self.resource = resource_class.reset_password_by_token(params[resource_name])
+      
+      if resource.errors.empty?
+        set_flash_message(:notice, :updated) #if is_navigational_format?
+        sign_in(resource_name, resource)
+        success = true
+      else
+        flash[:notice] = "some errors has been occured : #{resource.errors.full_messages.join(',')}"
+        success = false
+      end
+    end  
+    
+    if success == false
+      redirect_to "/users/password/edit?reset_password_token=#{params[resource_name][:reset_password_token]}"
     else
-      respond_with_navigational(resource){ render_with_scope :edit }
-    end
+      render :text => "password has been changed succesfully"    
+    end    
   end
   
   protected
