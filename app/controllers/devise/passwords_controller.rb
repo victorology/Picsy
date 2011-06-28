@@ -22,7 +22,7 @@ class Devise::PasswordsController < ApplicationController
     self.resource = resource_class.send_reset_password_instructions(params[resource_name])
     
     if resource.errors.empty?
-      set_flash_message(:notice, :send_instructions) #if is_navigational_format?
+      #set_flash_message(:notice, :send_instructions) #if is_navigational_format?
       #tfarespond_with resource, :location => after_sending_reset_password_instructions_path_for(resource_name)
       msg = nil
       success = true
