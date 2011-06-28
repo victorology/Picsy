@@ -48,7 +48,7 @@ Picsy::Application.configure do
   config.active_support.deprecation = :notify
   
   # host
-  config.action_mailer.default_url_options = { :host => '184.106.216.249' }
+  config.action_mailer.default_url_options = { :host => 'http://www.pumpl.com' }
 end
 
 ## TWITTER CONFIGURATION
