@@ -74,6 +74,10 @@ Picsy::Application.routes.draw do
       get 'mine'
       get 'feed'
     end
+    
+    member do
+      get 'regenerate'
+    end  
   end    
   
   resources :twitter do
