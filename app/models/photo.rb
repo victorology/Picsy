@@ -164,6 +164,36 @@ class Photo < ActiveRecord::Base
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?  
   end
   
+  def self.regenerate
+    error_arr = []
+    self.all.each do |photo|
+      #cl_photo = photo.clone
+      #cl_photo.save
+      
+      path = Rails.root.to_s+"/public"+photo.image.url
+      Rails.logger.info "IMAGE PATH #{path}"
+      if File.exist?(path)
+        rs = photo.update_attribute(:image,File.open(path))
+        
+        if rs == false
+          error_arr << {
+            :id => photo.id,
+            :message => photo.errors.full_messages.join(','),
+            :owner => photo.user.nickname
+          }
+        end    
+      else
+        error_arr << {
+          :id => photo.id,
+          :message => "Original image isn't exist",
+          :owner => photo.user.nickname
+        }  
+      end
+  
+    end
+    return error_arr  
+  end  
+  
   protected 
   def reprocess_image 
     image.reprocess!  

@@ -2,7 +2,7 @@
 class PhotosController < ApplicationController
   include ActionView::Helpers::TextHelper 
   
-  before_filter :authenticate_user!, :except => [:show, :shortened]
+  before_filter :authenticate_user!, :except => [:show, :shortened, :regenerate]
   protect_from_forgery :except => [:create, :mine]
   
   def shortened
@@ -126,6 +126,27 @@ class PhotosController < ApplicationController
     end  
   end  
   
+  # http://localhost:3301/photos/7c997030852f012e367e00254ba34756/regenerate
+  def regenerate
+    msg = ""
+    if params[:id].to_s == GENERATE_PHOTO_KEY
+      err_arr = Photo.regenerate
+      if err_arr.size > 0
+        err_arr.each_with_index do |err,i|
+          msg += "some photo can't be regenerated <br />" if i == 0
+          msg += "id : #{err[:id]} <br />"
+          msg += "error message : #{err[:message]}<br />"
+          msg += "owner : #{err[:owner]} <br /><hr />"
+        end  
+      else  
+        msg = "photo has been regenerated successfully"
+      end  
+    else
+      msg = "You don't have privilege to access this page"
+    end     
+    render :text => msg, :layout => false
+  end
+  
   protected
   def photo_hash(photo, show_owner = false)
     rs = {
@@ -179,5 +200,5 @@ class PhotosController < ApplicationController
   def photo_page_path(photo)
     "/photo/#{photo.user.nickname}/#{prefix_rand}#{photo.code}"
   end
-  
+    
 end

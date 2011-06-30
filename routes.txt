@@ -90,6 +90,7 @@
                                               DELETE /connections/:id(.:format)                         {:action=>"destroy", :controller=>"connections"}
                                   mine_photos GET    /photos/mine(.:format)                             {:action=>"mine", :controller=>"photos"}
                                   feed_photos GET    /photos/feed(.:format)                             {:action=>"feed", :controller=>"photos"}
+                             regenerate_photo GET    /photos/:id/regenerate(.:format)                   {:action=>"regenerate", :controller=>"photos"}
                                        photos GET    /photos(.:format)                                  {:action=>"index", :controller=>"photos"}
                                               POST   /photos(.:format)                                  {:action=>"create", :controller=>"photos"}
                                     new_photo GET    /photos/new(.:format)                              {:action=>"new", :controller=>"photos"}
