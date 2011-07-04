@@ -10,11 +10,12 @@ class Photo < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/jpg', 'image/png','image/gif']
   validates_attachment_presence :image
   validates_attachment_size :image, :less_than => 100.megabytes
+  validates_presence_of :filter
   
-  before_create :generate_code, :check_post_to
+  before_create :check_filter, :generate_code, :check_post_to
   before_create :fb_photo, :fb_photo_to_album, :tumblr_photo
   attr_accessor :album_name
-      
+        
   def generate_code
     charset = %w{1 2 3 4 6 7 9 A C D E F G H J K L M N P Q R T V W X Y Z}
     rs = (0...2).map{ charset.to_a[rand(charset.size)] }.join
@@ -195,6 +196,16 @@ class Photo < ActiveRecord::Base
   end  
   
   protected 
+  
+  def check_filter
+    if PHOTOS_FILTER.include?(self.filter)
+      return true
+    else
+      errors[:base] << "filter is invalid"
+      return false
+    end    
+  end
+  
   def reprocess_image 
     image.reprocess!  
   end

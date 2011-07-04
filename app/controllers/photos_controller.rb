@@ -151,6 +151,7 @@ class PhotosController < ApplicationController
   def photo_hash(photo, show_owner = false)
     rs = {
       :title => photo.title,
+      :filter => photo.filter,
       :original_width => photo.width,
       :original_height => photo.height,
       :shortened_url => shortened_url(photo),

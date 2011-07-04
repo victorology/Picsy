@@ -252,6 +252,9 @@
 	
 	<p> Photo :<br />
 	<%= file_field :photo, :image %> </p>
+	
+	<p> Filter :<br />
+	<%= select :photo, :filter, PHOTOS_FILTER+["Fake Filter",nil] %> </p>
 
 	<p> Post to Facebook Wall<br />
 	<%= select :photo, :post_to_facebook_wall, options_for_select(["yes", "no"], "no") %></p>
