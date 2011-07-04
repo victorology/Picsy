@@ -159,9 +159,9 @@ class PhotosController < ApplicationController
     }  
    
     photo_url_hash = {
-      :thumbnail_url => "http://"+request.host_with_port+photo.image.url(:medium),
-      :thumbnail_url_retina => "http://"+request.host_with_port+photo.image.url(:retina),
-      :original_url =>  "http://"+request.host_with_port+photo.image.url,
+      :thumbnail_url => url_escape("http://"+request.host_with_port+photo.image.url(:medium)),
+      :thumbnail_url_retina => url_escape("http://"+request.host_with_port+photo.image.url(:retina)),
+      :original_url => url_escape("http://"+request.host_with_port+photo.image.url),
     }
     
     ## additional value
@@ -199,7 +199,14 @@ class PhotosController < ApplicationController
   end  
     
   def photo_page_path(photo)
-    "/photo/#{photo.user.nickname}/#{prefix_rand}#{photo.code}"
+    "/photo/#{URI.escape(photo.user.nickname)}/#{prefix_rand}#{photo.code}"
   end
+  
+  def url_escape(url)
+    url_arr = url.split("/")
+    url_arr[5] = URI.escape(url_arr[5])
+    url_arr[8] = URI.escape(url_arr[8])
+    return url_arr.join("/")
+  end  
     
 end

@@ -27,4 +27,10 @@ user.confirmed_at = Time.now
 user.is_admin = false
 user.save
 
+### user data with space, it's used for test purpose only
+user = User.create(:email => "heo@gmail.com",:password => "work1234", :password_confirmation => "work1234", :nickname => "heo si jin", :phone_number => "88888")
+user.confirmed_at = Time.now
+user.is_admin = false
+user.save
+
   
