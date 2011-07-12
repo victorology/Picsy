@@ -31,8 +31,6 @@ class ApplicationController < ActionController::Base
         
         render :json => JSON.generate(@raw_result)
         return false
-      elsif params[:controller] == "me2day"
-        session[:me2day] = {:id => params[:id], :session_api => params[:session_api]}   
       end 
     else
       super

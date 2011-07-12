@@ -6,7 +6,9 @@ class Me2dayController < ApplicationController
   def connect
     authorize_path = Me2day::Client.get_auth_url(:app_key => ME2DAY_KEY)
     #redirect_to auth_url        
-    
+
+    session[:me2day] = {:id => params[:id], :session_api => params[:session_api]}   
+
     respond_to do |format|
       format.json {
         @raw_result = {
@@ -68,6 +70,7 @@ class Me2dayController < ApplicationController
        
     respond_to do |format|
       format.json {
+        session[:me2day] = nil
         render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
       }
     end       
