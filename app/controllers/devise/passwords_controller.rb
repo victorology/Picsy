@@ -34,7 +34,7 @@ class Devise::PasswordsController < ApplicationController
     end
     
     @raw_result = {
-      :code => (success == true) ? 1 : 0,
+      :code => (success == true) ? 0 : 1,
       :error_message => msg,
       :value => {
         :send_reset_link => success
