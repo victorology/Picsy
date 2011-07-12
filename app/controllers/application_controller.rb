@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
           :error_message => "you need to logged in to access this feature",
           :value => nil
         }
+        session[:me2day] = {:id => params[:id], :session_api => params[:session_api]} if params[:controller] == "me2day"
         render :json => JSON.generate(@raw_result)
         return false
       end 

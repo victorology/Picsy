@@ -31,7 +31,8 @@ class Me2dayController < ApplicationController
       )
       
       if @client.noop["message"] == "성공했습니다."
-        current_user.update_attributes(
+        @api_user = User.find(:first, :conditions => {:id => session[:me2day][:id], :session_api => session[:me2day][:session_api]}) 
+        @api_user.current_user.update_attributes(
           {
             :me2day_key => params[:user_key],
             :me2day_id => params[:user_id]  
