@@ -6,7 +6,10 @@ class LaunchController < ApplicationController
     # me2day confirm
     if params[:token]
       Rails.logger.info "SESSION ON INDEX #{session.inspect}" 
-      redirect_to confirm_me2day_index_path(
+      
+      pre_protocol = (RAILS_ENV=="production") ? "http://www.pumpl.com/" : nil
+      
+      redirect_to pre_protocol+confirm_me2day_index_path(
         :token => params[:token],
         :result => params[:result],
         :user_id => params[:user_id],
