@@ -13,7 +13,8 @@ class LaunchController < ApplicationController
         :token => params[:token],
         :result => params[:result],
         :user_id => params[:user_id],
-        :user_key => params[:user_key]
+        :user_key => params[:user_key],
+        :format => "json"
       )
     else  
     
