@@ -7,7 +7,9 @@ class Me2dayController < ApplicationController
     authorize_path = Me2day::Client.get_auth_url(:app_key => ME2DAY_KEY)
     #redirect_to auth_url        
 
-    session[:picsy_me2day] = {:id => params[:id], :session_api => params[:session_api]}   
+    session[:picsy_me2day] = {:id => params[:id], :session_api => params[:session_api]}  
+    
+    Rails.logger.info "SESSION ON CONNECT #{session.inspect}" 
 
     respond_to do |format|
       format.json {
@@ -27,6 +29,7 @@ class Me2dayController < ApplicationController
   end  
   
   def confirm
+    Rails.logger.info "SESSION ON CONFIRM #{session.inspect}" 
     if !params[:result].blank? and params[:result].eql?('true')
       @client = Me2day::Client.new(
         :user_id => params[:user_id], :user_key => params[:user_key], :app_key => ME2DAY_KEY

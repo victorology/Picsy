@@ -5,6 +5,7 @@ class LaunchController < ApplicationController
   def index    
     # me2day confirm
     if params[:token]
+      Rails.logger.info "SESSION ON INDEX #{session.inspect}" 
       redirect_to confirm_me2day_index_path(
         :token => params[:token],
         :result => params[:result],
