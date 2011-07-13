@@ -7,7 +7,7 @@ class Me2dayController < ApplicationController
     authorize_path = Me2day::Client.get_auth_url(:app_key => ME2DAY_KEY)
     #redirect_to auth_url        
 
-    session[:me2day] = {:id => params[:id], :session_api => params[:session_api]}   
+    session[:picsy_me2day] = {:id => params[:id], :session_api => params[:session_api]}   
 
     respond_to do |format|
       format.json {
@@ -33,7 +33,7 @@ class Me2dayController < ApplicationController
       )
       
       if @client.noop["message"] == "성공했습니다."
-        @api_user = User.where(:id => session[:me2day][:id], :session_api => session[:me2day][:session_api]).try(:first) 
+        @api_user = User.where(:id => session[:picsy_me2day][:id], :session_api => session[:picsy_me2day][:session_api]).try(:first) 
         @api_user.update_attributes(
           {
             :me2day_key => params[:user_key],
