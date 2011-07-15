@@ -20,7 +20,10 @@ class ConnectionsController < ApplicationController
             :tumblr => {
               :is_connected => current_user.tumblr_connected?,
               :nickname => current_user.tumblr_nickname
-            }
+            },
+            :me2day => {
+               :is_connected => current_user.me2day_connected?
+             }
           }
         }
         render :json => JSON.generate(@raw_result)
