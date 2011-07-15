@@ -100,7 +100,7 @@ class PhotosController < ApplicationController
             )
             
             if @client.noop["message"] == "성공했습니다."
-              @client.create_post "me2_id", 'post[body]' => "test from API"
+              @client.create_post "pumpltest", 'post[body]' => "test from API"
             end  
           end  
 
