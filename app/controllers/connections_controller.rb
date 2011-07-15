@@ -22,7 +22,8 @@ class ConnectionsController < ApplicationController
               :nickname => current_user.tumblr_nickname
             },
             :me2day => {
-               :is_connected => current_user.me2day_connected?
+               :is_connected => current_user.me2day_connected?,
+               :nickname => current_user.me2day_nickname
              }
           }
         }

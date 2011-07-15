@@ -35,12 +35,16 @@ class Me2dayController < ApplicationController
         :user_id => params[:user_id], :user_key => params[:user_key], :app_key => ME2DAY_KEY
       )
       
+      #user_info = @client.get_person(params[:user_id])
+      #user.nickname = user_info["nickname"]
+      
       if @client.noop["message"] == "성공했습니다."
         @api_user = User.where(:id => session[:picsy_me2day][:id], :session_api => session[:picsy_me2day][:session_api]).try(:first) 
         @api_user.update_attributes(
           {
             :me2day_key => params[:user_key],
-            :me2day_id => params[:user_id]  
+            :me2day_id => params[:user_id]  ,
+            :me2day_nickname => @client.get_person(params[:user_id])["nickname"]
           }
         ) 
         me2day_connected = true
