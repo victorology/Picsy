@@ -37,24 +37,30 @@ class Me2dayController < ApplicationController
       
       #user_info = @client.get_person(params[:user_id])
       #user.nickname = user_info["nickname"]
-      
-      if @client.noop["message"] == "성공했습니다."
-        @api_user = User.where(:id => session[:picsy_me2day][:id], :session_api => session[:picsy_me2day][:session_api]).try(:first) 
-        @api_user.update_attributes(
-          {
-            :me2day_key => params[:user_key],
-            :me2day_id => params[:user_id]  ,
-            :me2day_nickname => @client.get_person(params[:user_id])["nickname"]
-          }
-        ) 
-        me2day_connected = true
-        code = 0
-        msg = nil
-      else
+      begin
+        if @client.noop["message"] == "성공했습니다."
+          @api_user = User.where(:id => session[:picsy_me2day][:id], :session_api => session[:picsy_me2day][:session_api]).try(:first) 
+          @api_user.update_attributes(
+            {
+              :me2day_key => params[:user_key],
+              :me2day_id => params[:user_id]  ,
+              :me2day_nickname => @client.get_person(params[:user_id])["nickname"]
+            }
+          ) 
+          me2day_connected = true
+          code = 0
+          msg = nil
+        else
+          me2day_connected = false
+          code = 1
+          msg = @client.noop["message"]
+        end
+      rescue Me2day::Client::UnauthenticatedError => me2
         me2day_connected = false
         code = 1
-        msg = @client.noop["message"]
-      end     
+        msg = "Authentication failed, you might enter wrong username or password"
+        Rails.logger.info "AUTH ERROR : #{me2.message} BACKTRACE #{me2.backtrace}"
+      end         
         
       @raw_result = {
         :code => code,
