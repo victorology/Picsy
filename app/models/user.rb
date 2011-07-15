@@ -48,6 +48,13 @@ class User < ActiveRecord::Base
     return (self.tumblr_secret.blank?) ? false : true
   end  
   
+  def me2day_connected?
+    if self.me2day_id.blank? == false && self.me2day_key.blank? == false
+      return true
+    else
+      false
+    end    
+  end
   
   def update_session_api
     self.update_attribute(:session_api,UUID.new.generate.gsub("-",""))

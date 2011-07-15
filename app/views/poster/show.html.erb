@@ -274,6 +274,9 @@
 	<p> Post to Tumblr<br />
 	<%= select :photo, :post_to_tumblr, options_for_select(["yes", "no"], "no") %></p>
 	
+	<p> Post to Me2day<br />
+	<%= select :photo, :post_to_me2day, options_for_select(["yes", "no"], "no") %></p>
+	
 	<%= submit_tag "Upload" %>
 </form>
 <% else %>

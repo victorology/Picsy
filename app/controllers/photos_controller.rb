@@ -93,6 +93,16 @@ class PhotosController < ApplicationController
 
             client.update("#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}")  
           end
+          
+          if @photo.user.me2day_connected? == true and params[:photo][:post_to_me2day] == "yes"
+            @client = Me2day::Client.new(
+              :user_id => params[:user_id], :user_key => params[:user_key], :app_key => ME2DAY_KEY
+            )
+            
+            if @client.noop["message"] == "성공했습니다."
+              @client.create_post "me2_id", 'post[body]' => "test from API"
+            end  
+          end  
 
           if @photo.user.facebook_connected? == true and @photo.post_to_facebook_wall == "yes"
             clnt = HTTPClient.new
