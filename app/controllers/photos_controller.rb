@@ -96,7 +96,7 @@ class PhotosController < ApplicationController
           
           if @photo.user.me2day_connected? == true and params[:photo][:post_to_me2day] == "yes"
             @client = Me2day::Client.new(
-              :user_id => params[:user_id], :user_key => params[:user_key], :app_key => ME2DAY_KEY
+              :user_id => @photo.user.me2day_id, :user_key => @photo.user.me2day_key, :app_key => ME2DAY_KEY
             )
             
             if @client.noop["message"] == "성공했습니다."
