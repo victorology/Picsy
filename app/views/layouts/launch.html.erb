@@ -52,6 +52,23 @@
 		
 	</script>
 	
+	<style> 
+	  .wf-active body {
+	    font-family: 'NanumGothic';
+	  }
+	</style>
+	
+	<script src="http://www.google.com/jsapi"></script>
+	<script>
+	 google.load( "webfont", "1" );
+	 google.setOnLoadCallback(function() {
+	  WebFont.load({ custom: {
+	   families: [ "NanumGothic" ],
+	   urls: [ "http://pumpl.com/stylesheets/nanum.css" ]
+	  }});
+	 });
+	</script>
+	
 	<script type="text/javascript">
 
 	  var _gaq = _gaq || [];
