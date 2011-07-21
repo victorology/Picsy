@@ -17,6 +17,13 @@
 		    else if (field.value == '') field.value = field.defaultValue;
 		}
 		
+		// selects text inside input field
+		function SelectAll(id)
+		{
+		    document.getElementById(id).focus();
+		    document.getElementById(id).select();
+		}
+		
 	</script>
 
 	<% if @photo %>
