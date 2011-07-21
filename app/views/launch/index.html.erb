@@ -1,10 +1,9 @@
-
 <div id="launch_content">
 
 	<div>
 		<img src="/images/index/logo.png">
-		<p>PUMPL is currently being previewed among a select group of users.</p>
-		<p>If you would also like a sneak peak of PUMPL, enter your email address and we will send you an invite!</p>
+		<p>펌플은 현재 한정된 분들에 대하여 맛보기 서비스를 하고 있습니다.</p>
+		<p>펌플의 진수를 엿보시기 위하여, 이메일 주소를 보내주시면 저희 펌플이 초대 메일을 송부해드리겠습니다.</p>
 		
 		<%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
 	    <%= f.text_field :email, :value => "이메일", :onFocus => "clearText(this)", :onBlur => "clearText(this)" %>
@@ -20,30 +19,4 @@
 		<p><a href="http://twitter.com/PUMPL" target="_blank">Follow @PUMPL</a></p>
 
 	</div> <!-- #launch_content -->
-</div>	
-	
-
-<!--
-	<div>
-
-		<div>
-			<img src="http://images/index/logo.png">
-			<p>PUMPL is currently being previewed among a select group of users.</p>
-			<p>If you would also like a sneak peak of PUMPL, enter your email address and we will send you an invite!</p>
-
-			<form target="_blank" onsubmit="return window.confirm(&quot;You are submitting information to an external page.\nAre you sure?&quot;);">
-				<input type="text" name="email" value="이메일">
-				<input type="submit">
-			</form>
-
-			<div>
-				<div></div>
-			</div> 
-
-			<a href="http://twitter.com/PUMPL" target="_blank">Follow @PUMPL</a>
-
-		</div> 
-
-
-	</div>
--->
+</div>
