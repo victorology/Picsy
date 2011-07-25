@@ -74,6 +74,7 @@
                                        me2day GET    /me2day/:id(.:format)                              {:action=>"show", :controller=>"me2day"}
                                               PUT    /me2day/:id(.:format)                              {:action=>"update", :controller=>"me2day"}
                                               DELETE /me2day/:id(.:format)                              {:action=>"destroy", :controller=>"me2day"}
+                        connect_cyworld_index POST   /cyworld/connect(.:format)                         {:action=>"connect", :controller=>"cyworld"}
                                 cyworld_index GET    /cyworld(.:format)                                 {:action=>"index", :controller=>"cyworld"}
                                               POST   /cyworld(.:format)                                 {:action=>"create", :controller=>"cyworld"}
                                   new_cyworld GET    /cyworld/new(.:format)                             {:action=>"new", :controller=>"cyworld"}

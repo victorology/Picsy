@@ -25,6 +25,7 @@ end
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
+gem 'rake'										,"0.8.7"
 gem 'money' 									,"3.1.0"
 gem 'nokogiri'								,"1.4.3.1"
 gem 'devise'									,"1.1.3"
@@ -47,6 +48,7 @@ gem 'ruby-hmac'								,"0.4.0", :require => "hmac"
 gem 'ezcrypto'								,"0.7.2"
 gem 'magic_encoding'					,"0.0.2"
 gem 'carrierwave'							,"0.5.3"
+gem 'omniauth'								,"0.2.6"
 
 
 

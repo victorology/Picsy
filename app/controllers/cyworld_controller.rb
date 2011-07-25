@@ -1,10 +1,8 @@
 # -*- encoding : utf-8 -*-
 class CyworldController < ApplicationController
-  require 'base64'
-  require 'cgi'
-  require 'openssl'
   
-  def index 
+  def connect
+=begin    
     clnt = HTTPClient.new 
     
     uri = "https://oauth.nate.com/OAuth/GetRequestToken/V1a"
@@ -19,10 +17,44 @@ class CyworldController < ApplicationController
     }
 
 
+
     res = clnt.post(uri, body)
     render :text => res.content
 
-
+    client_options = {
+      :site => 'https://oauth.nate.com',
+      :authorize_path => "/OAuth/Authorize/V1a",
+      :access_token_path => "/OAuth/GetAccessToken/V1a",
+      :request_token_path => '/OAuth/GetRequestToken/V1a',
+      :oauth_version => "1.0"
+    }
+=end    
+  client_options = {
+    :site => 'https://oauth.nate.com',
+    :authorize_path => "/OAuth/Authorize/V1a",
+    :access_token_path => "/OAuth/GetAccessToken/V1a",
+    :request_token_path => '/OAuth/GetRequestToken/V1a',
+    :oauth_version => "1.0"
+  }
+  
+  @consumer = OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, client_options)
+  @request_token = @consumer.get_request_token
+  
+  respond_to do |format|
+    format.json {
+      @raw_result = {
+        :code => 0,
+        :error_message => nil,
+        :value => {
+          :authorize_url => @request_token.authorize_url
+        }
+      }
+      render :json => JSON.generate(@raw_result)
+    }
+    format.html {
+      redirect_to authorize_path
+    }
+  end
 =begin
 OAuth::Consumer.new(consumer_key, consumer_secret,
                                :site => "http://api.justin.tv",

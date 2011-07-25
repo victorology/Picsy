@@ -65,8 +65,12 @@ Picsy::Application.routes.draw do
     end  
   end  
   
-  resources :cyworld
-  
+  resources :cyworld do 
+    collection do
+      post 'connect'
+    end
+  end
+      
   resources :connections
   
   resources :photos do 
