@@ -18,8 +18,8 @@
 				<% if params[:mode] == "thank_you" || cookies[:guid] %>
 				  <%= render :partial => "launch/thank_you" %> 
 				<% else %>
-				<p><strong><%= @photo.user.nickname %></strong> is currently among a select group of users previewing PUMPL.</p>
-				<p>If you would also like a sneak peak of PUMPL, enter your email address and we will send you an invite!</p>
+				<p><strong><%= @photo.user.nickname %></strong>님은 현재 펌플의 맛보기 서비스를 제공받으시는 사용자입니다.</p>
+				<p>진정한 펌플의 진수를 엿보시기 위하여, 이메일 주소를 보내주시면 저희 펌플이 초대 메일을 송부해드리겠습니다.</p>
 
 					<%= form_for(@invite, :url => invite_launch_index_path) do |f| %>
 				    <%= f.text_field :email, :value => "이메일", :onFocus => "clearText(this)", :onBlur => "clearText(this)" %>
