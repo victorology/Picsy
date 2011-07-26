@@ -34,6 +34,7 @@ class CyworldController < ApplicationController
     :authorize_path => "/OAuth/Authorize/V1a",
     :access_token_path => "/OAuth/GetAccessToken/V1a",
     :request_token_path => '/OAuth/GetRequestToken/V1a',
+    :oauth_callback => "http://www.pumpl.com/cyworld/confirm.json",
     :oauth_version => "1.0"
   }
   
