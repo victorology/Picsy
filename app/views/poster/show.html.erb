@@ -267,6 +267,21 @@
  You need to logged in via API first
 <% end %>
 
+<h2>Me2day Unlink API</h2>
+<% if @photo_user.session_api %>
+<form action="/me2day/unlink.json" method="post">
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>	
+		
+	<%= submit_tag "Submit" %>		
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
+
 <h2>Upload Photo API</h2>
 <% if @photo_user.session_api %>
 <form action="/photos.json" method="post" enctype="multipart/form-data">

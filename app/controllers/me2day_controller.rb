@@ -86,39 +86,31 @@ class Me2dayController < ApplicationController
         session[:me2day] = nil
         render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
       }
-    end       
-=begin      
-      token = UserToken.new(:uid => params[:user_id], :token => params[:user_key], :provider => "me2day")
-      if current_user
-        current_user.user_tokens.find_or_create_by_provider_and_uid("me2day", params[:user_id])
-        flash[:notice] = "Authentication successful"
-        redirect_to edit_user_registration_path
-      else
-        authentication = UserToken.find_by_provider_and_uid("me2day", params[:user_id])
-        if authentication
-          flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
-          sign_in_and_redirect(:user, authentication.user)
-        else
-          begin
-            user = User.find_or_initialize_by_email(:email => "#{params[:user_id]}@me2day.net")
-            user = User.new if user.nil?
-            if user.nickname.blank?
-              user_info = @client.get_person(params[:user_id])
-              user.nickname = user_info["nickname"]
-            end
-            user.user_tokens.build(:provider => "me2day", :uid => params[:user_id], :token => params[:user_key])
-          rescue Exception => e
-            logger.error e
-          end
-          if user.save
-            flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
-            sign_in_and_redirect(:user, user)
-          else
-            redirect_to new_user_registration_url
-          end
-        end
-      end
-=end    
-
+    end 
+    
+  end
+  
+  def unlink
+    current_user.update_attributes(:me2day_key => nil, :me2day_id => nil, :me2day_nickname => nil)
+    session[:picsy_me2day] = nil
+    
+    respond_to do |format|
+      format.html {
+        flash[:notice] = "your account has been unlinked from me2day successfully"
+        redirect_to connections_path
+      }
+      format.json {
+        @raw_result = {
+          :code => 0,
+          :error_message => nil,
+          :value => {
+            :me2day => {
+              :unlink => current_user.me2day_connected? ? "failed" : "success"
+            },
+          }
+        }
+        render :json => JSON.generate(@raw_result)
+      }  
+    end   
   end
 end

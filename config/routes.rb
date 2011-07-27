@@ -62,6 +62,8 @@ Picsy::Application.routes.draw do
     collection do
       get 'confirm'
       post 'connect'
+      get 'unlink'
+      post 'unlink'
     end  
   end  
   

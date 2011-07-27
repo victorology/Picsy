@@ -67,6 +67,8 @@
                                               DELETE /poster/:id(.:format)                              {:action=>"destroy", :controller=>"poster"}
                          confirm_me2day_index GET    /me2day/confirm(.:format)                          {:action=>"confirm", :controller=>"me2day"}
                          connect_me2day_index POST   /me2day/connect(.:format)                          {:action=>"connect", :controller=>"me2day"}
+                          unlink_me2day_index GET    /me2day/unlink(.:format)                           {:action=>"unlink", :controller=>"me2day"}
+                                              POST   /me2day/unlink(.:format)                           {:action=>"unlink", :controller=>"me2day"}
                                  me2day_index GET    /me2day(.:format)                                  {:action=>"index", :controller=>"me2day"}
                                               POST   /me2day(.:format)                                  {:action=>"create", :controller=>"me2day"}
                                    new_me2day GET    /me2day/new(.:format)                              {:action=>"new", :controller=>"me2day"}
