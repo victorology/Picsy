@@ -47,6 +47,8 @@ class LaunchController < ApplicationController
     
       if @invite.save
         @invite.reload
+        
+        InviteMailer.sharing_email(@invite,"http://#{request.host_with_port}/v#{@invite.guid}").deliver
         cookies.permanent[:guid] = @invite.guid
         redirect_to thank_you_launch_index_path
       else

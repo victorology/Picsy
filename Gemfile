@@ -29,7 +29,6 @@ gem 'rake'										,"0.8.7"
 gem 'money' 									,"3.1.0"
 gem 'nokogiri'								,"1.4.3.1"
 gem 'devise'									,"1.1.3"
-gem 'hominid'									,"2.2.0"
 gem 'paperclip'								,"2.3.11"
 gem 'will_paginate'						,"3.0.pre2"
 gem 'whenever'								,"0.6.7"
@@ -49,6 +48,7 @@ gem 'ezcrypto'								,"0.7.2"
 gem 'magic_encoding'					,"0.0.2"
 gem 'carrierwave'							,"0.5.3"
 gem 'omniauth'								,"0.2.6"
+gem 'hominid'									,"3.0.2"
 
 
 
