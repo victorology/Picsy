@@ -1,9 +1,11 @@
 <p>가입해주셔서 감사드립니다. 많은 분들께서 가입하시면 더 빨리 펌플을 즐기실 수 있습니다.</p>
-<div style="float:left">
+<div id="launch_twitter">
 	<a href='http://twitter.com/share?url=<%= "http://#{request.host_with_port}/v#{cookies[:guid]}" %>' class="twitter-share-button" data-text="곧 펌플의 시대가 열립니다. 저와 함께 시작해요!" data-count="horizontal" data-via="PUMPL" data-related="victorology:PUMPL의 창업자" data-lang="ko">Tweet</a>
 	<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-</div>
+</div> <!-- launch_twitter -->
 
-<div id="fb-root"></div><script src="http://connect.facebook.net/ko_KR/all.js#appId=148136111933771&amp;xfbml=1"></script><fb:like href='<%= "http://#{request.host_with_port}/v#{cookies[:guid]}" %>' send="false" layout="button_count" width="90" show_faces="false" action="recommend" font=""></fb:like>
+<div id="launch_facebook">
+	<div id="fb-root"></div><script src="http://connect.facebook.net/ko_KR/all.js#appId=148136111933771&amp;xfbml=1"></script><fb:like href='<%= "http://#{request.host_with_port}/v#{cookies[:guid]}" %>' send="false" layout="button_count" width="90" show_faces="false" action="recommend" font=""></fb:like>
+</div> <!-- launch_facebook -->
 <p>또는 아래 링크를 개인 홈페이지에 공유하여 즐겨주십시오.</p>
 <div><%= text_field_tag "url", "http://#{request.host_with_port}/v#{cookies[:guid]}",:onClick=>"SelectAll('url');"%></div>

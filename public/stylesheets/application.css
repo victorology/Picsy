@@ -199,3 +199,12 @@ strong {
 #launch_content input[type="submit"]:active {
     background-position: 0 -64px;
 }
+
+#launch_twitter {
+    float: left;
+    margin: 10px 0;
+}
+
+#launch_facebook {
+    float: left;
+}
