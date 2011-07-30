@@ -5,7 +5,7 @@
 </div> <!-- launch_twitter -->
 
 <div id="launch_facebook">
-	<div id="fb-root"></div><script src="http://connect.facebook.net/ko_KR/all.js#appId=148136111933771&amp;xfbml=1"></script><fb:like href='<%= "http://#{request.host_with_port}/v#{cookies[:guid]}" %>' send="false" layout="button_count" width="90" show_faces="false" action="recommend" font=""></fb:like>
+	<div id="fb-root"></div><script src="http://connect.facebook.net/ko_KR/all.js#appId=207151429334208&amp;xfbml=1"></script><fb:like href='<%= "http://#{request.host_with_port}/v#{cookies[:guid]}" %>' send="false" layout="button_count" width="90" show_faces="false" action="recommend" font=""></fb:like>
 </div> <!-- launch_facebook -->
 <p>또는 아래 링크를 개인 홈페이지에 공유하여 즐겨주십시오.</p>
 <div><%= text_field_tag "url", "http://#{request.host_with_port}/v#{cookies[:guid]}",:onClick=>"SelectAll('url');"%></div>
