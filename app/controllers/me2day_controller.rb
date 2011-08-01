@@ -46,7 +46,7 @@ class Me2dayController < ApplicationController
           me2day_data = {
             :me2day_key => params[:user_key],
             :me2day_id => params[:user_id]  ,
-            :me2day_nickname => @client.get_person(params[:user_id])["nickname"]
+            :me2day_nickname => JSON.parse(@client.get_person(params[:user_id]))["nickname"]
           }
           
           Rails.logger.info "ME2DAY USER DATA #{@client.get_person(params[:user_id]).inspect}"
