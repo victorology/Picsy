@@ -38,7 +38,7 @@ class Me2dayController < ApplicationController
       #user_info = @client.get_person(params[:user_id])
       #user.nickname = user_info["nickname"]
       begin
-        Rails.logger.info "Class Name #{@client.noop.to_class}"
+        Rails.logger.info "Class Name #{@client.noop.class}"
         Rails.logger.info "Data Noop #{@client.noop}"
         
         if @client.noop["code"].to_s == "0" #"성공했습니다."
