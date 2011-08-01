@@ -108,9 +108,9 @@ class PhotosController < ApplicationController
                   'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
                 }
                 
-                post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_nickname}json"
+                post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_nickname}.json"
                 result = clnt.post(post_uri, body)
-                Rails.logger.info "POST RESULT #{result.inspect}"
+                Rails.logger.info "POST RESULT #{result.body.inspect}"
               end
              
               
