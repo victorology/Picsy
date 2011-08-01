@@ -100,14 +100,17 @@ class PhotosController < ApplicationController
             )      
 
             if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
-                File.open(File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0])) do |file|
-                   body = { 
-                     'attachment' => file,  
-                     'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
-                   }
-                   post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_nickname}json"
-                   result = clnt.post(uri, body)
-                 end
+              clnt = HTTPClient.new
+              
+              File.open(File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0])) do |file|
+                body = { 
+                  'attachment' => file,  
+                  'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
+                }
+                
+                post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_nickname}json"
+                result = clnt.post(uri, body)
+              end
              
               
               #result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => 
