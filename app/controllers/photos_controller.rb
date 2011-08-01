@@ -100,7 +100,7 @@ class PhotosController < ApplicationController
             )      
 
             if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
-              result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => File.open(Rails.root.to_s+"/public"+@photo.image_url.gsub("?")[0])
+              result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => File.open(Rails.root.to_s+"/public"+@photo.image.url.gsub("?")[0])
               
               Rails.logger.info "POST RESULT #{result.inspect}"
             end  
