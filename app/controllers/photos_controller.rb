@@ -102,7 +102,7 @@ class PhotosController < ApplicationController
             if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
               clnt = HTTPClient.new
               
-              File.open(File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0])) do |file|
+              File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0]) do |file|
                 body = { 
                   'attachment' => file,  
                   'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
