@@ -109,7 +109,7 @@ class PhotosController < ApplicationController
                 }
                 
                 post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_nickname}json"
-                result = clnt.post(uri, body)
+                result = clnt.post(post_uri, body)
               end
              
               
