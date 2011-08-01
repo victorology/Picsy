@@ -38,6 +38,7 @@ class Me2dayController < ApplicationController
       #user_info = @client.get_person(params[:user_id])
       #user.nickname = user_info["nickname"]
       begin
+
         if @client.noop["message"] == "성공했습니다."
           @api_user = User.where(:id => session[:picsy_me2day][:id], :session_api => session[:picsy_me2day][:session_api]).try(:first) 
           @api_user.update_attributes(
@@ -53,7 +54,7 @@ class Me2dayController < ApplicationController
         else
           me2day_connected = false
           code = 1
-          msg = @client.noop["message"]
+          msg = @client.noop.inspect
         end
       rescue Me2day::Client::UnauthenticatedError => me2
         me2day_connected = false
