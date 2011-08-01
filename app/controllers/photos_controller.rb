@@ -93,14 +93,14 @@ class PhotosController < ApplicationController
 
             client.update("#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}")  
           end
-          
+      
           if @photo.user.me2day_connected? == true and params[:photo][:post_to_me2day] == "yes"
             @client = Me2day::Client.new(
               :user_id => @photo.user.me2day_id, :user_key => @photo.user.me2day_key, :app_key => ME2DAY_KEY
-            )
-            
+            )      
+
             if @client.noop["message"] == "성공했습니다."
-              @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
+              @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => File.open(Rails.root.to_s+"/public"+@photo.image_url.gsub("?")[0])
             end  
           end  
 
