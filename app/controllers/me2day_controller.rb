@@ -39,7 +39,7 @@ class Me2dayController < ApplicationController
       #user.nickname = user_info["nickname"]
       begin
 
-        if @client.noop["message"] == "성공했습니다."
+        if @client.noop["code"].to_s == "0" #"성공했습니다."
           @api_user = User.where(:id => session[:picsy_me2day][:id], :session_api => session[:picsy_me2day][:session_api]).try(:first) 
           @api_user.update_attributes(
             {
