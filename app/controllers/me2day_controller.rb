@@ -41,7 +41,7 @@ class Me2dayController < ApplicationController
         Rails.logger.info "Class Name #{@client.noop.class}"
         Rails.logger.info "Data Noop #{@client.noop}"
         
-        if JSON.generate(@client.noop)["code"].to_s == "0" #"성공했습니다."
+        if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
           @api_user = User.where(:id => session[:picsy_me2day][:id], :session_api => session[:picsy_me2day][:session_api]).try(:first) 
           @api_user.update_attributes(
             {
@@ -56,7 +56,7 @@ class Me2dayController < ApplicationController
         else
           me2day_connected = false
           code = 1
-          msg = JSON.generate(@client.noop)["message"]
+          msg = JSON.parse(@client.noop)["message"]
         end
       rescue Me2day::Client::UnauthenticatedError => me2
         me2day_connected = false
