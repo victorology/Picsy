@@ -43,13 +43,16 @@ class Me2dayController < ApplicationController
         
         if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
           @api_user = User.where(:id => session[:picsy_me2day][:id], :session_api => session[:picsy_me2day][:session_api]).try(:first) 
-          @api_user.update_attributes(
-            {
-              :me2day_key => params[:user_key],
-              :me2day_id => params[:user_id]  ,
-              :me2day_nickname => @client.get_person(params[:user_id])["nickname"]
-            }
-          ) 
+          me2day_data = {
+            :me2day_key => params[:user_key],
+            :me2day_id => params[:user_id]  ,
+            :me2day_nickname => @client.get_person(params[:user_id])["nickname"]
+          }
+          
+          Rails.logger.info "ME2DAY USER DATA #{@client.get_person(params[:user_id]).inspect}"
+          Rails.logger.info "ME2DAY DATA WHILE CONFIRMATION #{me2day_data}"
+          
+          @api_user.update_attributes(me2day_data) 
           me2day_connected = true
           code = 0
           msg = nil
