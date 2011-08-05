@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       if @api_user.blank?
         @raw_result = {
           :code => 1,
-          :error_message => "you need to logged in to access this feature",
+          :error_message => t("you need to logged in to access this feature"),
           :value => nil
         }
         

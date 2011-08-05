@@ -64,7 +64,7 @@ class Me2dayController < ApplicationController
       rescue Me2day::Client::UnauthenticatedError => me2
         me2day_connected = false
         code = 1
-        msg = "Authentication failed, you might enter wrong username or password"
+        msg = t "authentication failed, you might enter wrong username or password"
         Rails.logger.info "AUTH ERROR : #{me2.message} BACKTRACE #{me2.backtrace}"
       end         
         
@@ -80,7 +80,7 @@ class Me2dayController < ApplicationController
     else
       @raw_result = {
         :code => 1,
-        :error_message => "connection is failed, please try again",
+        :error_message => t "connection is failed, please try again",
         :value => {
           :is_me2day_connected => false
         }
@@ -102,7 +102,7 @@ class Me2dayController < ApplicationController
     
     respond_to do |format|
       format.html {
-        flash[:notice] = "your account has been unlinked from me2day successfully"
+        flash[:notice] = t("your account has been unlinked from me2day successfully")
         redirect_to connections_path
       }
       format.json {
@@ -111,7 +111,7 @@ class Me2dayController < ApplicationController
           :error_message => nil,
           :value => {
             :me2day => {
-              :unlink => current_user.me2day_connected? ? "failed" : "success"
+              :unlink => current_user.me2day_connected? ? t("failed") : t("success")
             },
           }
         }

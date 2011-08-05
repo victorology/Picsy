@@ -34,7 +34,7 @@ class PhotosController < ApplicationController
         else
           @raw_result = {
             :code => 1,
-            :error_message => "you don't have any uploaded photos",
+            :error_message => t("you don't have any uploaded photos"),
             :value => nil
           }
         end    
@@ -47,11 +47,11 @@ class PhotosController < ApplicationController
 
   def feed
     if @api_user.following.blank?
-      @msg = "You have to follow at least one user to see a feed of photos"
+      @msg = t("you have to follow at least one user to see a feed of photos")
     else
       @photos = @api_user.get_following_photos
       if @photos.blank?
-        @msg = "Users that you follow don't have any uploaded photos yet"
+        @msg = t("users that you follow don't have any uploaded photos yet")
       end
     end
 
@@ -158,16 +158,16 @@ class PhotosController < ApplicationController
       err_arr = Photo.regenerate
       if err_arr.size > 0
         err_arr.each_with_index do |err,i|
-          msg += "some photo can't be regenerated <br />" if i == 0
-          msg += "id : #{err[:id]} <br />"
-          msg += "error message : #{err[:message]}<br />"
-          msg += "owner : #{err[:owner]} <br /><hr />"
+          msg += t("some photos can't be regenerated")+" <br />" if i == 0
+          msg += t("id")+" : #{err[:id]} <br />"
+          msg += t("error messages")+" : #{err[:message]}<br />"
+          msg += t("owner")+" : #{err[:owner]} <br /><hr />"
         end  
       else  
-        msg = "photo has been regenerated successfully"
+        msg = t("photo has been regenerated successfully")
       end  
     else
-      msg = "You don't have privilege to access this page"
+      msg = "you don't have privilege to access this page"
     end     
     render :text => msg, :layout => false
   end

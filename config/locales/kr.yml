@@ -1,0 +1,28 @@
+## replace values below(on the right side) to korean sentence
+
+
+kr:
+  "you need to logged in to access this feature": "you need to logged in to access this feature in KR"
+  "login failed": "login failed in KR"
+  "failed to authorize facebook, please try again": "failed to authorize facebook, please try again in KR"
+  "your account has been linked successfully to facebook": "your account has been linked successfully to facebook in KR"
+  "your account has been unlinked from facebook successfully": "your account has been unlinked from facebook successfully in KR"
+  "failed": "failed"
+  "success": "success"
+  "your account has been unlinked from me2day successfully": "your account has been unlinked from me2day successfully in KR"
+  "authentication failed, you might enter wrong username or password": "Authentication failed, you might enter wrong username or password in KR"
+  "connection is failed, please try again": "connection is failed, please try again in KR"
+  "you have logged in successfully": "you have logged in successfully in KR"
+  "thank you for signing up": "thank you for signing up in KR"
+  "failed to register due to": "failed to register due to in KR"
+  "you don't have any uploaded photos": "you don't have any uploaded photos in KR"
+  "you have to follow at least one user to see a feed of photos": "you have to follow at least one user to see a feed of photos in KR"
+  "users that you follow don't have any uploaded photos yet": "users that you follow don't have any uploaded photos yet in KR"
+  "some photos can't be regenerated": "some photos can't be regenerated in KR"
+  "id": "id in KR"
+  "error messages": "error_messages in KR"
+  "owner": "owner in KR"
+  "photo has been regenerated successfully": "photo has been regenerated successfully in KR" 
+  "you don't have privilege to access this page": "you don't have privilege to access this page in KR" 
+  
+  
