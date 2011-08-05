@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     
     @api_user.profile_photo = params[:profile_photo]
     if params[:profile_photo].blank?
-      @msg = "profile photo can't be blank"
+      @msg = t("profile photo can't be blank")
     elsif @api_user.save
       @photo_url = "http://#{request.host_with_port}#{@api_user.profile_photo.url}"
     else
@@ -109,17 +109,17 @@ class UsersController < ApplicationController
     @user_following  = @api_user.user_following.find_by_following_id(params[:following_id])
     if @user_following 
       unless @user_following.destroy
-        @msg = "Unfollow failed : #{@user_following.errors.full_messsages.join(". ")}"
+        @msg = t("unfollow failed")+" : #{@user_following.errors.full_messsages.join(". ")}"
       end 
     else
-      @msg = "You only can unfollow user that already followed"
+      @msg = t("you only can unfollow user that already followed")
     end
 
     @raw_result = {
       :code => (@msg.blank?) ? 1 : 0,
       :error_message => @msg,
       :value => {
-        :total_following  => "#{@api_user.following.size} user(s)",
+        :total_following  => "#{@api_user.following.size}",
         :following_ids => @api_user.following.collect(&:id).join(",")
       }
     }

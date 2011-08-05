@@ -19,19 +19,19 @@ class TumblrController < ApplicationController
     if params[:tumblr_email].blank?
       @raw_result = {
         :code => 1,
-        :error_message => "can't register with blank email",
+        :error_message => t("can't register with blank email"),
         :value => nil
       }
     elsif @user.nil? == false
       @raw_result = {
         :code => 1,
-        :error_message => "this tumblr email has already been taken by other user",
+        :error_message => t("this tumblr email has already been taken by other user"),
         :value => nil
       }   
-    elsif response.body.include?("Invalid credentials")
+    elsif response.body.include?("invalid credentials")
       @raw_result = {
         :code => 1,
-        :error_message => "Invalid credentials",
+        :error_message => t("invalid credentials"),
         :value => nil
       }
     else    
@@ -60,7 +60,7 @@ class TumblrController < ApplicationController
     current_user.update_attributes(:tumblr_secret => nil, :tumblr_nickname => nil)
     respond_to do |format|
       format.html {
-        flash[:notice] = "your account has been unlinked from tumblr successfully"
+        flash[:notice] = t("your account has been unlinked from tumblr successfully")
         redirect_to connections_path
       }
       format.json {
@@ -69,7 +69,7 @@ class TumblrController < ApplicationController
           :error_message => nil,
           :value => {
             :tumblr => {
-              :unlink => current_user.facebook_connected? ? "failed" : "success"
+              :unlink => current_user.facebook_connected? ? t("failed") : t("success")
             },
           }
         }

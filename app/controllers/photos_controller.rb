@@ -167,7 +167,7 @@ class PhotosController < ApplicationController
         msg = t("photo has been regenerated successfully")
       end  
     else
-      msg = "you don't have privilege to access this page"
+      msg = t("you don't have privilege to access this page")
     end     
     render :text => msg, :layout => false
   end

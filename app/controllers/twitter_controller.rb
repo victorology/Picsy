@@ -35,7 +35,7 @@ class TwitterController < ApplicationController
     rescue OAuth::Unauthorized
       @raw_result = {
         :code => 1,
-        :error_message => "failed to authorize, you supply wrong password or username",
+        :error_message => t("authentication failed, you might enter wrong username or password"),
         :value => nil
       }   
     end
@@ -70,7 +70,7 @@ class TwitterController < ApplicationController
     else
       @raw_result = {
         :code => 1,
-        :error_message => "login failed, access token & secret don't match, pls try to authorize first",
+        :error_message => t("login failed, access token & secret don't match, please try to authorize first"),
         :value => nil
       }
     end    
@@ -95,10 +95,10 @@ class TwitterController < ApplicationController
     
     if client.authorized? == true and session[:request_token] and session[:request_secret] 
       if current_user.twitter_token == access_token.token and current_user.twitter_secret == access_token.secret
-        flash[:notice] = "you have linked to twitter already"
+        flash[:notice] = t("you have linked to twitter already")
       else  
         current_user.update_attributes(:twitter_token => access_token.token, :twitter_secret => access_token.secret, :twitter_nickname => client.info["screen_name"], :twitter_id => client.info["id"])
-        flash[:notice] = "your account has been linked successfully to twitter"
+        flash[:notice] = t("your account has been linked successfully to twitter")
         #session[:twitter] = {}
         #session[:twitter][:nickname] = access_token.params[:screen_name]
         #session[:twitter][:password] = access_token.secret
@@ -106,7 +106,7 @@ class TwitterController < ApplicationController
         #session[:twitter][:twitter_secret] = access_token.secret
       end
     else
-      flash[:notice] == "twitter connection is failed, please try again"
+      flash[:notice] == t("twitter connection is failed, please try again")
       
     end
     redirect_to connections_path     
@@ -116,7 +116,7 @@ class TwitterController < ApplicationController
     current_user.update_attributes(:twitter_token => nil, :twitter_secret => nil, :twitter_nickname => nil, :twitter_id => nil)
     respond_to do |format|
       format.html {
-        flash[:notice] = "your account has been unlinked from twitter successfully"
+        flash[:notice] = t("your account has been unlinked from twitter successfully")
         redirect_to connections_path
       }
       format.json {
@@ -125,7 +125,7 @@ class TwitterController < ApplicationController
           :error_message => nil,
           :value => {
             :twitter => {
-              :unlink => current_user.twitter_connected? ? "failed" : "success"
+              :unlink => current_user.twitter_connected? ? t("failed") : t("success")
             },
           }
         }
@@ -133,35 +133,6 @@ class TwitterController < ApplicationController
       }  
     end   
   end  
-  
-  def assign_categories_locations
-    @item_types = ItemType.find(:all)
-    @categories = Category.find(:all)
-    @user = User.new
-    render :layout => "register"
-  end 
-  
-  def do_assign_categories_locations
-    @user = User.new(session[:twitter].merge(params[:user]))
-    @user.twitter_handle = true
-    
-    if @user.save
-      sign_in @user
-      session[:twitter] = nil
-      @result = true 
-    end
-    
-    render :update do |page|
-      if @result == true
-        flash[:notice] = "Thank you for signing up"
-        page.call "Modalbox.resizeToContent" 
-        page.assign "window.location", my_path
-      else  
-        page.replace_html "register_alert","#{@user.errors.full_messages.join('<br />')}"
-        page.call "Modalbox.resizeToContent"  
-      end     
-    end
-  end   
   
   protected
     
