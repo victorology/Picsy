@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery :except => :check_sign_in 
+  before_filter :set_locale
   
   def after_sign_in_path_for(resource_or_scope)
     if resource_or_scope.is_a?(User)
@@ -44,6 +45,12 @@ class ApplicationController < ActionController::Base
     else
       super
     end  
+  end    
+  
+  def set_locale
+    if params[:locale]
+      I18n.locale = params[:locale].to_sym
+    end
   end    
   
 end
