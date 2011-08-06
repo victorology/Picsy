@@ -41,5 +41,38 @@ kr:
   "are you sure want to unlink your twitter account ?": "are you sure want to unlink your twitter account ? in KR"
   "Connected to facebook as": "Connected to facebook as in KR"
   "are you sure want to unlink your facebook account ?": "are you sure want to unlink your facebook account ? in KR" 
+  "minimum is 4 characters": "minimum is 4 characters in KR"
+  "is invalid, forbidden to use @ character": "is invalid, forbidden to use @ character in KR"
   
-  
+## translation for Active Record goes here
+## however don't translate word inside %{}
+  activerecord:
+    errors:
+      messages:
+        invalid: "is invalid in KR"
+        blank: "can't be blank in KR"
+        taken: "is taken in KR"
+        content_type: "content type invalid in KR"
+        minimum_is_4_characters: "minimum is 4 characters in KR" 
+      template:
+        header:
+          one:   "1 error prohibited this %{model} from being saved in KR"
+          other: "%{count} errors prohibited this %{model} from being saved in KR"
+        body:    "There were problems with the following fields: in KR"
+    models:
+      invite: "invite in KR"
+    attributes:
+      invite:
+        email: "email in KR"
+      image:
+        title: "title in KR"
+        filter: "filter in KR"
+      user:
+        email: "email in KR"
+        first_name: "first name in KR"
+        last_name: "last name in KR"
+        nickname: "nickname in KR"
+        phone_number: "phone number in KR"                                                     
+                                                            
+        
+            

@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   
-  validates_length_of :password, :minimum => 4, :too_short => "minimum is 4 characters", :on => :create
+  validates_length_of :password, :minimum => 4, :too_short => :minimum_is_4_characters, :on => :create
   
   has_many :photos
 

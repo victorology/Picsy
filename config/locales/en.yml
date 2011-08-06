@@ -1,4 +1,4 @@
-# Sample localization file for English. Add more files in this directory for other locales.
+# Localization file for English. Add more files in this directory for other locales.
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
@@ -41,3 +41,36 @@ en:
   "are you sure want to unlink your twitter account ?": "are you sure want to unlink your twitter account ?"
   "Connected to facebook as": "Connected to facebook as"
   "are you sure want to unlink your facebook account ?": "are you sure want to unlink your facebook account ?"
+  "minimum is 4 characters": "minimum is 4 characters"
+  "is invalid, forbidden to use @ character": "is invalid, forbidden to use @ character"
+  
+## translation for Active Record goes here
+## however don't translate word inside %{}
+activerecord:
+  errors:
+    messages:
+      invalid: "is invalid"
+      blank: "can't be blank"
+      taken: "is taken"
+      content_type: "content type invalid"
+      minimum_is_4_characters: "minimum is 4 characters"
+    template:
+      header:
+        one:   "1 error prohibited this %{model} from being saved"
+        other: "%{count} errors prohibited this %{model} from being saved"
+      body:    "There were problems with the following fields:"
+  models:
+    invite: "invite"
+  attributes:
+    invite:
+      email: "email"
+    image:
+      title: "title"
+      filter: "filter"
+    user:
+      email: "email"
+      first_name: "first name"
+      last_name: "last name"
+      nickname: "nickname"
+      phone_number: "phone number"                                                     
+                             

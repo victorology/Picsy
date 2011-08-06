@@ -7,8 +7,8 @@ class Photo < ActiveRecord::Base
     :styles => { :medium => "100x100#", :retina => "200x200#"}, 
     :url => "/system/uphotos/:pattern_nickname/:pattern_code/:style/:basename.:extension"
   
-  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/jpg', 'image/png','image/gif']
-  validates_attachment_presence :image
+  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/jpg', 'image/png','image/gif'], :message => :content_type_invalid
+  validates_attachment_presence :image, :message => :blank
   validates_attachment_size :image, :less_than => 100.megabytes
   validates_presence_of :filter
   
