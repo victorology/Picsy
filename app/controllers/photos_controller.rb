@@ -94,6 +94,7 @@ class PhotosController < ApplicationController
             client.update("#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}")  
           end
       
+      debugger
           if @photo.user.me2day_connected? == true and params[:photo][:post_to_me2day] == "yes"
             @client = Me2day::Client.new(
               :user_id => @photo.user.me2day_id, :user_key => @photo.user.me2day_key, :app_key => ME2DAY_KEY

@@ -20,6 +20,10 @@ group :development do
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
+group :production do
+  gem 'ruby-debug'
+end
+
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
