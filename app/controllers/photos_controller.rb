@@ -99,7 +99,7 @@ class PhotosController < ApplicationController
               :user_id => @photo.user.me2day_id, :user_key => @photo.user.me2day_key, :app_key => ME2DAY_KEY
             )      
 
-            if JSON.parse(client.noop)["code"].to_s == "0" #"성공했습니다."
+            if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
               clnt = HTTPClient.new
               
               File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0]) do |file|
