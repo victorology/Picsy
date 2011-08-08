@@ -94,7 +94,6 @@ class PhotosController < ApplicationController
             client.update("#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}")  
           end
       
-      debugger
           if @photo.user.me2day_connected? == true and params[:photo][:post_to_me2day] == "yes"
             @client = Me2day::Client.new(
               :user_id => @photo.user.me2day_id, :user_key => @photo.user.me2day_key, :app_key => ME2DAY_KEY
@@ -103,20 +102,20 @@ class PhotosController < ApplicationController
             if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
               clnt = HTTPClient.new
               
-              File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0]) do |file|
-                body = { 
-                  'attachment' => file,  
-                  'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
-                }
-                
-                post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_nickname}.json"
-                result = clnt.post(post_uri, body)
-                Rails.logger.info "POST RESULT #{result.body.inspect}"
-              end
+              #File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0]) do |file|
+              #  body = { 
+              #    'attachment' => file,  
+              #    'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
+              #  }
+              #  
+              #  post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_nickname}.json"
+              #  result = clnt.post(post_uri, body)
+              #  Rails.logger.info "POST RESULT #{result.body.inspect}"
+              #end
              
               
-              #result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => 
-      
+              result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
+              Rails.logger,info "POST RESULT #{result.inspect}"
             end  
           end  
 
