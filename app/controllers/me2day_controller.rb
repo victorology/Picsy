@@ -80,7 +80,7 @@ class Me2dayController < ApplicationController
     else
       @raw_result = {
         :code => 1,
-        :error_message => t "connection is failed, please try again",
+        :error_message => t("connection is failed, please try again"),
         :value => {
           :is_me2day_connected => false
         }
