@@ -112,16 +112,17 @@ class PhotosController < ApplicationController
               #  result = clnt.post(post_uri, body)
               #  Rails.logger.info "POST RESULT #{result.body.inspect}"
               #end
-              Rails.logger.info "ME2DAY NICKNAME #{@photo.user.me2day_nickname}"
+              Rails.logger.info "ME2DAY NICKNAME #{@photo.user.me2day_nickname} \n"
               
               Rails.logger.info "STARTING TO GET POSTs"
               
               posts = @client.get_posts(@photo.user.me2day_id)
-              Rails.logger.info "GRAB POSTS #{posts.inspect}"
+              Rails.logger.info "GRAB POSTS #{posts.inspect} \n"
               
-              result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0])
+              photo_path = Rails.root.to_s+"/public"+@photo.image.url.split("?")[0]
+              Rails.logger.info "PHOTO PATH #{photo_path} \n"
               
-              #result = @client.create_post @photo.user.me2day_id, 'post[body]' => "test via API"
+              result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => File.open(photo_path)
 
               Rails.logger.info "POST RESULT #{result.inspect}}"
             end  
