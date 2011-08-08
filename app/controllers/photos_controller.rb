@@ -112,10 +112,10 @@ class PhotosController < ApplicationController
               #  result = clnt.post(post_uri, body)
               #  Rails.logger.info "POST RESULT #{result.body.inspect}"
               #end
-              Rails.logger.info "ME2DAY NICKNAME#{@photo.user.me2day_nickname}"
+              Rails.logger.info "ME2DAY NICKNAME #{@photo.user.me2day_nickname}"
               
               posts = @client.get_posts(@photo.user.me2day_nickname)
-              Rails.loger.info "GRAB POSTS #{posts.inspect}"
+              Rails.logger.info "GRAB POSTS #{posts.inspect}"
               
               #result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
               
