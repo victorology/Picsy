@@ -114,6 +114,8 @@ class PhotosController < ApplicationController
               #end
               Rails.logger.info "ME2DAY NICKNAME #{@photo.user.me2day_nickname}"
               
+              Rails.logger.info "STARTING TO GET POSTs"
+              
               posts = @client.get_posts(@photo.user.me2day_nickname)
               Rails.logger.info "GRAB POSTS #{posts.inspect}"
               
