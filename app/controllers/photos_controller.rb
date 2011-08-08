@@ -117,7 +117,9 @@ class PhotosController < ApplicationController
               posts = @client.get_posts(@photo.user.me2day_nickname)
               Rails.loger.info "GRAB POSTS #{posts.inspect}"
               
-              result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
+              #result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
+              
+              result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "test via API"
 
               Rails.logger.info "POST RESULT #{result.inspect}}"
             end  
