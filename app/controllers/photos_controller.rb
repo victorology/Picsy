@@ -119,7 +119,7 @@ class PhotosController < ApplicationController
               posts = @client.get_posts(@photo.user.me2day_id)
               Rails.logger.info "GRAB POSTS #{posts.inspect}"
               
-              result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
+              result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0])
               
               #result = @client.create_post @photo.user.me2day_id, 'post[body]' => "test via API"
 
