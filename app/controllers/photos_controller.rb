@@ -115,7 +115,7 @@ class PhotosController < ApplicationController
              
               
               result = @client.create_post @photo.user.me2day_nickname, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
-              Rails.logger,info "POST RESULT #{result.inspect}"
+              Rails.logger.info "POST RESULT #{result.inspect}"
             end  
           end  
 
