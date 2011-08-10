@@ -23,4 +23,26 @@ module Paperclip
       attachment.instance.pattern_nickname
     end
   end
-end    
+end   
+
+module HTTParty
+  module ClassMethods
+    def post(path, options={})
+      url = URI.parse('http://www.example.com/upload')
+      #File.open("./image.jpg") do |jpg|
+      #  req = Net::HTTP::Post::Multipart.new url.path,
+      #    "file" => UploadIO.new(jpg, "image/jpeg", "image.jpg")
+      #  res = Net::HTTP.start(url.host, url.port) do |http|
+      #    http.request(req)
+      #  end
+      #end
+      unless options["attachment"].blank?
+        File.open(options["attachment"]) do |upl|
+          options["attachment"] = UploadIO.new(upl,"image/jpg","upl.jpg")
+        end  
+      end  
+      
+      perform_request Net::HTTP::Post::Multipart, path, options
+    end
+  end      
+end

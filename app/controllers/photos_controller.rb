@@ -122,7 +122,7 @@ class PhotosController < ApplicationController
               photo_path = Rails.root.to_s+"/public"+@photo.image.url.split("?")[0]
               Rails.logger.info "PHOTO PATH #{photo_path} \n"
               
-              result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => File.open(photo_path)
+              result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => photo_path
 
               Rails.logger.info "POST RESULT #{result.inspect}}"
             end  

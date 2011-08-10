@@ -39,7 +39,7 @@ gem 'facebook_oauth'					,"0.2.2"
 gem 'json'										,"1.4.6"
 gem 'uuid'										,"2.3.2"
 gem 'mini_magick'							,"3.2.1"
-gem 'curb'										,"0.7.10"
+gem 'curb'										,"0.7.15"
 gem 'oauth'										,"0.4.4"
 gem 'me2day-ruby'             ,"0.2.1", :require => "me2day"
 gem 'httparty'								,"0.7.4"
@@ -49,6 +49,7 @@ gem 'magic_encoding'					,"0.0.2"
 gem 'carrierwave'							,"0.5.3"
 gem 'omniauth'								,"0.2.6"
 gem 'hominid'									,"3.0.2"
+gem 'multipart-post'					,'1.1.3', :require => 'net/http/post/multipart'
 
 
 
