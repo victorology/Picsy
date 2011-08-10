@@ -41,16 +41,14 @@ gem 'uuid'										,"2.3.2"
 gem 'mini_magick'							,"3.2.1"
 gem 'curb'										,"0.7.15"
 gem 'oauth'										,"0.4.4"
-gem 'me2day-ruby'             ,"0.2.1", :require => "me2day"
-gem 'httparty'								,"0.7.4"
+gem 'me2day-ruby'             ,"0.2.1", :require => "me2day", :path => "vendor/gems/me2day-ruby-0.2.1"
 gem 'ruby-hmac'								,"0.4.0", :require => "hmac"
 gem 'ezcrypto'								,"0.7.2"
 gem 'magic_encoding'					,"0.0.2"
 gem 'carrierwave'							,"0.5.3"
 gem 'omniauth'								,"0.2.6"
 gem 'hominid'									,"3.0.2"
-gem 'multipart-post'					,'1.1.3', :require => 'net/http/post/multipart'
-
+gem 'httmultiparty'					  ,"0.3.2"
 
 
 # Bundle gems for the local environment. Make sure to

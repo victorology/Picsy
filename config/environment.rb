@@ -25,6 +25,7 @@ module Paperclip
   end
 end   
 
+=begin
 module HTTParty
   module ClassMethods
     def post(path, options={})
@@ -36,6 +37,7 @@ module HTTParty
       #    http.request(req)
       #  end
       #end
+      a.a
       unless options["attachment"].blank?
         File.open(options["attachment"]) do |upl|
           options["attachment"] = UploadIO.new(upl,"image/jpg","upl.jpg")
@@ -46,3 +48,4 @@ module HTTParty
     end
   end      
 end
+=end
