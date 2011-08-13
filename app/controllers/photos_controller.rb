@@ -102,16 +102,20 @@ class PhotosController < ApplicationController
             if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
               clnt = HTTPClient.new
               
-              #File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0]) do |file|
-              #  body = { 
-              #    'attachment' => file,  
-              #    'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}"
-              #  }
-              #  
-              #  post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_nickname}.json"
-              #  result = clnt.post(post_uri, body)
-              #  Rails.logger.info "POST RESULT #{result.body.inspect}"
-              #end
+              File.open(Rails.root.to_s+"/public"+@photo.image.url.split("?")[0]) do |file|
+                body = { 
+                  'content_type' => "photo",
+                  'attachment' => file,  
+                  'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}",
+                  'uid'=> @photo.user.me2day_id,
+                  'ukey' => u_key(@photo.user.me2day_key)
+                }
+                
+                post_uri = "http://me2day.net/api/create_post/#{@photo.user.me2day_id}.json"
+                result = clnt.post(post_uri, body, 'me2_application_key' => ME2DAY_KEY)
+                Rails.logger.info "POST RESULT #{result.body.inspect}"
+              end
+=begin              
               Rails.logger.info "ME2DAY NICKNAME #{@photo.user.me2day_nickname} \n"
               
               Rails.logger.info "STARTING TO GET POSTs"
@@ -125,6 +129,7 @@ class PhotosController < ApplicationController
               result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(@photo.title, :length => 120)} #{shortened_url(@photo)}", 'attachment' => File.new(photo_path)
 
               Rails.logger.info "POST RESULT #{result.inspect}}"
+=end              
             end  
           end  
 
@@ -242,5 +247,10 @@ class PhotosController < ApplicationController
     url_arr[8] = URI.escape(url_arr[8])
     return url_arr.join("/")
   end  
+  
+  def u_key(user_key)
+    nonce = rand(0xffffffff).to_s(16)
+    nonce + Digest::MD5.hexdigest(nonce + user_key)
+  end
     
 end
