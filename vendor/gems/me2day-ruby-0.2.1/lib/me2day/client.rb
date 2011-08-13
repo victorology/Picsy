@@ -33,7 +33,6 @@ module Me2day
       # attr_accessor :app_key
 
       def get_auth_url(options={})
-        a.a
         raise "app_key is required" unless options[:app_key]
         self.headers 'me2_application_key' => options[:app_key]
         @auth_url ||= get("/get_auth_url.json")["url"]
@@ -54,7 +53,13 @@ module Me2day
         options = args.last.is_a?(Hash) ? args.last : {}
         format = options ? (options.delete(:format) || DEFAULT_FORMAT) : DEFAULT_FORMAT
         options.merge!(@auth)
-        resp = self.class.get("/#{method_sym}#{id_part}.#{format}", :query => options)
+        
+        if method_sym.to_s == "create_post"
+          resp = self.class.post("/#{method_sym}#{id_part}.#{format}", :query => options)
+        else
+          resp = self.class.get("/#{method_sym}#{id_part}.#{format}", :query => options)
+        end
+          
         case resp.response.code.to_s
           when "200"
             resp.parsed_response
