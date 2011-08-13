@@ -1,6 +1,8 @@
 module Me2day
   class Client
     include HTTMultiParty
+    debug_output $stderr
+
     base_uri "http://me2day.net/api"
     DEFAULT_FORMAT = 'json'
     @@apis = %w(
@@ -31,6 +33,7 @@ module Me2day
       # attr_accessor :app_key
 
       def get_auth_url(options={})
+        a.a
         raise "app_key is required" unless options[:app_key]
         self.headers 'me2_application_key' => options[:app_key]
         @auth_url ||= get("/get_auth_url.json")["url"]
