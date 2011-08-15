@@ -72,7 +72,52 @@ kr:
         first_name: "first name in KR"
         last_name: "last name in KR"
         nickname: "nickname in KR"
-        phone_number: "phone number in KR"                                                     
-                                                            
-        
-            
+        phone_number: "phone number in KR" 
+       
+# Used in distance_of_time_in_words(), distance_of_time_in_words_to_now(), time_ago_in_words()        
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute in KR"
+      less_than_x_seconds:
+        one:   "less than 1 second in KR"
+        other: "less than %{count} seconds in KR"
+      x_seconds:
+        one:   "1 second in KR"
+        other: "%{count} seconds in kR"
+      less_than_x_minutes:
+        one:   "less than a minute in KR"
+        other: "less than %{count} minutes in kR"
+      x_minutes:
+        one:   "1 minute in KR"
+        other: "%{count} minutes in KR"
+      about_x_hours:
+        one:   "about 1 hour in KR"
+        other: "about %{count} hours in KR"
+      x_days:
+        one:   "1 day in KR"
+        other: "%{count} days in KR"
+      about_x_months:
+        one:   "about 1 month in KR"
+        other: "about %{count} months in kR"
+      x_months:
+        one:   "1 month"
+        other: "%{count} months in KR"
+      about_x_years:
+        one:   "about 1 year in KR"
+        other: "about %{count} years in KR"
+      over_x_years:
+        one:   "over 1 year in KR"
+        other: "over %{count} years in KR"
+      almost_x_years:
+        one:   "almost 1 year in KR"
+        other: "almost %{count} years in kR"
+    prompts:
+      year:   "Year in KR"
+      month:  "Month in KR"
+      day:    "Day in KR"
+      hour:   "Hour in KR"
+      minute: "Minute in KR"
+      second: "Seconds in KR"                                                            
+
+
+  
