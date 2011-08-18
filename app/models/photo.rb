@@ -269,6 +269,22 @@ class Photo < ActiveRecord::Base
   def shortened_url    
     return (self.host_with_port+"/#{prefix_rand}#{self.code}").gsub("www.","")
   end
+
+  alias_method :old_save, :save
+  def save(options={})
+    resave(options, 1)   
+  end
+
+  def resave(options, attempts)
+    begin 
+      old_save(options)
+    rescue
+      attempts += 1
+      if attempts <= 3
+        resave(options, attempts)
+      end    
+    end
+  end
     
   protected 
   
