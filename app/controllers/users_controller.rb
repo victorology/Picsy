@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     else
       @user_following = @api_user.user_following.find_or_initialize_by_following_id(params[:following_id])
       unless @user_following.save
-        @msg = @user_following.errors.full_messsages.join(". ")
+        @msg = @user_following.errors.full_messages.join(". ")
       end
     end
 

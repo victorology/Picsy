@@ -127,6 +127,7 @@ class PhotosController < ApplicationController
   
   protected
   def photo_hash(photo, show_owner = false)
+    photo.host_with_port = "http://"+request.host_with_port
     rs = {
       :title => photo.title,
       :filter => photo.filter,
