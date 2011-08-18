@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Photo < ActiveRecord::Base
+  include ActionView::Helpers::TextHelper
   belongs_to :user
   
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :host_with_port
@@ -13,9 +14,7 @@ class Photo < ActiveRecord::Base
   validates_presence_of :filter
   
   before_create :check_filter, :generate_code, :check_post_to
-  before_create :fb_photo, :fb_photo_to_album, :tumblr_photo
-  attr_accessor :album_name
-        
+  
   def generate_code
     charset = %w{1 2 3 4 6 7 9 A C D E F G H J K L M N P Q R T V W X Y Z}
     rs = (0...2).map{ charset.to_a[rand(charset.size)] }.join
@@ -38,7 +37,7 @@ class Photo < ActiveRecord::Base
         :password => User.tumblr_pwd_decrypt(self.user.tumblr_secret),
         :type => "photo",
         :caption => "#{self.title} taken with PUMPL "+self.shortened_url,
-        :data => File.open(self.image.queued_for_write[:original].path) 
+        :data => File.open(self.image.path) 
       }
       clnt = HTTPClient.new
       response = clnt.post("http://www.tumblr.com/api/write",body)
@@ -76,7 +75,7 @@ class Photo < ActiveRecord::Base
       end  
       
       ## post photo to facebook
-      source = File.open(self.image.queued_for_write[:original].path)
+      source = File.open(self.image.path)
       
       body = {:access_token => self.user.facebook_token, :source => source,:message => "#{self.title} taken with PUMPL "+self.shortened_url}
       
@@ -94,8 +93,7 @@ class Photo < ActiveRecord::Base
         end    
         return false
       else  
-        write_attribute(:fb_original_url,rs["source"])
-        write_attribute(:fb_thumbnail_url,rs["picture"])
+        self.update_attributes(:fb_original_url => rs["source"], :fb_thumbnail_url => rs["picture"])
       end  
     
     elsif self.user.facebook_connected? == false and self.post_to_facebook == "yes" 
@@ -105,12 +103,12 @@ class Photo < ActiveRecord::Base
   end  
 
   def fb_photo_to_album
-    if self.user.facebook_connected? == true and self.post_to_facebook_album == "yes" and !self.album_name.blank?
-      @album_id = self.user.find_or_create_by_facebook_album(self.album_name)
+    if self.user.facebook_connected? == true and self.post_to_facebook_album == "yes" and !self.fb_album_name.blank?
+      @album_id = self.user.find_or_create_by_facebook_album(self.fb_album_name)
 
       ## post photo to facebook
       clnt = HTTPClient.new      
-      source = File.open(self.image.queued_for_write[:original].path)
+      source = File.open(self.image.path)
       body = {:access_token => self.user.facebook_token, :source => source,:message => "#{self.title} taken with PUMPL "+self.shortened_url}
       response = clnt.post("https://graph.facebook.com/#{@album_id}/photos",body)
      
@@ -126,13 +124,82 @@ class Photo < ActiveRecord::Base
         end    
         return false
       else  
-        write_attribute(:fb_original_url,rs["source"])
-        write_attribute(:fb_thumbnail_url,rs["picture"])
+        self.update_attributes(:fb_original_url => rs["source"], :fb_thumbnail_url => rs["picture"])
       end  
     elsif self.user.facebook_connected? == false and self.post_to_facebook_album == "yes" and !self.album_name.blank?
       errors[:base] << "Can't post photo to facebook, you need to link your account first" 
       return false
     end  
+  end
+
+  def fb_wall
+    if self.user.facebook_connected? == true and self.post_to_facebook_wall == "yes"
+      clnt = HTTPClient.new
+
+      body = {:access_token => self.user.facebook_token, :link => self.host_with_port+self.page_path, 
+              :picture => self.host_with_port+self.image.url, :name => self.title} 
+      response = clnt.post("https://graph.facebook.com/#{self.user.facebook_id}/feed", body)
+
+      fbid = JSON.parse(response.content)["id"].split("_")[1]
+      id = JSON.parse(response.content)["id"].split("_")[0]
+      self.update_attribute(:fb_wall_url, "http://facebook.com/permalink.php?story_fbid=#{fbid}&id=#{id}")     
+    end
+  end
+
+  def twitter
+    if self.user.twitter_connected? == true and self.post_to_twitter == "yes"
+      client = TwitterOAuth::Client.new(
+                :consumer_key => TWITTER_CONSUMER_KEY,
+                :consumer_secret => TWITTER_CONSUMER_SECRET,
+                :token => self.user.twitter_token, 
+                :secret => self.user.twitter_secret
+               )
+
+      client.update("#{truncate(self.title, :length => 120)} #{self.shortened_url}")  
+    end
+  end
+
+  def me2day
+   if self.user.me2day_connected? == true and self.post_to_me2day == "yes"
+      @client = Me2day::Client.new(
+        :user_id => @self.user.me2day_id, :user_key => self.user.me2day_key, :app_key => ME2DAY_KEY
+      )      
+
+      if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
+        clnt = HTTPClient.new
+              
+        File.open(Rails.root.to_s+"/public"+self.image.url.split("?")[0]) do |file|
+          nonce = rand(0xffffffff).to_s(16)
+          u_key = nonce + Digest::MD5.hexdigest(nonce + self.user.me2day_key)
+
+          body = { 
+            'content_type' => "photo",
+            'attachment' => file,  
+            'post[body]' => "#{truncate(self.title, :length => 120)} #{self.shortened_url}",
+            'uid'=> self.user.me2day_id,
+            'ukey' => u_key
+          }
+                
+          post_uri = "http://me2day.net/api/create_post/#{self.user.me2day_id}.json"
+          result = clnt.post(post_uri, body, 'me2_application_key' => ME2DAY_KEY)
+          Rails.logger.info "POST RESULT #{result.body.inspect}"
+        end
+=begin              
+        Rails.logger.info "ME2DAY NICKNAME #{self.user.me2day_nickname} \n"      
+        Rails.logger.info "STARTING TO GET POSTs"
+              
+        posts = @client.get_posts(self.user.me2day_id)
+        Rails.logger.info "GRAB POSTS #{posts.inspect} \n"
+              
+        photo_path = Rails.root.to_s+"/public"+self.image.url.split("?")[0]
+        Rails.logger.info "PHOTO PATH #{photo_path} \n"
+              
+        result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(self.title, :length => 120)} #{self.shortened_url}", 'attachment' => File.new(photo_path)
+
+        Rails.logger.info "POST RESULT #{result.inspect}}"
+=end              
+      end  
+    end 
   end
   
   ## options[:thumbnail]
@@ -194,7 +261,15 @@ class Photo < ActiveRecord::Base
     end
     return error_arr  
   end  
-  
+
+  def page_path
+    "/photo/#{URI.escape(self.user.nickname)}/#{prefix_rand}#{self.code}"
+  end
+
+  def shortened_url    
+    return (self.host_with_port+"/#{prefix_rand}#{self.code}").gsub("www.","")
+  end
+    
   protected 
   
   def check_filter
@@ -227,14 +302,19 @@ class Photo < ActiveRecord::Base
     return self.send("image_#{type}").try(:to_s)
   end  
   
-  def shortened_url
-    
-    prefix = ["z","t","q","x"]
-    prefix_rand = prefix[rand(prefix.size)]
-    
-    return (self.host_with_port+"/#{prefix_rand}#{self.code}").gsub("www.","")
+  def prefix_rand
+    if @prefix_rand.blank?
+      prefix = ["z","t","q","x"]
+      @prefix_rand = prefix[rand(prefix.size)]
+    end
+    return @prefix_rand 
   end
   
-    
-
+  def url_escape(url)
+    url_arr = url.split("/")
+    url_arr[5] = URI.escape(url_arr[5])
+    url_arr[8] = URI.escape(url_arr[8])
+    return url_arr.join("/")
+  end  
+  
 end

@@ -8,7 +8,7 @@ class PhotosController < ApplicationController
   
   def shortened
     @photo = Photo.find(:first, :conditions => {:code => params[:code]})
-    redirect_to photo_page_path(@photo)
+    redirect_to @photo.page_path
   end  
   
   def show
@@ -82,7 +82,7 @@ class PhotosController < ApplicationController
         if @photo.save
           
           #upload photo to social networks
-          Delayed::Job.enqueue PhotoJob.new(@photo.id, photo_hash(@photo))
+          Delayed::Job.enqueue PhotoJob.new(@photo.id, "http://"+request.host_with_port)
           
           @raw_result = {
             :code => 0,
@@ -132,8 +132,8 @@ class PhotosController < ApplicationController
       :filter => photo.filter,
       :original_width => photo.width,
       :original_height => photo.height,
-      :shortened_url => shortened_url(photo),
-      :page_url => "http://"+request.host_with_port+photo_page_path(photo),
+      :shortened_url => photo.shortened_url,
+      :page_url => "http://"+request.host_with_port+photo.page_path,
     }  
    
     photo_url_hash = {
@@ -149,7 +149,7 @@ class PhotosController < ApplicationController
       :fb_thumbnail_url => photo.fb_thumbnail_url
     }
     
-    rs.merge!(fb_hash) if photo.post_to_facebook == "yes" || (photo.post_to_facebook_album == "yes" and !photo.album_name.blank?) || photo.post_to_facebook_wall == "yes"
+    rs.merge!(fb_hash) if photo.post_to_facebook == "yes" || (photo.post_to_facebook_album == "yes" and !photo.fb_album_name.blank?) || photo.post_to_facebook_wall == "yes"
     rs.merge!(photo_url_hash)  
 
     if show_owner
@@ -164,22 +164,6 @@ class PhotosController < ApplicationController
     return rs 
   end
 
-  def shortened_url(photo)
-    return ("http://"+request.host_with_port+"/#{prefix_rand}#{photo.code}").gsub("www.","")
-  end  
-  
-  def prefix_rand
-    if @prefix_rand.blank?
-      prefix = ["z","t","q","x"]
-      @prefix_rand = prefix[rand(prefix.size)]
-    end
-    return @prefix_rand  
-  end  
-    
-  def photo_page_path(photo)
-    "/photo/#{URI.escape(photo.user.nickname)}/#{prefix_rand}#{photo.code}"
-  end
-  
   def url_escape(url)
     url_arr = url.split("/")
     url_arr[5] = URI.escape(url_arr[5])
@@ -187,9 +171,4 @@ class PhotosController < ApplicationController
     return url_arr.join("/")
   end  
   
-  def u_key(user_key)
-    nonce = rand(0xffffffff).to_s(16)
-    nonce + Digest::MD5.hexdigest(nonce + user_key)
-  end
-    
 end
