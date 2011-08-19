@@ -30,5 +30,19 @@ class Admin::UsersController < ApplicationController
     end
     redirect_to :action => "index"
   end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      flash[:message] = "User was successfully updated"
+      redirect_to :action => "index"
+    else
+      render :action => "edit"
+    end
+  end
   
 end
