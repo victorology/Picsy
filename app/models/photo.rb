@@ -285,6 +285,10 @@ class Photo < ActiveRecord::Base
       end    
     end
   end
+
+  def self.delete_unowned_photos
+    Photo.delete_all("photos.user_id NOT IN (SELECT id FROM users)") 
+  end
     
   protected 
   

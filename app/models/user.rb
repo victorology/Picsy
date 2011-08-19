@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   
   validates_length_of :password, :minimum => 4, :too_short => :minimum_is_4_characters, :on => :create
   
-  has_many :photos
+  has_many :photos, :dependent => :destroy
 
   #follower and following
   has_many :user_following, :foreign_key => "follower_id"
