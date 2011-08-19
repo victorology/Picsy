@@ -162,7 +162,7 @@ class Photo < ActiveRecord::Base
   def me2day
    if self.user.me2day_connected? == true and self.post_to_me2day == "yes"
       @client = Me2day::Client.new(
-        :user_id => @self.user.me2day_id, :user_key => self.user.me2day_key, :app_key => ME2DAY_KEY
+        :user_id => self.user.me2day_id, :user_key => self.user.me2day_key, :app_key => ME2DAY_KEY
       )      
 
       if JSON.parse(@client.noop)["code"].to_s == "0" #"성공했습니다."
