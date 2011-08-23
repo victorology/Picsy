@@ -83,8 +83,8 @@ class User < ActiveRecord::Base
     
     if socmed == "facebook"
       rs = self.photos.find(:all,:conditions => ["fb_original_url IS NOT NULL and fb_original_url!=''"]).size
-    elsif socmed == "tumblr" or socmed == "twitter"
-      rs = self.photos.find(:all,:conditions => ["post_to_#{socmed}=?","yes"]).size
+    elsif socmed == "tumblr" or socmed == "twitter" or socmed == "me2day"
+      rs = self.photos.find(:all,:conditions => ["post_to_#{socmed}=?","yes"]).size 
     end
     return rs    
   end
