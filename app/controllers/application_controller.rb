@@ -46,11 +46,29 @@ class ApplicationController < ActionController::Base
       super
     end  
   end    
-  
+
   def set_locale
-    if params[:locale]
-      I18n.locale = params[:locale].to_sym
-    end
-  end    
+    begin 
+      @user = current_user
+    rescue
+      @user = nil
+    end    
+    
+    if params[:language].blank? == false
+      I18n.locale = params[:language] 
+      Rails.logger.info "SET LANGUAGE BY PARAMS: #{I18n.locale}"
+    elsif @user.try(:language).blank? == false
+      I18n.locale = @user.language
+      Rails.logger.info "SET LANGUAGE BY MODEL: #{I18n.locale}"
+    elsif session[:language].blank? == false
+      I18n.locale = session[:language]  
+      Rails.logger.info "SET LANGUAGE BY SESSION: #{I18n.locale}"
+    else    
+      I18n.locale = I18n.default_locale
+      Rails.logger.info "SET LANGUAGE BY DEFAULT VALUE: #{I18n.locale}"
+    end  
+    
+    session[:language] = I18n.locale
+  end  
   
 end

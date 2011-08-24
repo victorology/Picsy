@@ -1,3 +1,5 @@
+<strong>Current Language : <%= @locale %></strong>
+
 <h2>Registration Step 2 API</h2>
 
 <% form_for :user, :url => personalization_user_creation_path(:format => "json") do |f| %>
@@ -9,6 +11,10 @@
 	
 	<p> Password :<br />
 	<%= f.password_field :password %> </p>
+	
+	<p> Language :<br />
+	<%= select_tag :language, options_for_select([nil,["Korean","kr"],["English","en"]]) %> </p>
+	
 	<%= submit_tag "Send" %>
 <% end %>	
 
@@ -23,6 +29,9 @@
 	
 	<p> Password :<br />
 	<%= password_field_tag "user[language]" %> </p>
+	
+	<p> Language :<br />
+	<%= select_tag :language, options_for_select([nil,["Korean","kr"],["English","en"]]) %> </p>
 	<%= submit_tag "Send" %>
 </form>
 

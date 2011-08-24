@@ -11,6 +11,9 @@ class PosterController < ApplicationController
       @photo_user = User.find(:first, :conditions => {:nickname => params[:id]})
       @photo_user.update_session_api if @photo_user.session_api.blank?
       
+      # set language
+      @locale = I18n.locale
+      
       #@fb_user = User.find(:first,:conditions => {:facebook_handle => true, :email => "aditya.jamop@gmail.com"})
       render :layout => false
     #else

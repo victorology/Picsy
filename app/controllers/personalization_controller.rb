@@ -19,6 +19,7 @@ class PersonalizationController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.valid?
+      @user.language = params[:language] unless params[:language].blank?
       @user.save
       sign_in @user
       @user.update_session_api if params[:format] == "json"

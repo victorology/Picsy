@@ -33,9 +33,10 @@ class Devise::SessionsController < ApplicationController
     resource = warden.authenticate(:scope => resource_name)
     
     if resource
-      flash[:notice] = "you have logged in successfully"
+      resource.update_attribute(:language, params[:language])
+      flash[:notice] = t("you have logged in successfully")
     else
-      @msg = "The password or email you entered incorrect, please try it again"
+      @msg = t("password or email you entered incorrect, please try it again")
     end    
     
     respond_to do |format|
@@ -90,9 +91,9 @@ class Devise::SessionsController < ApplicationController
       resource.password = params[:password]
       resource.password_confirmation = params[:password_confirmation]
       if params[:password].blank?
-        @msg = "new password can't be blank"
+        @msg = t("new password can't be blank")
       elsif params[:password] != params[:password_confirmation]
-        @msg = "new password and new password confirmation doesn't match"  
+        @msg = t("new password and new password confirmation doesn't match")  
       elsif current_user.save
         resource.update_session_api
         @user = {
@@ -102,10 +103,10 @@ class Devise::SessionsController < ApplicationController
           :session_api => resource.session_api
         }
       else
-        @msg = "Password and Password confirmation doesn't match"
+        @msg = t("password and password confirmation doesn't match")
       end    
     else
-      @msg = "The old password you entered incorrect, please try it again"
+      @msg = t("the old password you entered incorrect, please try it again")
     end
     
     respond_to do |format|
