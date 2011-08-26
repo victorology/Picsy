@@ -23,7 +23,7 @@ class ConnectionsController < ApplicationController
             },
             :me2day => {
                :is_connected => current_user.me2day_connected?,
-               :nickname => current_user.me2day_nickname
+               :id => current_user.me2day_id
              }
           }
         }
