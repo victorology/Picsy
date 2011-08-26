@@ -4,6 +4,9 @@ class PhotoJob < Struct.new(:photo_id, :host_with_port)
     @photo = Photo.find(photo_id)
     @photo.host_with_port = host_with_port
     
+    #upload to me2day
+    @photo.me2day
+    
     #upload to fb default album 
     @photo.fb_photo
     
@@ -18,9 +21,7 @@ class PhotoJob < Struct.new(:photo_id, :host_with_port)
     
     #upload to twitter
     @photo.twitter
- 
-    #upload to me2day
-    @photo.me2day
+
   end  
 
 end  
