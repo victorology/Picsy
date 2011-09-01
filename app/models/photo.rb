@@ -183,7 +183,7 @@ class Photo < ActiveRecord::Base
           post_uri = "http://me2day.net/api/create_post/#{self.user.me2day_id}.json"
           result = clnt.post(post_uri, body, 'me2_application_key' => ME2DAY_KEY)
           inspect_message = "POST RESULT #{result.body.inspect}"
-          RAILS_DEFAULT_LOGGER.info inspect_message
+          Rails.logger.info inspect_message
           self.update_attribute(:me2day_error_message,inspect_message)
         end
 =begin              
