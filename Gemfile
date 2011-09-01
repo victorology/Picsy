@@ -8,7 +8,6 @@ gem 'rails', '3.0.7'
 gem 'mysql2','0.2.7'
 
 # Use thin as the web server
-gem 'thin'
 gem 'passenger'
 
 # Deploy with Capistrano
