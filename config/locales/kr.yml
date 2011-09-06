@@ -48,6 +48,7 @@ kr:
   "new password and new password confirmation doesn't match": "new password and new password confirmation doesn't match in KR"
   "password and password confirmation doesn't match": "password and password confirmation doesn't match in KR"
   "the old password you entered incorrect, please try it again": "the old password you entered incorrect, please try it again in KR"
+  "you aren't registered to PUMPL or your PUMPL account isn't linked to Facebook account": "you aren't registered to PUMPL or your PUMPL account isn't linked to Facebook account in KR"
   
 ## translation for Active Record goes here
 ## however don't translate word inside %{}

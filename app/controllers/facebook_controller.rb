@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class FacebookController < ApplicationController
   protect_from_forgery :except => [:confirm_api]
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:single_sign_on]
   
   def index
     client = facebook_connect
@@ -90,8 +90,41 @@ class FacebookController < ApplicationController
     client = FacebookOAuth::Client.new(
         :application_id => FACEBOOK_APPLICATION_ID,
         :application_secret => FACEBOOK_APPLICATION_SECRET,
-        :token => params[:access_token]
+        :token => params[:fb_access_token]
     )
+    
+    begin
+      @facebook_id = client.me.info["id"]   
+      user = User.where(:facebook_id => @facebook_id).first
+    rescue
+      user = nil
+    end    
+      
+    unless user.blank?
+      code = 0
+      error_message = nil
+      user.update_session_api
+      user_hash = {
+        :nickname => user.nickname,
+        :email => user.email,
+        :id => user.id,
+        :session_api => user.session_api
+      }
+    else
+      code = 1
+      error_message = t("you aren't registered to PUMPL or your PUMPL account isn't linked to Facebook account")  
+      user_hash = nil
+    end    
+
+    
+    @raw_result = {
+      :code => code,
+      :error_message => error_message,
+      :value => {
+        :user => user_hash
+      }
+    }
+    render :json => JSON.generate(@raw_result)
   end  
   
   
