@@ -18,6 +18,17 @@
 	<%= submit_tag "Send" %>
 <% end %>	
 
+<h2>Login via Facebook SSO API</h2>
+
+<form action="/facebook/single_sign_on.json" method="post">
+	<p> FB Access Token : <br />
+  <%= text_area_tag "fb_access_token",nil, :cols => 60, :rows => 5 %></p>
+	
+	<p> Language :<br />
+	<%= select_tag :language, options_for_select([nil,["Korean","kr"],["English","en"]]) %> </p>
+	<%= submit_tag "Send" %>
+</form>
+
 <h2>Login API</h2>
 
 <form action="/check_sign_in.json" method="post">

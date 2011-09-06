@@ -132,6 +132,7 @@
                                               POST   /facebook/unlink(.:format)                         {:action=>"unlink", :controller=>"facebook"}
    assign_categories_locations_facebook_index GET    /facebook/assign_categories_locations(.:format)    {:action=>"assign_categories_locations", :controller=>"facebook"}
 do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categories_locations(.:format) {:action=>"do_assign_categories_locations", :controller=>"facebook"}
+                single_sign_on_facebook_index POST   /facebook/single_sign_on(.:format)                 {:action=>"single_sign_on", :controller=>"facebook"}
                                facebook_index GET    /facebook(.:format)                                {:action=>"index", :controller=>"facebook"}
                                               POST   /facebook(.:format)                                {:action=>"create", :controller=>"facebook"}
                                  new_facebook GET    /facebook/new(.:format)                            {:action=>"new", :controller=>"facebook"}

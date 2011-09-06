@@ -86,6 +86,14 @@ class FacebookController < ApplicationController
     end  
   end
   
+  def single_sign_on
+    client = FacebookOAuth::Client.new(
+        :application_id => FACEBOOK_APPLICATION_ID,
+        :application_secret => FACEBOOK_APPLICATION_SECRET,
+        :token => params[:access_token]
+    )
+  end  
+  
   
   protected
   

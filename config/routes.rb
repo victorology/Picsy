@@ -115,6 +115,7 @@ Picsy::Application.routes.draw do
       post 'unlink'
       get 'assign_categories_locations'
       post 'do_assign_categories_locations'
+      post 'single_sign_on'
     end   
   end  
   # Sample resource route (maps HTTP verbs to controller actions automatically):
