@@ -49,7 +49,7 @@ class Devise::SessionsController < ApplicationController
           page.replace_html "login_alert", @msg
           page.call "Modalbox.resizeToContent"
         end   
-        #page.alert(params.inspect + "resource = " + resource.inspect)
+        #page.alert(params.inspect + "resource = " + res2222ource.inspect)
       end
       }
       format.json {

@@ -49,6 +49,7 @@ en:
   "password and password confirmation doesn't match": "password and password confirmation doesn't match"
   "the old password you entered incorrect, please try it again": "the old password you entered incorrect, please try it again"
   "you aren't registered to PUMPL or your PUMPL account isn't linked to Facebook account": "you aren't registered to PUMPL or your PUMPL account isn't linked to Facebook account"
+  "failed to connect to facebook, please try again": "failed to connect to facebook, please try again"
   
 ## translation for Active Record goes here
 ## however don't translate word inside %{}

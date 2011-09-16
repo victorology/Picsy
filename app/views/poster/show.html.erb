@@ -18,17 +18,6 @@
 	<%= submit_tag "Send" %>
 <% end %>	
 
-<h2>Login via Facebook SSO API</h2>
-
-<form action="/facebook/single_sign_on.json" method="post">
-	<p> FB Access Token : <br />
-  <%= text_area_tag "fb_access_token",nil, :cols => 60, :rows => 5 %></p>
-	
-	<p> Language :<br />
-	<%= select_tag :language, options_for_select([nil,["Korean","kr"],["English","en"]]) %> </p>
-	<%= submit_tag "Send" %>
-</form>
-
 <h2>Login API</h2>
 
 <form action="/check_sign_in.json" method="post">
@@ -160,6 +149,23 @@
 <% else %>
  You need to logged in via API first
 <% end %>
+
+<h2>Connect to Facebook via SSO API</h2>
+
+<form action="/facebook/single_sign_on.json" method="post">
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>
+	
+	<p> FB Access Token : <br />
+  <%= text_area_tag "fb_access_token",nil, :cols => 60, :rows => 5 %></p>
+	
+	<p> Language :<br />
+	<%= select_tag :language, options_for_select([nil,["Korean","kr"],["English","en"]]) %> </p>
+	<%= submit_tag "Send" %>
+</form>
 
 <h2>Connect to Facebook</h2>
 <% if @photo_user.session_api %>
