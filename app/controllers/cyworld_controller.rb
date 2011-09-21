@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CyworldController < ApplicationController
+  before_filter :authenticate_user!
   
   def connect
 =begin    
@@ -40,6 +41,7 @@ class CyworldController < ApplicationController
   
   @consumer = OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, client_options)
   @request_token = @consumer.get_request_token
+  @api_user.update_attribute(:cyworld_request_token_response, @request_token.params)
   
   respond_to do |format|
     format.json {
@@ -56,6 +58,7 @@ class CyworldController < ApplicationController
       redirect_to authorize_path
     }
   end
+
 =begin
 OAuth::Consumer.new(consumer_key, consumer_secret,
                                :site => "http://api.justin.tv",
@@ -86,6 +89,30 @@ OAuth::Consumer.new(consumer_key, consumer_secret,
 
   end
   
+  def confirm
+    client_options = {
+      :site => 'https://oauth.nate.com',
+      :authorize_path => "/OAuth/Authorize/V1a",
+      :access_token_path => "/OAuth/GetAccessToken/V1a",
+      :request_token_path => '/OAuth/GetRequestToken/V1a',
+      :oauth_callback => "http://www.pumpl.com/cyworld/confirm.json",
+      :oauth_version => "1.0"
+    }
+    @consumer = OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, client_options)
+    @request_token = OAuth::RequestToken.from_hash(@consumer, @api_user.cyworld_request_token_response)
+    @access_token = @consumer.get_access_token @request_token, {:oauth_verifier => params[:verifier]}
+    response = @consumer.request(:post, "/OAuth/GetNateMemberInfo/V1a", @access_token)
+
+    respond_to do |format|
+      format.json {
+        render :json => Hash.from_xml(response.body).to_json
+      }
+      format.html {
+        redirect_to authorize_path
+      }
+    end
+  end
+
   protected
 
   def sig

@@ -236,15 +236,15 @@
 
 <h2>Connect to Cyworld STEP 2</h2>
 <% if @photo_user.session_api %>
-<form action="/cyworld/connect.json" method="post">
+<form action="/cyworld/confirm.json" method="post">
 	<p>ID <br />
 	<%= text_field_tag "id",@photo_user.id %></p>
 	
 	<p>Session API: <br />
 	<%= text_field_tag "session_api", @photo_user.session_api %></p>
 	
-	<p>Auth: <br />
-	<%= text_field_tag "auth"%></p>
+	<p>Auth Verifier: <br />
+	<%= text_field_tag "verifier"%></p>
 	
 	<p><%= submit_tag "Connect" %></p>	
 </form>

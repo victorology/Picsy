@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   before_save :downcase_email
   
   mount_uploader :profile_photo, ProfileUploader
+  serialize :cyworld_request_token_response, Hash
   
   def twitter_connected?
     if self.twitter_token and self.twitter_secret

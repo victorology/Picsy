@@ -70,6 +70,7 @@ Picsy::Application.routes.draw do
   resources :cyworld do 
     collection do
       post 'connect'
+      post 'confirm'
     end
   end
       
