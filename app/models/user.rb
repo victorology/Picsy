@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   
   mount_uploader :profile_photo, ProfileUploader
   serialize :cyworld_request_token_response, Hash
+  serialize :cyworld_access_token_response, Hash
   
   def twitter_connected?
     if self.twitter_token and self.twitter_secret
@@ -152,6 +153,16 @@ class User < ActiveRecord::Base
     else
       return nil
     end
+  end
+
+  def cyworld_request_token
+    return nil if self.cyworld_request_token_response.blank?
+    OAuth::RequestToken.from_hash(CYWORLD_CONSUMER, self.cyworld_request_token_response)
+  end
+
+  def cyworld_access_token
+    return nil if self.cyworld_access_token_response.blank?
+    OAuth::AccessToken.from_hash(CYWORLD_CONSUMER, self.cyworld_access_token_response)
   end
   
   protected

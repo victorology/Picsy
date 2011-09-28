@@ -76,6 +76,15 @@ TUMBLR_SALT = "phKYU0cGo7gdAB5djukKxOp1cLyhggHtP8oYACLO7nns"
 ## CYWORLD
 CYWORLD_KEY = '57da071cfa829016b63fb10d9653947b04dfa0ba3'
 CYWORLD_SECRET = '2bb2f4150d18a8ca4ebd304e08345369'
+CYWOLRD_CLIENT_OPTIONS = {
+  :site => 'https://oauth.nate.com',
+  :authorize_path => "/OAuth/Authorize/V1a",
+  :access_token_path => "/OAuth/GetAccessToken/V1a",
+  :request_token_path => '/OAuth/GetRequestToken/V1a',
+  :oauth_callback => "http://www.pumpl.com/cyworld/confirm.json",
+  :oauth_version => "1.0"
+}
+CYWORLD_CONSUMER = OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, CYWOLRD_CLIENT_OPTIONS)s
 
 ## ME2DAY config
 ME2DAY_KEY = "2a8512295365b1fe59b9ecc691c4fcb1"
