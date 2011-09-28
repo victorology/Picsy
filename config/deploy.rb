@@ -40,7 +40,7 @@ end
 
 after 'deploy:update_code', 'bundler:symlink_bundled_gems'
 after 'deploy:update_code', 'bundler:install'
-after "deploy:update_code", "delayed_job:restart"
+#after "deploy:update_code", "delayed_job:restart"
 
  
 
