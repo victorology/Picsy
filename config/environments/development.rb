@@ -54,7 +54,6 @@ CYWOLRD_CLIENT_OPTIONS = {
   :oauth_callback => "http://www.pumpl.com/cyworld/confirm.json",
   :oauth_version => "1.0"
 }
-CYWORLD_CONSUMER = OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, CYWOLRD_CLIENT_OPTIONS)
 
 =begin
 OLD KEY 85700c4d74697b45cff0b499c09c253e

@@ -157,15 +157,19 @@ class User < ActiveRecord::Base
 
   def cyworld_request_token
     return nil if self.cyworld_request_token_response.blank?
-    OAuth::RequestToken.from_hash(CYWORLD_CONSUMER, self.cyworld_request_token_response)
+    OAuth::RequestToken.from_hash(cyworld_consumer, self.cyworld_request_token_response)
   end
 
   def cyworld_access_token
     return nil if self.cyworld_access_token_response.blank?
-    OAuth::AccessToken.from_hash(CYWORLD_CONSUMER, self.cyworld_access_token_response)
+    OAuth::AccessToken.from_hash(cyworld_consumer, self.cyworld_access_token_response)
   end
   
   protected
+  
+  def cyworld_consumer
+    OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, CYWOLRD_CLIENT_OPTIONS)
+  end
   
   def downcase_email
     write_attribute(:email,self.email.downcase)
