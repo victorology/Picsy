@@ -84,7 +84,7 @@ CYWOLRD_CLIENT_OPTIONS = {
   :oauth_callback => "http://www.pumpl.com/cyworld/confirm.json",
   :oauth_version => "1.0"
 }
-CYWORLD_CONSUMER = OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, CYWOLRD_CLIENT_OPTIONS)s
+CYWORLD_CONSUMER = OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, CYWOLRD_CLIENT_OPTIONS)
 
 ## ME2DAY config
 ME2DAY_KEY = "2a8512295365b1fe59b9ecc691c4fcb1"
