@@ -48,6 +48,7 @@ Picsy::Application.routes.draw do
   match 'photo/:nickname/q:code' => 'photos#show'
   match 'photo/:nickname/x:code' => 'photos#show'
   match 'facebook/confirm_api/:session_api/id/:id.:format' => 'facebook#confirm_api'
+  match 'admin' => 'admin/users#sign_in'
   
   resources :home do
     collection do
@@ -160,6 +161,9 @@ Picsy::Application.routes.draw do
     resources :referrals
     resources :users do
       delete 'multiple_destroy', :on => :collection
+      collection do
+        get 'sign_in'
+      end  
     end
     resources :photos do
       delete 'multiple_destroy', :on => :collection

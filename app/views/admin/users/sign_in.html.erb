@@ -1,0 +1,18 @@
+<body>
+<div id="login_alert" class="alert" style="text-align:center;"><%= params[:msg] %></div>	
+<div id="login">
+	<% form_for(:user, :url => session_path("user")) do |f| %>
+		<fieldset>
+		<legend>로그인</legend>
+		<ul>
+			<li><%= f.label :email,t("email") %>
+			<%= f.text_field :email %></li>
+			<li><%= f.label :password,t("password") %>
+			<%= f.password_field :password %></li>
+		</ul>
+		<%= submit_tag "Submit" %>
+		</fieldset>
+	<% end %>
+</div>
+<br /><br />
+</body>

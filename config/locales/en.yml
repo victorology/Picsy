@@ -50,6 +50,8 @@ en:
   "the old password you entered incorrect, please try it again": "the old password you entered incorrect, please try it again"
   "you aren't registered to PUMPL or your PUMPL account isn't linked to Facebook account": "you aren't registered to PUMPL or your PUMPL account isn't linked to Facebook account"
   "failed to connect to facebook, please try again": "failed to connect to facebook, please try again"
+  "email": "email"
+  "password": "password"
   
 ## translation for Active Record goes here
 ## however don't translate word inside %{}

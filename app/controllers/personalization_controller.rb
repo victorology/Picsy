@@ -4,16 +4,6 @@ class PersonalizationController < ApplicationController
   before_filter :convert_api_params, :only => [:user_creation]
   protect_from_forgery :except => [:user_creation]
   
-  
-  def user_sign_in
-    @user = User.new
-    render :layout => "register"
-  end  
-  
-  def sign_in_done
-    flash[:notice] = t("you have logged in successfully")
-    redirect_to my_path
-  end  
 
   def user_creation
     @user = User.new(params[:user])

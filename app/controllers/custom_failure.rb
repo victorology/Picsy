@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class CustomFailure < Devise::FailureApp
   def redirect_url
-    user_sign_in_personalization_index_url(:msg => "login failed")
+    sign_in_admin_users_url(:msg => "login failed")
   end
 
   # You need to override respond to eliminate recall

@@ -49,6 +49,7 @@
                                                      /photo/:nickname/q:code(.:format)                  {:controller=>"photos", :action=>"show"}
                                                      /photo/:nickname/x:code(.:format)                  {:controller=>"photos", :action=>"show"}
                                                      /facebook/confirm_api/:session_api/id/:id.:format  {:controller=>"facebook", :action=>"confirm_api"}
+                                        admin        /admin(.:format)                                   {:action=>"sign_in", :controller=>"admin/users"}
                          crawl_rss_home_index GET    /home/crawl_rss(.:format)                          {:action=>"crawl_rss", :controller=>"home"}
                     run_scheduling_home_index GET    /home/run_scheduling(.:format)                     {:action=>"run_scheduling", :controller=>"home"}
                                    home_index GET    /home(.:format)                                    {:action=>"index", :controller=>"home"}
@@ -77,6 +78,7 @@
                                               PUT    /me2day/:id(.:format)                              {:action=>"update", :controller=>"me2day"}
                                               DELETE /me2day/:id(.:format)                              {:action=>"destroy", :controller=>"me2day"}
                         connect_cyworld_index POST   /cyworld/connect(.:format)                         {:action=>"connect", :controller=>"cyworld"}
+                        confirm_cyworld_index POST   /cyworld/confirm(.:format)                         {:action=>"confirm", :controller=>"cyworld"}
                                 cyworld_index GET    /cyworld(.:format)                                 {:action=>"index", :controller=>"cyworld"}
                                               POST   /cyworld(.:format)                                 {:action=>"create", :controller=>"cyworld"}
                                   new_cyworld GET    /cyworld/new(.:format)                             {:action=>"new", :controller=>"cyworld"}
@@ -155,6 +157,7 @@ do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categor
                                               PUT    /admin/referrals/:id(.:format)                     {:action=>"update", :controller=>"admin/referrals"}
                                               DELETE /admin/referrals/:id(.:format)                     {:action=>"destroy", :controller=>"admin/referrals"}
                  multiple_destroy_admin_users DELETE /admin/users/multiple_destroy(.:format)            {:action=>"multiple_destroy", :controller=>"admin/users"}
+                          sign_in_admin_users GET    /admin/users/sign_in(.:format)                     {:action=>"sign_in", :controller=>"admin/users"}
                                   admin_users GET    /admin/users(.:format)                             {:action=>"index", :controller=>"admin/users"}
                                               POST   /admin/users(.:format)                             {:action=>"create", :controller=>"admin/users"}
                                new_admin_user GET    /admin/users/new(.:format)                         {:action=>"new", :controller=>"admin/users"}
