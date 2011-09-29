@@ -1,1 +1,1 @@
-git push origin pre && cap pre deploy
+git push origin master && cap deploy
