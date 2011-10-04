@@ -22,6 +22,8 @@ class PhotoJob < Struct.new(:photo_id, :host_with_port)
     #upload to twitter
     @photo.twitter
 
+    #upload to cyworld
+    @photo.cyworld
   end  
 
 end  

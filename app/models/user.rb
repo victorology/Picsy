@@ -164,13 +164,18 @@ class User < ActiveRecord::Base
     return nil if self.cyworld_access_token_response.blank?
     OAuth::AccessToken.from_hash(cyworld_consumer, self.cyworld_access_token_response)
   end
-  
-  protected
-  
-  def cyworld_consumer
+
+  def cyworld_connected?
+    !self.cyworld_access_token_response.blank?
+  end  
+
+  def cyworld_consumer(site = 'https://oauth.nate.com')
+    CYWOLRD_CLIENT_OPTIONS[:site] = site
     OAuth::Consumer.new(CYWORLD_KEY, CYWORLD_SECRET, CYWOLRD_CLIENT_OPTIONS)
   end
   
+  protected
+    
   def downcase_email
     write_attribute(:email,self.email.downcase)
   end  

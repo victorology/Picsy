@@ -204,6 +204,16 @@ class Photo < ActiveRecord::Base
       end  
     end 
   end
+
+  def cyworld
+    if self.user.cyworld_connected? == true and self.post_to_cyworld == "yes"
+      options = {:title => self.title,
+                 :photoUrls => self.host_with_port+self.image.url,
+                 :content => "#{truncate(self.title, :length => 120)} #{self.shortened_url}"}
+      consumer = self.user.cyworld_consumer('https://oauth.nate.com')
+      consumer.request(:post, "/OApi/RestApiSSL/CY/200110/xml_RegisterPhotoItem/v1", self.user.cyworld_access_token, options)
+    end
+  end
   
   ## options[:thumbnail]
   
