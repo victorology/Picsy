@@ -131,8 +131,36 @@ class FacebookController < ApplicationController
     }
     render :json => JSON.generate(@raw_result)
   end  
-  
-  
+
+  def albums
+    respond_to do |format|
+      format.json {
+        albums = @api_user.facebook_connected? ? @api_user.facebook_albums : []
+        if albums.size > 0   
+          albums.sort!{|x,y| x["name"] <=> y["name"]}       
+          @raw_result = {
+            :code => 0,
+            :error_message => nil,
+            :value => albums.collect{|album| {:id => album["id"], :name => album["name"]} }
+          }
+        else
+          if @api_user.facebook_connected? 
+            message = t("you don't have any facebook albums")
+          else
+            message = t("You have to connect to facebook to fecth albums")
+          end
+          @raw_result = {
+            :code => 1,
+            :error_message => message,
+            :value => nil
+          }
+        end    
+
+        render :json => JSON.generate(@raw_result), :content_type => Mime::JSON
+      }
+    end
+  end
+
   protected
   
   def facebook_connect

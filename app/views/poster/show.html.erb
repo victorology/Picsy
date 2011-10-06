@@ -364,6 +364,18 @@
  You need to logged in via API first
 <% end %>
 
+<h2>Retrieve facebook albums API</h2>
+<% if @photo_user.session_api %>
+<form action="/facebook/albums.json" method="get">
+	<p> User : <br />
+	<b><%= @photo_user.nickname %></b></p>	
+	<%= hidden_field_tag "id",@photo_user.id %>
+	<%= hidden_field_tag "session_api", @photo_user.session_api %>
+	<%= submit_tag "Retrieve" %>
+</form>
+<% else %>
+  You need to logged in via API first
+<% end %>
 
 <h2>Retrieve My Photos API</h2>
 <form action="/photos/mine.json" method="get" enctype="multipart/form-data">
