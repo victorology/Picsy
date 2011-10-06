@@ -103,8 +103,8 @@ class Photo < ActiveRecord::Base
   end  
 
   def fb_photo_to_album
-    if self.user.facebook_connected? == true and self.post_to_facebook_album == "yes" and !self.fb_album_name.blank?
-      @album_id = self.user.find_or_create_by_facebook_album(self.fb_album_name)
+    if self.user.facebook_connected? == true and self.post_to_facebook_album == "yes" and (!self.fb_album_name.blank? || !self.fb_album_id.blank?)
+      @album_id = self.fb_album_id.blank? ? self.user.find_or_create_by_facebook_album(self.fb_album_name) : self.fb_album_id
 
       ## post photo to facebook
       clnt = HTTPClient.new      
@@ -126,7 +126,7 @@ class Photo < ActiveRecord::Base
       else  
         self.update_attributes(:fb_original_url => rs["source"], :fb_thumbnail_url => rs["picture"])
       end  
-    elsif self.user.facebook_connected? == false and self.post_to_facebook_album == "yes" and !self.album_name.blank?
+    elsif self.user.facebook_connected? == false and self.post_to_facebook_album == "yes" and !self.fb_album_name.blank?
       errors[:base] << "Can't post photo to facebook, you need to link your account first" 
       return false
     end  
