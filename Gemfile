@@ -49,6 +49,7 @@ gem 'hominid'									,"3.0.2"
 gem 'httmultiparty'					  ,"0.3.2"
 gem 'delayed_job'					  	,'2.1.4'
 gem 'daemons'									,"1.0.10"
+gem 'daemon-spawn'						,"0.4.2"
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
