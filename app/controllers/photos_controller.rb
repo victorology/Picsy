@@ -82,7 +82,7 @@ class PhotosController < ApplicationController
         if @photo.save
           
           #upload photo to social networks
-          Delayed::Job.enqueue PhotoJob.new(@photo.id, "http://"+request.host_with_port)
+          Resque.enqueue(PhotoJob, @photo.id, "http://"+request.host_with_port)
           
           @raw_result = {
             :code => 0,

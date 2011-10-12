@@ -1,6 +1,7 @@
-class PhotoJob < Struct.new(:photo_id, :host_with_port)  
+class PhotoJob  
+  @queue = :upload_photo_to_sns
   
-  def perform  
+  def self.perform(photo_id, host_with_port)
     @photo = Photo.find(photo_id)
     @photo.host_with_port = host_with_port
     
