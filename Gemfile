@@ -15,9 +15,7 @@ gem 'capistrano'
 gem 'capistrano-ext'
 
 # To use debugger
-group :development do
-  gem 'ruby-debug19', :require => 'ruby-debug'
-end
+gem 'ruby-debug19', :require => 'ruby-debug'
 
 # Bundle the extra gems:
 # gem 'bj'
