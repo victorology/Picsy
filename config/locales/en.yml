@@ -2,11 +2,11 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  "you need to logged in to access this feature": "you need to logged in to access this feature"
-  "login failed": "login failed"
-  "failed to authorize facebook, please try again": "failed to authorize facebook, please try again"
-  "your account has been linked successfully to facebook": "your account has been linked successfully to facebook"
-  "your account has been unlinked from facebook successfully": "your account has been unlinked from facebook successfully"
+  "you need to logged in to access this feature": "You must login to use this feature."
+  "login failed": "Sorry, your login failed. Please try again. :("
+  "failed to authorize facebook, please try again": "Sorry, we were unable to authorize your Facebook. Please try again. :("
+  "your account has been linked successfully to facebook": "Congratulations! You have connected your account to Facebook. :D"
+  "your account has been unlinked from facebook successfully": "Your account has been unlinked from Facebook."
   "failed": "failed"
   "success": "success"
   "your account has been unlinked from me2day successfully": "your account has been unlinked from me2day successfully"
