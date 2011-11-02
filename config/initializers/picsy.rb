@@ -1,4 +1,4 @@
-FB_ALBUM_NAME = "Mobile Photos (PUMPL)"
+FB_ALBUM_NAME = "Mobile Uploads (PUMPL)"
 
 #http://localhost:3301/photos/7c997030852f012e367e00254ba34756/regenerate
 GENERATE_PHOTO_KEY = "7c997030852f012e367e00254ba34756"
