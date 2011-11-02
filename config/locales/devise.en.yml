@@ -7,29 +7,29 @@ en:
 
   devise:
     failure:
-      unauthenticated: 'You need to sign in or sign up before continuing.'
-      unconfirmed: 'You have to confirm your account before continuing.'
+      unauthenticated: 'You must login or sign up before continuing.'
+      unconfirmed: 'You must confirm your account before continuing.'
       locked: 'Your account is locked.'
-      invalid: 'Invalid email or password.'
-      invalid_token: 'Invalid authentication token.'
-      timeout: 'Your session expired, please sign in again to continue.'
-      inactive: 'Your account was not activated yet.'
+      invalid: 'Sorry, your email or password is invalid. :('
+      invalid_token: 'Sorry, we were unable to authenticate your account. :('
+      timeout: 'You have been logged out. Please login again to continue.'
+      inactive: 'Your account has not been activated yet.'
     sessions:
-      signed_in: 'Signed in successfully.'
-      signed_out: 'Signed out successfully.'
+      signed_in: 'You have logged in successfully.'
+      signed_out: 'You have logged out successfully.'
     passwords:
-      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
-      updated: 'Your password was changed successfully. You are now signed in.'
+      send_instructions: 'You will receive an email with instructions about how to reset your password soon.'
+      updated: 'Your password was changed successfully. You are now logged in.'
     confirmations:
       send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
-      confirmed: 'Your account was successfully confirmed. You are now signed in.'
+      confirmed: 'Your account was successfully confirmed. You are now logged in.'
     registrations:
-      signed_up: 'You have signed up successfully. The confirmation was sent to your e-mail.'
+      signed_up: 'You have signed up successfully. The confirmation was sent to your email.'
       updated: 'You updated your account successfully.'
-      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
+      destroyed: 'Your account has been cancelled but we are sorry to see you leave. :( We hope to see you again soon.'
     unlocks:
-      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
-      unlocked: 'Your account was successfully unlocked. You are now signed in.'
+      send_instructions: 'You will receive an email with instructions about how to unlock your account soon.'
+      unlocked: 'Your account was successfully unlocked. You are now logged in.'
     mailer:
       confirmation_instructions:
         subject: 'Confirmation instructions'
