@@ -49,7 +49,7 @@ en:
   "password and password confirmation doesn't match": "Sorry, your password and password confirmation doesn't match."
   "the old password you entered incorrect, please try it again": "Sorry, the old password you entered is incorrect. Please try again. :("
   "you aren't registered to PUMPL or your PUMPL account isn't linked to Facebook account": "You haven't signed up at PUMPL or your PUMPL account isn't linked to a Facebook account."
-  "failed to connect to facebook, please try again": "We were unable to connect you to Facebook. Please try again. :(""
+  "failed to connect to facebook, please try again": "We were unable to connect you to Facebook. Please try again. :("
   "email": "Email"
   "password": "Password"
   
