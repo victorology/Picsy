@@ -7,7 +7,7 @@ class LaunchController < ApplicationController
     if params[:token]
       Rails.logger.info "SESSION ON INDEX #{session.inspect}" 
       
-      pre_protocol = (RAILS_ENV=="production") ? "http://www.pumpl.com/" : nil
+      pre_protocol = (RAILS_ENV=="production") ? "http://www.pumpl.com" : nil
       
       redirect_to pre_protocol+confirm_me2day_index_path(
         :token => params[:token],
