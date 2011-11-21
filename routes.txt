@@ -23,6 +23,14 @@
                                        launch GET    /launch/:id(.:format)                              {:action=>"show", :controller=>"launch"}
                                               PUT    /launch/:id(.:format)                              {:action=>"update", :controller=>"launch"}
                                               DELETE /launch/:id(.:format)                              {:action=>"destroy", :controller=>"launch"}
+                      check_sns_key_utilities POST   /utilities/check_sns_key(.:format)                 {:action=>"check_sns_key", :controller=>"utilities"}
+                                    utilities GET    /utilities(.:format)                               {:action=>"index", :controller=>"utilities"}
+                                              POST   /utilities(.:format)                               {:action=>"create", :controller=>"utilities"}
+                                  new_utility GET    /utilities/new(.:format)                           {:action=>"new", :controller=>"utilities"}
+                                 edit_utility GET    /utilities/:id/edit(.:format)                      {:action=>"edit", :controller=>"utilities"}
+                                      utility GET    /utilities/:id(.:format)                           {:action=>"show", :controller=>"utilities"}
+                                              PUT    /utilities/:id(.:format)                           {:action=>"update", :controller=>"utilities"}
+                                              DELETE /utilities/:id(.:format)                           {:action=>"destroy", :controller=>"utilities"}
                          update_profile_users POST   /users/update_profile(.:format)                    {:action=>"update_profile", :controller=>"users"}
                    update_profile_photo_users POST   /users/update_profile_photo(.:format)              {:action=>"update_profile_photo", :controller=>"users"}
                                  follow_users POST   /users/follow(.:format)                            {:action=>"follow", :controller=>"users"}
@@ -135,6 +143,7 @@
    assign_categories_locations_facebook_index GET    /facebook/assign_categories_locations(.:format)    {:action=>"assign_categories_locations", :controller=>"facebook"}
 do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categories_locations(.:format) {:action=>"do_assign_categories_locations", :controller=>"facebook"}
                 single_sign_on_facebook_index POST   /facebook/single_sign_on(.:format)                 {:action=>"single_sign_on", :controller=>"facebook"}
+                        albums_facebook_index GET    /facebook/albums(.:format)                         {:action=>"albums", :controller=>"facebook"}
                                facebook_index GET    /facebook(.:format)                                {:action=>"index", :controller=>"facebook"}
                                               POST   /facebook(.:format)                                {:action=>"create", :controller=>"facebook"}
                                  new_facebook GET    /facebook/new(.:format)                            {:action=>"new", :controller=>"facebook"}
@@ -198,3 +207,4 @@ do_assign_categories_locations_facebook_index POST   /facebook/do_assign_categor
                                                      /q:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
                                                      /x:code(.:format)                                  {:controller=>"photos", :action=>"shortened"}
                                                      /v:code(.:format)                                  {:controller=>"launch", :action=>"index"}
+                                       resque        /resque                                            {:to=>Resque::Server}

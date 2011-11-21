@@ -13,6 +13,12 @@ Picsy::Application.routes.draw do
       get 'thank_you'
     end
   end
+  
+  resources :utilities do
+    collection do
+      post 'check_sns_key'
+    end  
+  end  
 
   resources :users do 
     collection do

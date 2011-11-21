@@ -128,6 +128,21 @@
  You need to logged in via API first
 <% end %>
 
+<h2>Check whether SNS key is expired or not</h2>
+<% if @photo_user.session_api %>
+<form action="/utilities/check_sns_key.json" method="post">
+	<p>ID <br />
+	<%= text_field_tag "id",@photo_user.id %></p>
+	
+	<p>Session API: <br />
+	<%= text_field_tag "session_api", @photo_user.session_api %></p>	
+	
+	<%= submit_tag "Check" %></p>		
+</form>
+<% else %>
+ You need to logged in via API first
+<% end %>
+
 <h2>Connect to Twitter</h2>
 <% if @photo_user.session_api %>
 <form action="/twitter/xauth_token.json" method="post">
