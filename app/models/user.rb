@@ -139,7 +139,8 @@ class User < ActiveRecord::Base
   def facebook_albums
     clnt = HTTPClient.new      
     response = clnt.get("https://graph.facebook.com/me/albums", {:access_token => self.facebook_token})
-    return JSON.parse(response.body)["data"].select{|album| album["type"] != "wall"}
+    data = JSON.parse(response.body)["data"]
+    return (data.nil?) ? [] : data.select{|album| album["type"] != "wall"}
   end
 
   def facebook_albums_array_for_select

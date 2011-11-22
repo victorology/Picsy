@@ -7,7 +7,7 @@ class UtilitiesController < ApplicationController
     respond_to do |format|
       format.json {
         @raw_result = {
-          :code => 1,
+          :code => 0,
           :error_message => nil,
           :value => result
         }
@@ -19,6 +19,7 @@ class UtilitiesController < ApplicationController
   
   protected
   def check_facebook_key
+    rs = nil
     if current_user.facebook_connected? == true
       begin
         client = FacebookOAuth::Client.new(
@@ -26,12 +27,23 @@ class UtilitiesController < ApplicationController
           :application_secret => FACEBOOK_APPLICATION_SECRET,
           :token => current_user.facebook_token
         )
-        return client.me.info
+        rs = {
+          :expired => false,
+          :account_info => client.me.info
+        } 
       rescue OAuth2::HTTPError
-        current_user.update_attribute(:facebook_token,nil)
-        "facebook token is expired, facebook token data has been reset"
-      end    
+        facebook_expired
+      rescue OAuth2::AccessDenied   
+        facebook_expired
+      end   
+    else
+      rs = {
+        :expired => true,
+        :account_info => nil
+      }     
     end
+    
+    return rs
   end
   
   def check_twitter_key
@@ -45,6 +57,14 @@ class UtilitiesController < ApplicationController
   def check_me2day_key
     
   end
+  
+  def facebook_expired
+    current_user.update_attribute(:facebook_token,nil)
+    rs = {
+      :expired => true,
+      :account_info => nil
+    }
+  end  
   
          
 
