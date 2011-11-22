@@ -28,7 +28,7 @@ class TumblrController < ApplicationController
         :error_message => t("this tumblr email has already been taken by other user"),
         :value => nil
       }   
-    elsif response.body.include?("invalid credentials")
+    elsif response.body.include?("Invalid credentials")
       @raw_result = {
         :code => 1,
         :error_message => t("invalid credentials"),

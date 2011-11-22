@@ -2,7 +2,9 @@ class UtilitiesController < ApplicationController
 
   def check_sns_key
     result = {}
+
     result[:facebook] = check_facebook_key
+    result[:tumblr] = check_tumblr_key
     
     respond_to do |format|
       format.json {
@@ -29,7 +31,7 @@ class UtilitiesController < ApplicationController
         )
         rs = {
           :expired => false,
-          :account_info => client.me.info
+          :info => client.me.info
         } 
       rescue OAuth2::HTTPError
         facebook_expired
@@ -43,12 +45,38 @@ class UtilitiesController < ApplicationController
     return rs
   end
   
-  def check_twitter_key
+  def check_tumblr_key
+    rs = nil
+    if current_user.tumblr_connected? == true
+      data = {
+        :email => current_user.tumblr_email,
+        :password => User.tumblr_pwd_decrypt(current_user.tumblr_secret)
+      }
+      
+      clnt = HTTPClient.new
+      response = clnt.post("http://www.tumblr.com/api/authenticate",data)
 
+      if response.body.include?("Invalid credentials")
+        tumblr_expired
+      else
+        doc = Nokogiri::XML response.body
+        rs = {
+          :expired => false,
+          :info => {
+            :email => current_user.tumblr_email,
+            :nickname => doc.xpath("//tumblr//tumblelog")[0].attr('name'),
+            :url => doc.xpath("//tumblr//tumblelog")[0].attr('url'),
+            :avatar_url => doc.xpath("//tumblr//tumblelog")[0].attr('avatar-url'),
+          }
+        }
+      end
+    else
+      tumblr_expired  
+    end      
   end
   
-  def check_tumblr_key
-    
+  def check_twitter_key
+
   end
   
   def check_me2day_key
@@ -64,7 +92,20 @@ class UtilitiesController < ApplicationController
     
     rs = {
       :expired => true,
-      :account_info => nil
+      :info => nil
+    }
+  end  
+  
+  def tumblr_expired
+    current_user.update_attributes(
+      :tumblr_email =>nil,
+      :tumblr_secret => nil,
+      :tumblr_nickname => nil
+    )
+    
+    rs = {
+      :expired => true,
+      :info => nil
     }
   end  
   
