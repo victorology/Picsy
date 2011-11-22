@@ -37,10 +37,7 @@ class UtilitiesController < ApplicationController
         facebook_expired
       end   
     else
-      rs = {
-        :expired => true,
-        :account_info => nil
-      }     
+      facebook_expired  
     end
     
     return rs
@@ -59,7 +56,12 @@ class UtilitiesController < ApplicationController
   end
   
   def facebook_expired
-    current_user.update_attribute(:facebook_token,nil)
+    current_user.update_attributes(
+      :facebook_token =>nil,
+      :facebook_nickname => nil,
+      :facebook_id => nil
+    )
+    
     rs = {
       :expired => true,
       :account_info => nil
