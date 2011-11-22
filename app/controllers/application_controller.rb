@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       @api_user = User.find(:first, :conditions => {:id => params[:id], :session_api => params[:session_api]})  
       if @api_user.blank?
         @raw_result = {
-          :code => 1,
+          :code => (params[:controller] == "photos" and params[:action] == "mine") ? 2 : 1,
           :error_message => t("you need to logged in to access this feature"),
           :value => nil
         }
