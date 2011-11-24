@@ -3,8 +3,9 @@ class UtilitiesController < ApplicationController
   def check_sns_key
     result = {}
 
-    result[:facebook] = check_facebook_key
-    result[:tumblr] = check_tumblr_key
+    #result[:facebook] = check_facebook_key
+    #result[:tumblr] = check_tumblr_key
+    result[:twitter] = check_twitter_key
     
     respond_to do |format|
       format.json {
@@ -76,12 +77,33 @@ class UtilitiesController < ApplicationController
   end
   
   def check_twitter_key
-
+    rs = nil
+    if current_user.twitter_connected? == true
+      client = TwitterOAuth::Client.new(
+        :consumer_key => TWITTER_CONSUMER_KEY,
+        :consumer_secret => TWITTER_CONSUMER_SECRET,
+        :token => self.user.twitter_token, 
+        :secret => self.user.twitter_secret
+      )
+      debugger
+      client.info 
+    else
+      twitter_expired
+    end     
   end
   
   def check_me2day_key
     
   end
+  
+  def twitter_expired
+    current_user.update_attributes(
+      :twitter_token => nil,
+      :twitter_nickname => nil,
+      :twitter_id => nil,
+      :twitter_secret => nil
+    )
+  end  
   
   def facebook_expired
     current_user.update_attributes(
