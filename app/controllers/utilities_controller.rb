@@ -82,11 +82,18 @@ class UtilitiesController < ApplicationController
       client = TwitterOAuth::Client.new(
         :consumer_key => TWITTER_CONSUMER_KEY,
         :consumer_secret => TWITTER_CONSUMER_SECRET,
-        :token => self.user.twitter_token, 
-        :secret => self.user.twitter_secret
+        :token => current_user.twitter_token, 
+        :secret => current_user.twitter_secret
       )
-      debugger
-      client.info 
+      info = client.info
+      if info["error"]
+        twitter_expired
+      else
+        rs = {
+          :expired => false,
+          :info => info
+        }
+      end     
     else
       twitter_expired
     end     
@@ -103,6 +110,11 @@ class UtilitiesController < ApplicationController
       :twitter_id => nil,
       :twitter_secret => nil
     )
+    
+    rs = {
+      :expired => true,
+      :info => nil
+    }
   end  
   
   def facebook_expired
