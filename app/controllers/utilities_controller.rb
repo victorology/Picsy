@@ -3,8 +3,8 @@ class UtilitiesController < ApplicationController
   def check_sns_key
     result = {}
 
-    #result[:facebook] = check_facebook_key
-    #result[:tumblr] = check_tumblr_key
+    result[:facebook] = check_facebook_key
+    result[:tumblr] = check_tumblr_key
     result[:twitter] = check_twitter_key
     
     respond_to do |format|
