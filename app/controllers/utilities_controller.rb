@@ -85,10 +85,15 @@ class UtilitiesController < ApplicationController
         :token => current_user.twitter_token, 
         :secret => current_user.twitter_secret
       )
-      info = client.info
-      if info["error"]
+      client_info = client.info
+      
+      if client_info["error"]
         twitter_expired
       else
+        info = Hash.new
+        ["id","name","location","screen_name","friends_count","description"].each do |key|
+          info[key] = client_info[key]
+        end  
         rs = {
           :expired => false,
           :info => info
