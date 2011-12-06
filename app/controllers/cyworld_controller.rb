@@ -5,8 +5,11 @@ class CyworldController < ApplicationController
   def connect
 
     @request_token = cyworld_consumer.get_request_token
-    @api_user.update_attribute(:cyworld_request_token_response, @request_token.params)
-  
+    #@api_user.update_attribute(:cyworld_request_token_response, @request_token.params)
+    #@api_user.update_attributes(
+    #  :cyworld_key => @request_token.params[:oauth_token],
+    #  :cyworld_secret => @request_token.params[:oauth_token_secret] 
+    #)
     respond_to do |format|
       format.json {
         @raw_result = {
@@ -26,10 +29,17 @@ class CyworldController < ApplicationController
   end
   
   def confirm
-    @request_token = @api_user.cyworld_request_token
+    @request_token = cyworld_consumer.get_request_token
     @access_token = cyworld_consumer.get_access_token @request_token, {:oauth_verifier => params[:verifier]}
-    @api_user.update_attribute(:cyworld_access_token_response, @access_token.params)
-
+    
+    @api_user.update_attributes!(
+      :cyworld_key => @access_token.token,
+      :cyworld_secret => @access_token.secret 
+    )
+    
+    Rails.logger.info "CYWORLD KEY #{@api_user.cyworld_key}"
+    Rails.logger.info "CYWORLD SECRET #{@api_user.cyworld_secret}"
+    
     respond_to do |format|
       format.json {
         render :json => Hash.from_xml(response.body).to_json

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :twitter_id, :facebook_token, :facebook_nickname, :facebook_id, :tumblr_email, :tumblr_secret, :tumblr_nickname, :phone_number, :password, :profile_photo, :is_admin, :me2day_id, :me2day_key, :me2day_nickname, :language
+  attr_accessible :email, :password, :remember_me, :nickname, :first_name, :last_name, :twitter_token, :twitter_secret, :twitter_nickname, :twitter_id, :facebook_token, :facebook_nickname, :facebook_id, :tumblr_email, :tumblr_secret, :tumblr_nickname, :phone_number, :password, :profile_photo, :is_admin, :me2day_id, :me2day_key, :me2day_nickname, :language, :cyworld_key, :cyworld_secret
   
   validates :nickname, :presence => true, :nickname_format => true, :uniqueness => true
 
@@ -31,8 +31,8 @@ class User < ActiveRecord::Base
   before_save :downcase_email
   
   mount_uploader :profile_photo, ProfileUploader
-  serialize :cyworld_request_token_response, Hash
-  serialize :cyworld_access_token_response, Hash
+  #serialize :cyworld_request_token_response, Hash
+  #serialize :cyworld_access_token_response, Hash
   
   def twitter_connected?
     if self.twitter_token and self.twitter_secret
@@ -166,8 +166,9 @@ class User < ActiveRecord::Base
   end
 
   def cyworld_request_token
-    return nil if self.cyworld_request_token_response.blank?
-    OAuth::RequestToken.from_hash(cyworld_consumer, self.cyworld_request_token_response)
+    #return nil if self.cyworld_request_token_response.blank?
+    #OAuth::RequestToken.from_hash(cyworld_consumer, self.cyworld_request_token_response)
+    return nil if self.cyworld_key
   end
 
   def cyworld_access_token

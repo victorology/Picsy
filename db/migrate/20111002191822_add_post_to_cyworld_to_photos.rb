@@ -4,6 +4,6 @@ class AddPostToCyworldToPhotos < ActiveRecord::Migration
   end
 
   def self.down
-    add_column :photos, :post_to_cyworld
+    remove_column :photos, :post_to_cyworld
   end
 end
