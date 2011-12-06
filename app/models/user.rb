@@ -177,7 +177,7 @@ class User < ActiveRecord::Base
   end
 
   def cyworld_connected?
-    !self.cyworld_access_token_response.blank?
+    !self.cyworld_secret.blank?
   end  
 
   def cyworld_consumer(site = 'https://oauth.nate.com')

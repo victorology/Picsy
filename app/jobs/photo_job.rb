@@ -24,7 +24,7 @@ class PhotoJob
     @photo.twitter
 
     #upload to cyworld
-    @photo.cyworld
+    # @photo.cyworld
   end  
 
 end  

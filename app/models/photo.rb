@@ -187,20 +187,7 @@ class Photo < ActiveRecord::Base
           Rails.logger.info inspect_message
           self.update_attribute(:me2day_error_message,inspect_message)
         end
-=begin              
-        Rails.logger.info "ME2DAY NICKNAME #{self.user.me2day_nickname} \n"      
-        Rails.logger.info "STARTING TO GET POSTs"
-              
-        posts = @client.get_posts(self.user.me2day_id)
-        Rails.logger.info "GRAB POSTS #{posts.inspect} \n"
-              
-        photo_path = Rails.root.to_s+"/public"+self.image.url.split("?")[0]
-        Rails.logger.info "PHOTO PATH #{photo_path} \n"
-              
-        result = @client.create_post @photo.user.me2day_id, 'post[body]' => "#{truncate(self.title, :length => 120)} #{self.shortened_url}", 'attachment' => File.new(photo_path)
-
-        Rails.logger.info "POST RESULT #{result.inspect}}"
-=end              
+          
       end  
     end 
   end
@@ -210,8 +197,12 @@ class Photo < ActiveRecord::Base
       options = {:title => self.title,
                  :photoUrls => self.host_with_port+self.image.url,
                  :content => "#{truncate(self.title, :length => 120)} #{self.shortened_url}"}
-      consumer = self.user.cyworld_consumer('https://oauth.nate.com')
-      consumer.request(:post, "/OApi/RestApiSSL/CY/200110/xml_RegisterPhotoItem/v1", self.user.cyworld_access_token, options)
+                 
+      cyworld_consumer = self.user.cyworld_consumer
+      @request_token = cyworld_consumer.get_request_token
+      @access_token = OAuth::AccessToken.new(@consumer, self.user.cyworld_key, self.user.cyworld_secret) 
+      #consumer.request(:post, "/OApi/RestApiSSL/CY/200110/xml_RegisterPhotoItem/v1", self.user.cyworld_access_token, options)
+      rs = @access_token.post("/OApi/RestApiSSL/CY/200110/xml_RegisterPhotoItem/v1",options)
     end
   end
   

@@ -80,7 +80,7 @@ class PhotosController < ApplicationController
         @photo.host_with_port = "http://"+request.host_with_port
         
         if @photo.save
-          
+          #@photo.cyworld
           #upload photo to social networks
           Resque.enqueue(PhotoJob, @photo.id, "http://"+request.host_with_port)
           

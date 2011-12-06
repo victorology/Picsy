@@ -373,6 +373,9 @@
 	<p> Post to Me2day<br />
 	<%= select :photo, :post_to_me2day, options_for_select(["yes", "no"], "no") %></p>
 	
+	<p> Post to Cyworld<br />
+	<%= select :photo, :post_to_cyworld, options_for_select(["yes", "no"], "no") %></p>
+	
 	<%= submit_tag "Upload" %>
 </form>
 <% else %>
